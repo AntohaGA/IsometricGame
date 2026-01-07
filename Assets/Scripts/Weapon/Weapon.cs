@@ -25,14 +25,20 @@ public class Weapon : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _currentAmmo = _magazineAmmo;
+        Shooted += Shoot;
     }
 
-    public void Shoot()
+    public virtual void PullTrigger()
     {
         if (_isReloading == false)
         {
             Shooted?.Invoke();
         }
+    }
+
+    protected virtual void Shoot()
+    {
+
     }
 
     private void ReloadWeapon()
@@ -57,14 +63,13 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator DelayCoroutine()
     {
-
         yield return new WaitForSeconds(_rateOfFire);
-
     }
 
     public Weapon Equip(Vector3 position, Transform parent)
     {
         Weapon weapon = Instantiate(this, position, Quaternion.identity, parent);
+        Debug.Log("weapon - " + weapon);
 
         return weapon;
     }

@@ -1,9 +1,11 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class SniperRiffle : Weapon
 {
+    private static WaitForSeconds _timeLifeEffect = new WaitForSeconds(0.3f);
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -13,33 +15,19 @@ public class SniperRiffle : Weapon
     {
         GameObject activeShot = Instantiate(_bulletExplosion, _bulletSpawner.position, _bulletSpawner.rotation);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return _timeLifeEffect;
 
         Destroy(activeShot);
     }
 
-    public void Shoot()
+    protected override void Shoot()
     {
-        Instantiate(_bullet, _bulletSpawner.position, _bulletSpawner.rotation);
-        StartCoroutine(Effect());
+        Bullet bullet = Instantiate(_bullet, _bulletSpawner.position, _bulletSpawner.rotation);
+        Coroutine coroutineEffect = StartCoroutine(Effect());
     }
 
     public IEnumerator Reload()
     {
         throw new System.NotImplementedException();
-    }
-
-    public Weapon Equip(Vector3 position, Transform parent)
-    {
-        return Instantiate(this, position, Quaternion.identity, parent);
-    }
-
-    public void Unequip()
-    {
-    }
-
-    public SpriteRenderer GetGunSprite()
-    {
-        return _spriteRenderer;
     }
 }

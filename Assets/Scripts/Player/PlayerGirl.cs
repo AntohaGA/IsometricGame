@@ -8,7 +8,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(PlayerInteractor))]
 public class PlayerGirl : MonoBehaviour, IDamagable
 {
     [SerializeField] private Slider _healthSlider;
@@ -19,10 +18,10 @@ public class PlayerGirl : MonoBehaviour, IDamagable
     private Rigidbody2D _rigidbody2D;
     private WeaponCollector _weaponCollector;
     private InputReader _playerInput;
-    private PlayerInteractor _playerInteractor;
 
     public event Action<PlayerGirl> Deceased;
-    public event Action Shooted;
+    public event Action FirstWeaponShooted;
+    public event Action SecondWeaponShooted;
 
     private void Awake()
     {
@@ -30,7 +29,6 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         _animator = GetComponent<PlayerAnimator>();
         _weaponCollector = GetComponent<WeaponCollector>();
         _playerInput = GetComponent<InputReader>();
-        _playerInteractor = GetComponent<PlayerInteractor>();
         _healthSlider.value = _health;
     }
 
@@ -48,11 +46,18 @@ public class PlayerGirl : MonoBehaviour, IDamagable
             _animator.Stand();
         }
 
-        if (_playerInput.IsShoot)
+        if (_playerInput.IsFirstWeaponShoot)
         {
-            Debug.Log("Нажал стрелять");
-            Shooted?.Invoke();
-            _weaponCollector.GetEquipWeapon().Shoot();
+            Debug.Log("Нажал стрелять основное оружие");
+            FirstWeaponShooted?.Invoke();
+            _weaponCollector.GetCurrentWeapon().PullTrigger();
+        }
+
+        if (_playerInput.IsSecondWeaponShoot)
+        {
+            Debug.Log("Нажал стрелять второе оружие");
+            SecondWeaponShooted?.Invoke();
+            _weaponCollector.GetSecondWeapon().PullTrigger();
         }
     }
 

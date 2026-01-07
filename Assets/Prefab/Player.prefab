@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6244838513781245926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5023637293448074060}
+  m_Layer: 3
+  m_Name: SecondWeaponSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5023637293448074060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6244838513781245926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.254, y: -0.22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 55477577812137120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9127517849912267122
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,10 +47,11 @@ GameObject:
   - component: {fileID: 853088556831858620}
   - component: {fileID: 3347653536723575118}
   - component: {fileID: 959862658592479938}
-  - component: {fileID: -8004133298169612780}
   - component: {fileID: 1134670277943152197}
   - component: {fileID: 6608731679995153569}
   - component: {fileID: 5780506016250916224}
+  - component: {fileID: 1204707835512087346}
+  - component: {fileID: 9047182208386960128}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -37,14 +69,16 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.55, y: -2.37, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4571491, y: 1.4049143, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1812657343788877970}
+  - {fileID: 5023637293448074060}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &241891447867808421
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -63,6 +97,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -84,9 +120,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -150523396, guid: 0c187a32c5bde4747be8d00770b07403, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +134,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2914976464118221532
 Animator:
@@ -229,20 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da3d72e8a1d45e489ef75a221aae768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8004133298169612780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9127517849912267122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc47f31bc14756499ea3a504d587970, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _grenade: {fileID: 3262486703261772038, guid: f59f7b49d12e3ab45be8d2e70841edcb, type: 3}
-  throwSpeed: 10
 --- !u!114 &1134670277943152197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,8 +278,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d122e3902f83e94fb253c9a65d98e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _riffle: {fileID: 4949280668569926525, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
-  _positionCurrentWeapon: {fileID: 1812657343788877970}
+  _rightHand: {fileID: 1812657343788877970}
+  _leftHand: {fileID: 5023637293448074060}
+  _riffle: {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+  _shotgun: {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
+  _granader: {fileID: 1811121775649058669, guid: 26cf4a507eedd654a862cee5fa96cf8a, type: 3}
+  _weapons: []
 --- !u!114 &6608731679995153569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +311,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208e13fed58b60742a52f89824fb304e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1204707835512087346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9127517849912267122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113cb0954e5b8ab41a2552376975c00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunRotator
+--- !u!114 &9047182208386960128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9127517849912267122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d94e3ffdc0234c9131faf91574858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputReader
 --- !u!1001 &4009365776632683379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -334,11 +385,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9085184557699155184, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
       propertyPath: m_Name
-      value: WeaponSpot
+      value: FirstWeaponSpot
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4949280668569926525, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     - {fileID: 599680357077723355, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+    - {fileID: 7143125398951573885, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+    - {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     - {fileID: 7143125398951573885, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6887896319420767930, guid: 31faf949682f0b445960575bb827c6bc, type: 3}

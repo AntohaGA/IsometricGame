@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Shotgun : Weapon
+public class Shotgun : Weapon, ILootable
 {
     [Header("ƒробовик настройки")]
     [SerializeField] private int _bulletsCount = 5;
-    [SerializeField] private float _spreadAngle = 8f;  // разброс в градусах
+    [SerializeField] private float _spreadAngle = 7f;  // разброс в градусах
     [SerializeField] private float _spreadDistance = 0.1f;  // разброс по позиции спавна
 
     private void Awake()
@@ -13,22 +13,12 @@ public class Shotgun : Weapon
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public Weapon Equip(Vector3 position, Transform parent)
-    {
-        return Instantiate(this, position, Quaternion.identity, parent);
-    }
-
-    public SpriteRenderer GetGunSprite()
-    {
-        return _spriteRenderer;
-    }
-
     public IEnumerator Reload()
     {
         throw new System.NotImplementedException();
     }
 
-    public void Shoot()
+    public override void PullTrigger()
     {
         Vector3 spawnPosition = _bulletSpawner.position;
 
@@ -47,8 +37,8 @@ public class Shotgun : Weapon
             float randomAngle = Random.Range(-_spreadAngle, _spreadAngle);
             Quaternion bulletRotation = _bulletSpawner.rotation * Quaternion.Euler(0, 0, randomAngle);
 
-            // —оздание пули
             Bullet bullet = Instantiate(_bullet, bulletSpawnPos, bulletRotation);
+            bullet.Init(1,15,30,1);
 
             // ƒополнительно можно задать случайную скорость пули
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
@@ -71,7 +61,7 @@ public class Shotgun : Weapon
         Destroy(activeShot);
     }
 
-    public void Unequip()
+    public void Take(ILootTaker lootTaker)
     {
         throw new System.NotImplementedException();
     }

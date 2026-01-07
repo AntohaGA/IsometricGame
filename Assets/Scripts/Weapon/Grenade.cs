@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour, IBullet
+public class Grenade : Bullet
 {
     [SerializeField] private GameObject _explosion;
 
@@ -10,7 +10,6 @@ public class Grenade : MonoBehaviour, IBullet
     public float explosionDelay = 2f;
 
     private Vector3 _targetPosition;
-    private float _speed = 5;
     private bool isLaunched = false;
 
     public void Launch(Vector3 target)
@@ -22,7 +21,7 @@ public class Grenade : MonoBehaviour, IBullet
 
     private void Update()
     {
-        if (isLaunched)
+       /* if (isLaunched)
         {
             float step = _speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, _targetPosition, step);
@@ -31,7 +30,7 @@ public class Grenade : MonoBehaviour, IBullet
             {
                 Explode();
             }
-        }
+        }*/
     }
 
     private IEnumerator ExplodeAfterDelay()
@@ -54,8 +53,6 @@ public class Grenade : MonoBehaviour, IBullet
                 Debug.Log("кого-то нашли для взрыва");
             }
         }
-
-        Die();
     }
 
     private IEnumerator Effect()
@@ -65,15 +62,5 @@ public class Grenade : MonoBehaviour, IBullet
         yield return new WaitForSeconds(2f);
 
         Destroy(activeShot.gameObject);
-    }
-
-    public void Fly()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Die()
-    {       
-        Destroy(gameObject); // Уничтожаем гранату после взрыва
     }
 }

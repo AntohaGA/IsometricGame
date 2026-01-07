@@ -105,12 +105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5320476173d616a4db55897ce7b2e5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 8987357034972243327, guid: 84c6422d445ff524686175da644b4598, type: 3}
+  _bullet: {fileID: 1536372615843991675, guid: 84c6422d445ff524686175da644b4598, type: 3}
   _bulletExplosion: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
   _bulletSpawner: {fileID: 7993082468846385030}
   _reloadTime: 1.5
-  _maxAmmo: 10
+  _magazineAmmo: 10
   _damage: 10
+  _rateOfFire: 1
   _bulletsCount: 5
   _spreadAngle: 50
   _spreadDistance: 0.1
@@ -126,7 +127,7 @@ GameObject:
   m_Layer: 0
   m_Name: BulletSpotSpawn
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

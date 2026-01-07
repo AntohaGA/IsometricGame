@@ -16259,11 +16259,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
---- !u!4 &410389316 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
-  m_PrefabInstance: {fileID: 625279192}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &420232244
 GameObject:
   m_ObjectHideFlags: 0
@@ -16864,11 +16859,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 55477577812137120, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.7
+      value: 14.32
       objectReference: {fileID: 0}
     - target: {fileID: 55477577812137120, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.3
+      value: -12.07
       objectReference: {fileID: 0}
     - target: {fileID: 55477577812137120, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16903,17 +16898,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1134670277943152197, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
-      propertyPath: _riffle
+      propertyPath: _granader
       value: 
-      objectReference: {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
-    - target: {fileID: 1134670277943152197, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
-      propertyPath: _shotgun
-      value: 
-      objectReference: {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
-    - target: {fileID: 1134670277943152197, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
-      propertyPath: _positionCurrentWeapon
-      value: 
-      objectReference: {fileID: 410389316}
+      objectReference: {fileID: 1811121775649058669, guid: 26cf4a507eedd654a862cee5fa96cf8a, type: 3}
+    - target: {fileID: 5310078032391266179, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_Name
+      value: FirstWeaponSpot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608731679995153569, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608731679995153569, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _health
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 6608731679995153569, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: _healthSlider
       value: 
