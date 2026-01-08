@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
@@ -8,27 +9,26 @@ public class Bullet : MonoBehaviour
 
     private float _damage;
     private float _lifeTime;
-    private int _throughCount = 1;
-
     private float _speed;
     
-    private void Start()
+    private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+    }  
 
-    public void Init(float lifeTime,float speed, int damage, int throughCount)
+    public void Fly(float lifeTime,float speed, int damage)
     {
         _lifeTime = lifeTime;
         _speed = speed;
         _damage = damage;
-        _throughCount = throughCount;
         StartCoroutine(LifeTime());
     }
 
     private IEnumerator LifeTime()
     {
         float timer = 0f;
+
+        Debug.Log("speed - " + _speed + "lifeTime - " + _lifeTime);
 
         while (timer < _lifeTime)
         {
@@ -42,10 +42,7 @@ public class Bullet : MonoBehaviour
         Destroy();
     }
 
-    public float GetDamage()
-    {
-        return _damage;
-    }
+    public float GetDamage() => _damage;
 
     public void Destroy()
     {

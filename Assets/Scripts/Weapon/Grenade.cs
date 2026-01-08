@@ -9,30 +9,6 @@ public class Grenade : Bullet
     public float explosionDamage = 50f;
     public float explosionDelay = 2f;
 
-    private Vector3 _targetPosition;
-    private bool isLaunched = false;
-
-    public void Launch(Vector3 target)
-    {
-        _targetPosition = target;
-        isLaunched = true;
-        StartCoroutine(ExplodeAfterDelay());
-    }
-
-    private void Update()
-    {
-       /* if (isLaunched)
-        {
-            float step = _speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, step);
-
-            if (Vector3.Distance(transform.position, _targetPosition) < 0.1f)
-            {
-                Explode();
-            }
-        }*/
-    }
-
     private IEnumerator ExplodeAfterDelay()
     {
         yield return new WaitForSeconds(explosionDelay);

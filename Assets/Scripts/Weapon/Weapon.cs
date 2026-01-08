@@ -5,17 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] protected Bullet _bullet;
-    [SerializeField] protected GameObject _bulletExplosion;
+    [SerializeField] protected Bullet _bulletPrefab;
     [SerializeField] protected Transform _bulletSpawner;
-
-    [SerializeField] protected float _reloadTime = 1.5f;
-    [SerializeField] protected int _magazineAmmo = 10;
-    [SerializeField] protected int _damage = 10;
-    [SerializeField] protected float _rateOfFire = 0.5f;
-
-    protected bool _isReloading = false;
-    protected int _currentAmmo;
+    [SerializeField] protected int _damage;
 
     protected SpriteRenderer _spriteRenderer;
 
@@ -24,54 +16,24 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _currentAmmo = _magazineAmmo;
-        Shooted += Shoot;
     }
 
     public virtual void PullTrigger()
     {
-        if (_isReloading == false)
-        {
             Shooted?.Invoke();
-        }
     }
 
     protected virtual void Shoot()
     {
-
+        Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawner.position, _bulletSpawner.rotation);
+        bullet.Fly(1, 10, 50);
     }
 
-    private void ReloadWeapon()
+    public virtual void Equip(Vector3 position, Transform parent)
     {
-        StartCoroutine(ReloadCoroutine());
-    }
-
-    private void DelayShoot()
-    {
-        StartCoroutine(DelayCoroutine());
-    }
-
-    private IEnumerator ReloadCoroutine()
-    {
-        _isReloading = true;
-
-        yield return new WaitForSeconds(_reloadTime);
-
-        _isReloading = false;
-        _currentAmmo = _magazineAmmo;
-    }
-
-    private IEnumerator DelayCoroutine()
-    {
-        yield return new WaitForSeconds(_rateOfFire);
-    }
-
-    public Weapon Equip(Vector3 position, Transform parent)
-    {
-        Weapon weapon = Instantiate(this, position, Quaternion.identity, parent);
-        Debug.Log("weapon - " + weapon);
-
-        return weapon;
+        transform.SetParent(parent);
+        transform.position = position;
+        gameObject.SetActive(true);
     }
 
     public void Unequip()
@@ -79,8 +41,5 @@ public class Weapon : MonoBehaviour
 
     }
 
-    public SpriteRenderer GetGunSprite()
-    {
-        return _spriteRenderer;
-    }
+    public SpriteRenderer GetGunSprite() => _spriteRenderer;
 }

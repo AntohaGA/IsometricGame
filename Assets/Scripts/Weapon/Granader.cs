@@ -28,6 +28,7 @@ public class Granader : Weapon
 
     private void ThrowGrenade(Vector3 targetPosition)
     {
-        Bullet bullet = Instantiate(_bullet, transform.position, Quaternion.identity);
+        Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        bullet.Fly(2,5,50);
     }
 }

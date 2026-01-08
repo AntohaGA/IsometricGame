@@ -37,28 +37,9 @@ public class Shotgun : Weapon, ILootable
             float randomAngle = Random.Range(-_spreadAngle, _spreadAngle);
             Quaternion bulletRotation = _bulletSpawner.rotation * Quaternion.Euler(0, 0, randomAngle);
 
-            Bullet bullet = Instantiate(_bullet, bulletSpawnPos, bulletRotation);
-            bullet.Init(1,15,30,1);
-
-            // Дополнительно можно задать случайную скорость пули
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            if (bulletRb != null)
-            {
-                float randomSpeedMultiplier = Random.Range(0.9f, 1.1f);
-                bulletRb.linearVelocity *= randomSpeedMultiplier;
-            }
+            Bullet bullet = Instantiate(_bulletPrefab, bulletSpawnPos, bulletRotation);
+            bullet.Fly(0.3f,15,30);
         }
-
-        StartCoroutine(Effect());
-    }
-
-    private IEnumerator Effect()
-    {
-        GameObject activeShot = Instantiate(_bulletExplosion, _bulletSpawner.position, _bulletSpawner.rotation);
-
-        yield return new WaitForSeconds(1f);
-
-        Destroy(activeShot);
     }
 
     public void Take(ILootTaker lootTaker)

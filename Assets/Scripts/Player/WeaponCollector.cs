@@ -19,9 +19,6 @@ public class WeaponCollector : MonoBehaviour
     private Weapon _secondWeapon;
     private GunRotator _gunRotator;
 
-    public event Action<Weapon> FirstWeaponEquipped;
-    public event Action<Weapon> SecondWeaponEquipped;
-
     private void Awake()
     {
         _gunRotator = GetComponent<GunRotator>();
@@ -36,21 +33,12 @@ public class WeaponCollector : MonoBehaviour
     private void Start()
     {
         EquipWeapon(1);
-        EquipSecondWeapon(2);
     }
 
     private void EquipWeapon(int index)
     {
-        _firstWeapon = _weapons[index].Equip(_rightHand.position, transform);
-        FirstWeaponEquipped?.Invoke(_firstWeapon);
+        _weapons[index].Equip(_rightHand.position, transform);
         _gunRotator.SetGunSprite(_firstWeapon.GetGunSprite());
-    }
-
-    private void EquipSecondWeapon(int index)
-    {
-        _secondWeapon = _weapons[index].Equip(_leftHand.position, transform);
-        SecondWeaponEquipped?.Invoke(_secondWeapon);
-        _gunRotator.SetSecondGunSprite(_secondWeapon.GetGunSprite());
     }
 
     public Weapon GetCurrentWeapon()

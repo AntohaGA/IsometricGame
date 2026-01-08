@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpotSpawner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
       value: 21.8
@@ -235,6 +239,14 @@ PrefabInstance:
     - target: {fileID: 5930165079838766964, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _delay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16157,6 +16169,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 122.946434
@@ -16253,6 +16273,14 @@ PrefabInstance:
     - target: {fileID: 5930165079838766964, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _delay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16361,6 +16389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpotSpawner (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
       value: 18
@@ -16425,6 +16457,14 @@ PrefabInstance:
     - target: {fileID: 6255531788151218474, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16712,6 +16752,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpotSpawner (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
       value: 29.4
@@ -16978,6 +17022,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17035,6 +17087,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17091,6 +17151,14 @@ PrefabInstance:
     - target: {fileID: 5930165079838766964, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _delay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17376,6 +17444,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 80.07206
@@ -17587,6 +17663,14 @@ PrefabInstance:
     - target: {fileID: 6255531788151218474, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_Name
       value: SpawnPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26805,6 +26889,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpotSpawner (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
       value: 27.3
@@ -26869,6 +26957,10 @@ PrefabInstance:
     - target: {fileID: 1040746843782205187, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Name
       value: SpotSpawner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
@@ -26935,6 +27027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpotSpawner (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
       value: 20.1
@@ -26999,6 +27095,10 @@ PrefabInstance:
     - target: {fileID: 1040746843782205187, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Name
       value: SpotSpawner (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
@@ -27065,6 +27165,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.335028
@@ -27122,6 +27230,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.240025
@@ -27178,6 +27294,10 @@ PrefabInstance:
     - target: {fileID: 1040746843782205187, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Name
       value: SpotSpawner (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475695223519823021, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
+      propertyPath: _countEnemy
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7555071381421984811, guid: 48a24d68f63b31842ba8dbf385b59607, type: 3}
       propertyPath: m_Size.x
@@ -92329,6 +92449,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982515823550750709, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29.189741
@@ -92425,6 +92553,14 @@ PrefabInstance:
     - target: {fileID: 5930165079838766964, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _count
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566555594269526927, guid: 7cb2878235973d24983f92b3e576387e, type: 3}
+      propertyPath: _delay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
