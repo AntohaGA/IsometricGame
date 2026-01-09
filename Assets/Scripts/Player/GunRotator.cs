@@ -12,7 +12,7 @@ public class GunRotator : MonoBehaviour
         }
         else
         {
-            Debug.Log("GunRotator - _gun or _secondGun == null");
+            Debug.Log("GunRotator - _gun == null");
         }
     }
 
@@ -24,19 +24,11 @@ public class GunRotator : MonoBehaviour
     private void Rotate()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 playerPos = transform.position;
-        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerPos;
-        float rotate = Mathf.Atan2(mouse.y, mouse.x) * Mathf.Rad2Deg;
+        Vector3 direction = mousePos - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        _gunSprite.transform.rotation = Quaternion.Euler(0, 0, rotate);
+        _gunSprite.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        if (mousePos.x < transform.position.x)
-        {
-            _gunSprite.flipY = true;
-        }
-        else if (mousePos.x > transform.position.x)
-        {
-            _gunSprite.flipY = false;
-        }
+        _gunSprite.flipY = mousePos.x < transform.position.x;
     }
 }

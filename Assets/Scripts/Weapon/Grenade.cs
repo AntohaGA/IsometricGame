@@ -6,17 +6,13 @@ public class Grenade : Bullet
     [SerializeField] private GameObject _explosion;
 
     public float explosionRadius = 2f;
-    public float explosionDamage = 50f;
-    public float explosionDelay = 2f;
 
-    private IEnumerator ExplodeAfterDelay()
+    public override void Fly(float lifeTime, float speed, int damage)
     {
-        yield return new WaitForSeconds(explosionDelay);
-
-        Explode();
+        base.Fly(lifeTime, speed, damage);
+        Explode(damage);
     }
-
-    private void Explode()
+    private void Explode(int damage)
     {
         StartCoroutine(Effect());
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -25,7 +21,7 @@ public class Grenade : Bullet
         {
             if (hit.TryGetComponent(out Enemy enemy))
             {
-                enemy.TakeDamage(explosionDamage);
+                enemy.TakeDamage(damage);
                 Debug.Log("кого-то нашли для взрыва");
             }
         }
@@ -33,10 +29,10 @@ public class Grenade : Bullet
 
     private IEnumerator Effect()
     {
+        yield return new WaitForSeconds(1f);
+
         GameObject activeShot = Instantiate(_explosion, transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(2f);
-
-        Destroy(activeShot.gameObject);
+        Destroy(activeShot.gameObject, 2);
     }
 }

@@ -1,24 +1,13 @@
-using System.Collections;
 using UnityEngine;
 
-public class Shotgun : Weapon, ILootable
+public class Shotgun : Weapon
 {
     [Header("Дробовик настройки")]
-    [SerializeField] private int _bulletsCount = 5;
-    [SerializeField] private float _spreadAngle = 7f;  // разброс в градусах
-    [SerializeField] private float _spreadDistance = 0.1f;  // разброс по позиции спавна
+    [SerializeField] private int _bulletsCount;
+    [SerializeField] private float _spreadAngle;  // разброс в градусах
+    [SerializeField] private float _spreadDistance;  // разброс по позиции спавна
 
-    private void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    public IEnumerator Reload()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void PullTrigger()
+    public override void Shoot()
     {
         Vector3 spawnPosition = _bulletSpawner.position;
 
@@ -40,10 +29,5 @@ public class Shotgun : Weapon, ILootable
             Bullet bullet = Instantiate(_bulletPrefab, bulletSpawnPos, bulletRotation);
             bullet.Fly(0.3f,15,30);
         }
-    }
-
-    public void Take(ILootTaker lootTaker)
-    {
-        throw new System.NotImplementedException();
     }
 }

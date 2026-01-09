@@ -9,45 +9,41 @@ public class WeaponCollector : MonoBehaviour
     [SerializeField] private Transform _leftHand;
 
     [Header("Все пушки по одной")]
-    [SerializeField] private SniperRiffle _riffle;
-    [SerializeField] private Shotgun _shotgun;
-    [SerializeField] private Granader _granader;
+    [SerializeField] private SniperRiffle _rifflePrefab;
+    [SerializeField] private Shotgun _shotgunPrefab;
+    [SerializeField] private Granader _granaderPrefab;
 
-    private List<Weapon> _weapons;
+    private List<Weapon> _weapons = new List<Weapon>();
 
     private Weapon _firstWeapon;
-    private Weapon _secondWeapon;
     private GunRotator _gunRotator;
 
     private void Awake()
     {
         _gunRotator = GetComponent<GunRotator>();
-        _weapons = new List<Weapon>
-        {
-            _riffle,
-            _shotgun,
-            _granader,
-        };
+
+        if (_rifflePrefab != null) _weapons.Add(Instantiate(_rifflePrefab));
+        if (_shotgunPrefab != null) _weapons.Add(Instantiate(_shotgunPrefab));
+        if (_granaderPrefab != null) _weapons.Add(Instantiate(_granaderPrefab));
     }
 
     private void Start()
     {
-        EquipWeapon(1);
+        EquipWeapon(2);
     }
 
     private void EquipWeapon(int index)
     {
-        _weapons[index].Equip(_rightHand.position, transform);
-        _gunRotator.SetGunSprite(_firstWeapon.GetGunSprite());
+        if (index >= 0 && index < _weapons.Count)
+        {
+            _weapons[index].Equip(_rightHand.position, _rightHand);
+            _firstWeapon = _weapons[index];
+            _gunRotator.SetGunSprite(_firstWeapon.GetGunSprite());
+        }
     }
 
-    public Weapon GetCurrentWeapon()
+    public void ShootCurrentWeapon()
     {
-        return _firstWeapon;
-    }
-
-    public Weapon GetSecondWeapon()
-    {
-        return _secondWeapon;
+        _firstWeapon.Shoot();
     }
 }

@@ -280,10 +280,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rightHand: {fileID: 1812657343788877970}
   _leftHand: {fileID: 5023637293448074060}
-  _riffle: {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
-  _shotgun: {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
-  _granader: {fileID: 1811121775649058669, guid: 26cf4a507eedd654a862cee5fa96cf8a, type: 3}
-  _weapons: []
+  _rifflePrefab: {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+  _shotgunPrefab: {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
+  _granaderPrefab: {fileID: 1811121775649058669, guid: 26cf4a507eedd654a862cee5fa96cf8a, type: 3}
 --- !u!114 &6608731679995153569
 MonoBehaviour:
   m_ObjectHideFlags: 0

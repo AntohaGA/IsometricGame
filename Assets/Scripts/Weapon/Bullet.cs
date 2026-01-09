@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }  
 
-    public void Fly(float lifeTime,float speed, int damage)
+    public virtual void Fly(float lifeTime,float speed, int damage)
     {
         _lifeTime = lifeTime;
         _speed = speed;

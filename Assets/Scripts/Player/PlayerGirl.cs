@@ -20,8 +20,6 @@ public class PlayerGirl : MonoBehaviour, IDamagable
     private InputReader _playerInput;
 
     public event Action<PlayerGirl> Deceased;
-    public event Action FirstWeaponShooted;
-    public event Action SecondWeaponShooted;
 
     private void Awake()
     {
@@ -49,15 +47,7 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         if (_playerInput.IsFirstWeaponShoot)
         {
             Debug.Log("Нажал стрелять основное оружие");
-            FirstWeaponShooted?.Invoke();
-            _weaponCollector.GetCurrentWeapon().PullTrigger();
-        }
-
-        if (_playerInput.IsSecondWeaponShoot)
-        {
-            Debug.Log("Нажал стрелять второе оружие");
-            SecondWeaponShooted?.Invoke();
-            _weaponCollector.GetSecondWeapon().PullTrigger();
+            _weaponCollector.ShootCurrentWeapon();
         }
     }
 
