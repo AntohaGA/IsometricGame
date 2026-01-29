@@ -1,23 +1,26 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerRotator : MonoBehaviour
 {
-    private void Update()
+    private SpriteRenderer _playerSprite;
+    private Camera _cam;
+
+    private void Awake()
     {
-        Rotate();
+        _playerSprite = GetComponent<SpriteRenderer>();
+        _cam = Camera.main;
     }
 
-    private void Rotate()
+    private void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (_cam == null) return;
 
-        if (mousePos.x < transform.position.x)
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-        else if (mousePos.x > transform.position.x)
-        {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        }
+        Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+
+        bool facingRight = mousePos.x > transform.position.x;
+
+        transform.localScale = new Vector3(facingRight ? 1f : -1f, 1f, 1f);
     }
 }

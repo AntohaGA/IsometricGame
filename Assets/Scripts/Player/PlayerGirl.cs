@@ -46,7 +46,6 @@ public class PlayerGirl : MonoBehaviour, IDamagable
 
         if (_playerInput.IsFirstWeaponShoot)
         {
-            Debug.Log("Нажал стрелять основное оружие");
             _weaponCollector.ShootCurrentWeapon();
         }
     }

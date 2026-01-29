@@ -1,49 +1,41 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(GunRotator))]
 public class WeaponCollector : MonoBehaviour
 {
-    [SerializeField] private Transform _rightHand;
-    [SerializeField] private Transform _leftHand;
+    [SerializeField] Transform _firstWeaponSpot;
 
     [Header("Все пушки по одной")]
-    [SerializeField] private SniperRiffle _rifflePrefab;
-    [SerializeField] private Shotgun _shotgunPrefab;
-    [SerializeField] private Granader _granaderPrefab;
+    [SerializeField] private Riffle _rifflePrefab;
 
-    private List<Weapon> _weapons = new List<Weapon>();
-
-    private Weapon _firstWeapon;
     private GunRotator _gunRotator;
-
-    private void Awake()
-    {
-        _gunRotator = GetComponent<GunRotator>();
-
-        if (_rifflePrefab != null) _weapons.Add(Instantiate(_rifflePrefab));
-        if (_shotgunPrefab != null) _weapons.Add(Instantiate(_shotgunPrefab));
-        if (_granaderPrefab != null) _weapons.Add(Instantiate(_granaderPrefab));
-    }
+    private Weapon _currentWeapon;
 
     private void Start()
     {
-        EquipWeapon(2);
+        _gunRotator = GetComponent<GunRotator>();
+
+        Weapon w = Instantiate(_rifflePrefab);
+        w.gameObject.SetActive(false);
+        EquipWeapon(w);
     }
 
-    private void EquipWeapon(int index)
+    private void EquipWeapon(Weapon weapon)
     {
-        if (index >= 0 && index < _weapons.Count)
-        {
-            _weapons[index].Equip(_rightHand.position, _rightHand);
-            _firstWeapon = _weapons[index];
-            _gunRotator.SetGunSprite(_firstWeapon.GetGunSprite());
-        }
+        _currentWeapon = weapon;
+
+        SpriteRenderer sprite = weapon.GunSprite;
+
+        _currentWeapon.gameObject.SetActive(true);
+        _gunRotator.SetGunSprite(sprite);
+        _currentWeapon.transform.SetParent(_firstWeaponSpot);
+        _currentWeapon.transform.localPosition = Vector3.zero;
+        _currentWeapon.transform.localRotation = Quaternion.identity;
     }
 
     public void ShootCurrentWeapon()
     {
-        _firstWeapon.Shoot();
+        _currentWeapon.Shoot();
     }
 }

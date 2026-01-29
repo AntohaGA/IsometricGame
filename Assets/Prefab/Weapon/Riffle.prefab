@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3351798175051977697}
   - component: {fileID: 7143125398951573885}
   - component: {fileID: 1124186274912175026}
+  - component: {fileID: 606511019714314245}
   m_Layer: 3
   m_Name: Riffle
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7320e7eed91a04fb1237641cfb40a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SniperRiffle
-  _bulletPrefab: {fileID: 1536372615843991675, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
+  _bulletPrefab: {fileID: -494354636844885753, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
   _bulletSpawner: {fileID: 901361398097737229}
   _damage: 10
+--- !u!114 &606511019714314245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9085184557699155184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc6c3784e2519b47b8b8f97cca08164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RiffleBulletSpawner
+  PrefabBullet: {fileID: -494354636844885753, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}

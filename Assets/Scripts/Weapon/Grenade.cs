@@ -4,17 +4,19 @@ using UnityEngine;
 public class Grenade : Bullet
 {
     [SerializeField] private GameObject _explosion;
-
     public float explosionRadius = 2f;
 
-    public override void Fly(float lifeTime, float speed, int damage)
+    public override void Init(float lifeTime, float speed, int damage, Transform spot)
     {
-        base.Fly(lifeTime, speed, damage);
-        Explode(damage);
+        base.Init(lifeTime, speed, damage, spot);
+        StartCoroutine( Explode(damage, lifeTime));       
     }
-    private void Explode(int damage)
+
+    private IEnumerator Explode(int damage,float lifeTime)
     {
-        StartCoroutine(Effect());
+        yield return new WaitForSeconds(lifeTime);
+
+        GameObject explosion = Instantiate(_explosion, transform.position, transform.rotation);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
         foreach (Collider2D hit in colliders)
@@ -25,14 +27,8 @@ public class Grenade : Bullet
                 Debug.Log("кого-то нашли для взрыва");
             }
         }
-    }
 
-    private IEnumerator Effect()
-    {
-        yield return new WaitForSeconds(1f);
-
-        GameObject activeShot = Instantiate(_explosion, transform.position, transform.rotation);
-
-        Destroy(activeShot.gameObject, 2);
+        Debug.Log("Ещё не удалена пуля");
+        Destroy(explosion.gameObject, 1);
     }
 }

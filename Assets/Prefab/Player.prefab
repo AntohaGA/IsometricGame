@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6244838513781245926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5023637293448074060}
-  m_Layer: 3
-  m_Name: SecondWeaponSpot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5023637293448074060
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6244838513781245926}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.254, y: -0.22, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 55477577812137120}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9127517849912267122
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,7 +42,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1812657343788877970}
-  - {fileID: 5023637293448074060}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &241891447867808421
@@ -278,11 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d122e3902f83e94fb253c9a65d98e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rightHand: {fileID: 1812657343788877970}
-  _leftHand: {fileID: 5023637293448074060}
+  _firstWeaponSpot: {fileID: 1812657343788877970}
   _rifflePrefab: {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
-  _shotgunPrefab: {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
-  _granaderPrefab: {fileID: 1811121775649058669, guid: 26cf4a507eedd654a862cee5fa96cf8a, type: 3}
 --- !u!114 &6608731679995153569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 0}
   _speed: 8
-  _health: 40
+  _health: 100
 --- !u!114 &5780506016250916224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113cb0954e5b8ab41a2552376975c00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRotator
+  _mainCamera: {fileID: 0}
 --- !u!114 &9047182208386960128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +349,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9085184557699155184, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 9085184557699155184, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
       propertyPath: m_Name
       value: FirstWeaponSpot
       objectReference: {fileID: 0}
@@ -392,6 +362,7 @@ PrefabInstance:
     - {fileID: 7143125398951573885, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     - {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     - {fileID: 7143125398951573885, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+    - {fileID: 606511019714314245, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6887896319420767930, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
     m_AddedGameObjects: []
