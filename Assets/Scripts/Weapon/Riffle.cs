@@ -5,8 +5,13 @@ using UnityEngine;
 public class Riffle : Weapon
 {
     private BulletSpawner _riffleBulletSpawner;
+    [SerializeField] private float _bulletLifeTime = 2;
+    [SerializeField] private float _bulletSpeed = 10;
+    [SerializeField] private float _bulletDamage = 50;
 
     protected SpriteRenderer _spriteRenderer;
+
+    public override SpriteRenderer GunSprite => _spriteRenderer;
 
     private void Awake()
     {
@@ -16,9 +21,6 @@ public class Riffle : Weapon
 
     public override void Shoot()
     {
-        _riffleBulletSpawner.GetBullet(2,10,50, transform);
-
+        _riffleBulletSpawner.GetBullet(_bulletLifeTime, _bulletSpeed, _bulletDamage, transform);
     }
-
-    public override SpriteRenderer GunSprite => _spriteRenderer;
 }

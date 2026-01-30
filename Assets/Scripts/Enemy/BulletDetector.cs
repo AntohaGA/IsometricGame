@@ -19,7 +19,7 @@ public class BulletDetector : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Bullet bullet))
         {
-            TakeDamage(bullet.GetDamage());
+            TakeDamage(bullet.Damage);
             DestroyBullet(bullet);
         }
     }

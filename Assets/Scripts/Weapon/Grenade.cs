@@ -6,13 +6,13 @@ public class Grenade : Bullet
     [SerializeField] private GameObject _explosion;
     public float explosionRadius = 2f;
 
-    public override void Init(float lifeTime, float speed, int damage, Transform spot)
+    public override void Init(float lifeTime, float speed, float damage, Transform spot)
     {
         base.Init(lifeTime, speed, damage, spot);
-        StartCoroutine( Explode(damage, lifeTime));       
+        StartCoroutine(Explode(damage, lifeTime));
     }
 
-    private IEnumerator Explode(int damage,float lifeTime)
+    private IEnumerator Explode(float damage, float lifeTime)
     {
         yield return new WaitForSeconds(lifeTime);
 

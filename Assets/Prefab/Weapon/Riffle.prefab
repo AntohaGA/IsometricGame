@@ -137,9 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7320e7eed91a04fb1237641cfb40a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SniperRiffle
-  _bulletPrefab: {fileID: -494354636844885753, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
   _bulletSpawner: {fileID: 901361398097737229}
-  _damage: 10
+  _bulletLifeTime: 1
+  _bulletSpeed: 20
+  _bulletDamage: 100
 --- !u!114 &606511019714314245
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class ZombieMover : MonoBehaviour
 
     private IEnumerator UpdatePath(PlayerGirl playerMover)
     {
-        WaitForSeconds delay = new WaitForSeconds(0.1f);
+        WaitForSeconds delay = new WaitForSeconds(0.2f);
 
         while (enabled)
         {

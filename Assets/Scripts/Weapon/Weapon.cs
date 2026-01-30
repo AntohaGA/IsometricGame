@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] protected Bullet _bulletPrefab;
     [SerializeField] protected Transform _bulletSpawner;
-    [SerializeField] protected int _damage;
+
+    protected int _damage;
 
     public event Action<Transform> OnShoot;
 

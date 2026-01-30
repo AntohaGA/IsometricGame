@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8709564, y: -20.171364, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,3 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33dd2f6a61054d43a61541bd38b95fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiffleBullet
+  _damageMultiplier: 1
+  _pierceCount: 5
+  _startDeviationDegrees: 15

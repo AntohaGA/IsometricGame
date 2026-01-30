@@ -15,7 +15,7 @@ public abstract class BulletSpawner : MonoBehaviour
         PoolBullets.Init(PoolCapacity, PoolMaxSize, PrefabBullet);
     }
 
-    public Bullet GetBullet(float lifeTime, float speed, int damage, Transform spot)
+    public Bullet GetBullet(float lifeTime, float speed, float damage, Transform spot)
     {
         Bullet bullet = PoolBullets.GetInstance();
         bullet.Init(lifeTime, speed, damage, spot);
