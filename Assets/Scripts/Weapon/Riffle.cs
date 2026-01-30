@@ -17,6 +17,7 @@ public class Riffle : Weapon
     public override void Shoot()
     {
         _riffleBulletSpawner.GetBullet(2,10,50, transform);
+
     }
 
     public override SpriteRenderer GunSprite => _spriteRenderer;

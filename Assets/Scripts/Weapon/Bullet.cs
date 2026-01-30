@@ -36,8 +36,11 @@ public class Bullet : MonoBehaviour
         _lifeTime = lifeTime;
         _speed = speed;
         _damage = _damageMultiplier * damage;
-        transform.position = spot.position;
+
         _spot = spot;
+        transform.position = spot.position;
+        transform.rotation = spot.rotation;
+        transform.Rotate(0f, 0f, -90f);
         Fly();
     }
 
