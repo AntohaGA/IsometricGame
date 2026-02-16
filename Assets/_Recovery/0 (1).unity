@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &22603335 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+  m_PrefabInstance: {fileID: 625279192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &64297402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16902,6 +16907,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 55477577812137120, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 55477577812137120, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 55477577812137120, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.32
       objectReference: {fileID: 0}
@@ -16941,14 +16954,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1134670277943152197, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _firstWeaponSpot
+      value: 
+      objectReference: {fileID: 22603335}
+    - target: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812657343788877970, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310078032391266179, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 6608731679995153569, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6608731679995153569, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: _healthSlider
       value: 
       objectReference: {fileID: 420232246}
-    - target: {fileID: 9047182208386960128, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
-      propertyPath: _showInputInLog
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9127517849912267122, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_Name
       value: Player

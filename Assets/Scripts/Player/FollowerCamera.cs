@@ -9,7 +9,7 @@ public class FollowerCamera : MonoBehaviour
         _target = FindFirstObjectByType<PlayerGirl>().transform;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         transform.position = new Vector3(_target.position.x, _target.position.y, transform.position.z);
     }

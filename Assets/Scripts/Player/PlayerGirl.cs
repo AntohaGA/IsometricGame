@@ -48,6 +48,19 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         {
             _weaponCollector.ShootCurrentWeapon();
         }
+
+        if (_playerInput.IsFirstWeapon)
+        {
+            _weaponCollector.SwitchToWeapon(0);
+        }
+        if (_playerInput.IsSecondWeapon)
+        {
+            _weaponCollector.SwitchToWeapon(1);
+        }
+        if (_playerInput.IsThirdWeapon)
+        {
+            _weaponCollector.SwitchToWeapon(2);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -57,7 +70,6 @@ public class PlayerGirl : MonoBehaviour, IDamagable
 
         if (_health <= 0)
         {
-            Debug.Log("Игрок умер сработало событие");
             Deceased?.Invoke(this);
         }
     }

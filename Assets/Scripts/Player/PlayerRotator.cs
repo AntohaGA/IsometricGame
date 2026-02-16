@@ -14,13 +14,16 @@ public class PlayerRotator : MonoBehaviour
 
     private void Update()
     {
-        if (_cam == null) return;
+        if (_cam == null)
+            return;
 
         Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
         bool facingRight = mousePos.x > transform.position.x;
 
-        transform.localScale = new Vector3(facingRight ? 1f : -1f, 1f, 1f);
+        // transform.localScale = new Vector3(facingRight ? 1f : -1f, 1f, 1f);
+
+        _playerSprite.flipX = !facingRight; // true = смотрит влево
     }
 }

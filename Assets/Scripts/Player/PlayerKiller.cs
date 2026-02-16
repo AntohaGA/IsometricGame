@@ -14,6 +14,5 @@ public class PlayerKiller : MonoBehaviour
     {
         _playerGirl.Deceased -= Die;
         Destroy(playerGirl.gameObject);
-        Debug.Log("Игрок умер");
     }
 }

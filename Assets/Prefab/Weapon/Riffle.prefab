@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6887896319420767930}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.971, y: 0.058000058, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3351798175051977697}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9085184557699155184
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3351798175051977697}
   - component: {fileID: 7143125398951573885}
   - component: {fileID: 1124186274912175026}
-  - component: {fileID: 606511019714314245}
+  - component: {fileID: 5490702732023650137}
   m_Layer: 3
   m_Name: Riffle
   m_TagString: Untagged
@@ -58,8 +58,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9085184557699155184}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.19, y: -0.22, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.19691733, y: -0.28405103, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -137,11 +137,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7320e7eed91a04fb1237641cfb40a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SniperRiffle
-  _bulletSpawner: {fileID: 901361398097737229}
+  BulletSpawnerSpot: {fileID: 901361398097737229}
+  spawner: {fileID: 5490702732023650137}
+  bulletData: {fileID: 11400000, guid: 6808873af4386b246a3cd8e8bfa3585c, type: 2}
   _bulletLifeTime: 1
   _bulletSpeed: 20
   _bulletDamage: 100
---- !u!114 &606511019714314245
+--- !u!114 &5490702732023650137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +152,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9085184557699155184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cc6c3784e2519b47b8b8f97cca08164, type: 3}
+  m_Script: {fileID: 11500000, guid: 96acbf58411549343a919e29a86af2e8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RiffleBulletSpawner
-  PrefabBullet: {fileID: -494354636844885753, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::SingleBulletSpawner
+  _speed: 10
+  _damage: 100
+  _lifeTime: 3
+  PrefabBullet: {fileID: 7743676561388759529, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}

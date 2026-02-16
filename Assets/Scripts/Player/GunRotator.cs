@@ -2,52 +2,46 @@ using UnityEngine;
 
 public class GunRotator : MonoBehaviour
 {
-    [SerializeField] private Camera _mainCamera;
-
-    private SpriteRenderer _gunSprite;
+    private Camera _mainCamera;
+    private Weapon _gun;
 
     private void Awake()
     {
-        if (_mainCamera == null) _mainCamera = Camera.main;
+        if (_mainCamera == null)
+            _mainCamera = Camera.main;
     }
 
     private void LateUpdate()
     {
-        if (_gunSprite == null) 
-            return;
-
-        Rotate();
+        RotateTowardsMouse();
     }
 
-    public void SetGunSprite(SpriteRenderer gunSprite) => _gunSprite = gunSprite;
+    public void SetGun(Weapon weapon)
+    {
+        _gun = weapon;
+    }
 
-    private void Rotate()
+    private void RotateTowardsMouse()
     {
         Vector3 mouseWorld = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0;
-
         Vector2 direction = mouseWorld - transform.position;
-        direction.Normalize();
-
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        float scaleX = transform.lossyScale.x;
+        if (_gun != null)
+        {
+            _gun.transform.localRotation = Quaternion.Euler(0, 0, angle);
 
-        Debug.Log(scaleX);
+            bool isFacingRight = angle > -90f && angle < 90f;
+            Vector3 scale = _gun.transform.localScale;
+            float targetScaleY = isFacingRight ? 1f : -1f;
 
-        if (scaleX < 0)
-        {         
-            angle = 360 - angle;
-            _gunSprite.flipX = true;
-            _gunSprite.flipY = true;
+            scale.y = targetScaleY;
+            _gun.transform.localScale = scale;
         }
         else
         {
-            _gunSprite.flipX = false;
-            _gunSprite.flipY = false;
+            Debug.Log("_gun = null");
         }
-
-            // Применяем вращение
-            _gunSprite.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 }

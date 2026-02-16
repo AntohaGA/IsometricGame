@@ -1,24 +1,15 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
+    private const float RotatorBulletZ = -90f;
     private Rigidbody2D _rigidbody2D;
-
-    [SerializeField] private float _damageMultiplier = 1;
-    [SerializeField] private int _pierceCount = 5;
-    [SerializeField] private float _startDeviationDegrees;
-
     private float _damage;
     private float _lifeTime;
     private float _speed;
-
-    private Transform _spot;
-    private Coroutine _coroutineFly;
-    private Vector2 _initialDirection;
 
     public event Action<Bullet> Destroyed;
 
@@ -29,63 +20,27 @@ public abstract class Bullet : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    private void OnEnable()
-    {
-        if (_coroutineFly != null)
-        {
-            StopCoroutine(_coroutineFly);
-        }
-    }
-
     public virtual void Init(float lifeTime, float speed, float damage, Transform spot)
     {
         _lifeTime = lifeTime;
         _speed = speed;
-        _damage = _damageMultiplier * damage;
-        _spot = spot;
-        transform.position = spot.position;
-        transform.rotation = spot.rotation;
-        transform.Rotate(0f, 0f, -90f);
-
-        // Рассчитываем начальное направление с рандомным отклонением
-        Vector2 baseDirection = spot.right.normalized;
-        float deviation = UnityEngine.Random.Range(-_startDeviationDegrees, _startDeviationDegrees);
-        float deviationRad = deviation * Mathf.Deg2Rad;
-        float angle = Mathf.Atan2(baseDirection.y, baseDirection.x) + deviationRad;
-        _initialDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-
-        Fly();
+        _damage = damage;
+        transform.SetPositionAndRotation(spot.position, spot.rotation * Quaternion.Euler(0, 0, RotatorBulletZ));
+        CancelInvoke();
+        Invoke(nameof(Destroy), _lifeTime);
+        _rigidbody2D.linearVelocity = spot.right * _speed;
     }
 
-    public virtual void Fly()
+    private void Destroy()
     {
-        _coroutineFly = StartCoroutine(LifeTime());
-    }
-
-    private IEnumerator LifeTime()
-    {
-        float timer = 0f;
-
-        Vector2 direction = _initialDirection;
-
-        while (timer < _lifeTime)
-        {
-            _rigidbody2D.linearVelocity = direction * _speed;
-            timer += Time.deltaTime;
-
-            yield return null;
-        }
-
         Destroyed?.Invoke(this);
+        gameObject.SetActive(false);
     }
 
-    public void OnHit()
+    private void Despawn()
     {
-        _pierceCount--;
-
-        if( _pierceCount == 0)
-        {
-            Destroyed?.Invoke(this);
-        }
+        CancelInvoke(); // защита от повторного вызова
+        Destroyed?.Invoke(this);
+        gameObject.SetActive(false);
     }
 }

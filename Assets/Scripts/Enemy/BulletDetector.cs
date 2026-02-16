@@ -28,7 +28,6 @@ public class BulletDetector : MonoBehaviour
     {
         _zombieAnimator.Hit();
         _hp -= damage;
-        Debug.Log("урон получаю");
 
         if (_hp <= 0)
         {

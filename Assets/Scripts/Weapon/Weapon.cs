@@ -1,18 +1,31 @@
-using System;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] protected Transform _bulletSpawner;
+    [SerializeField] public Transform BulletSpawnerSpot;
+    [SerializeField] protected BulletSpawner spawner;
+    [SerializeField] protected WeaponStats bulletData;
 
-    protected int _damage;
+    public SpriteRenderer GunSprite { get; private set; }
 
-    public event Action<Transform> OnShoot;
+    protected virtual void Awake()
+    {
+        GunSprite = GetComponent<SpriteRenderer>();
+        ValidateComponents();
 
-    public virtual SpriteRenderer GunSprite => null;
+        if (bulletData != null)
+            bulletData.ApplyBaseValues();
+    }
+
+    protected virtual void ValidateComponents()
+    {
+        if (spawner == null) Debug.LogError($"{name}: Spawner не назначен!", this);
+        if (BulletSpawnerSpot == null) Debug.LogError($"{name}: BulletSpawnerSpot не назначен!", this);
+        if (bulletData == null) Debug.LogError($"{name}: BulletData не назначена!", this);
+    }
 
     public virtual void Shoot()
     {
-        OnShoot?.Invoke(transform);
+        spawner.Shoot(BulletSpawnerSpot, bulletData);
     }
 }

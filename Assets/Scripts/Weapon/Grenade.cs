@@ -24,11 +24,9 @@ public class Grenade : Bullet
             if (hit.TryGetComponent(out Enemy enemy))
             {
                 enemy.TakeDamage(damage);
-                Debug.Log("кого-то нашли для взрыва");
             }
         }
 
-        Debug.Log("Ещё не удалена пуля");
         Destroy(explosion.gameObject, 1);
     }
 }

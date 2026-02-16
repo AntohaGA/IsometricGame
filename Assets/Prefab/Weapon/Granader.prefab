@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672028545953539594}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2921408628638785704}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8200337624215283597
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2921408628638785704}
   - component: {fileID: 8866873551633565031}
   - component: {fileID: 1811121775649058669}
+  - component: {fileID: 1117644596865473037}
   m_Layer: 0
   m_Name: Granader
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc47f31bc14756499ea3a504d587970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granader
-  _bulletPrefab: {fileID: 3262486703261772038, guid: f59f7b49d12e3ab45be8d2e70841edcb, type: 3}
-  _bulletSpawner: {fileID: 2394056983311092372}
-  _damage: 70
+  BulletSpawnerSpot: {fileID: 2394056983311092372}
+  spawner: {fileID: 1117644596865473037}
+  bulletData: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
+--- !u!114 &1117644596865473037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200337624215283597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96acbf58411549343a919e29a86af2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SingleBulletSpawner
+  PrefabBullet: {fileID: 3262486703261772038, guid: f59f7b49d12e3ab45be8d2e70841edcb, type: 3}

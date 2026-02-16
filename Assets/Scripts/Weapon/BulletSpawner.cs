@@ -11,28 +11,40 @@ public abstract class BulletSpawner : MonoBehaviour
 
     protected virtual void Awake()
     {
-        PoolBullets = gameObject.AddComponent<PoolBullets>();
-        PoolBullets.Init(PoolCapacity, PoolMaxSize, PrefabBullet);
+        if (PoolBullets == null)
+        {
+            PoolBullets = gameObject.AddComponent<PoolBullets>();
+            PoolBullets.Init(PoolCapacity, PoolMaxSize, PrefabBullet);
+        }
     }
 
-    public Bullet GetBullet(float lifeTime, float speed, float damage, Transform spot)
+    public virtual void Shoot(Transform from, WeaponStats bulletData)
     {
-        Bullet bullet = PoolBullets.GetInstance();
-        bullet.Init(lifeTime, speed, damage, spot);
-
-        bullet.Destroyed += ReturnBullet;
-
-        return bullet;
+        Bullet bullet = GetBullet(bulletData, from);
     }
 
     public virtual void ReturnBullet(Bullet bullet)
     {
-        bullet.Destroyed -= ReturnBullet;
+        bullet.Destroyed -= OnBulletDestroyed;
         PoolBullets.ReturnInstance(bullet);
     }
 
     public virtual void Reset()
     {
         PoolBullets.ClearPool();
+    }
+
+    public void OnBulletDestroyed(Bullet bullet)
+    {
+        ReturnBullet(bullet);
+    }
+
+    private Bullet GetBullet(WeaponStats bulletData, Transform spot)
+    {
+        Bullet bullet = PoolBullets.GetInstance();
+        bullet.Init(bulletData.finalLifeTime, bulletData.finalSpeed, bulletData.finalDamage, spot);
+        bullet.Destroyed += OnBulletDestroyed;
+
+        return bullet;
     }
 }
