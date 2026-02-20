@@ -107,8 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletSpawnerSpot: {fileID: 7993082468846385030}
-  spawner: {fileID: 1846755287596626255}
-  bulletData: {fileID: 11400000, guid: 93310a4fae3c7944591644fd91b4d042, type: 2}
+  BulletSpawner: {fileID: 1846755287596626255}
+  WeaponStats: {fileID: 11400000, guid: 93310a4fae3c7944591644fd91b4d042, type: 2}
 --- !u!114 &1846755287596626255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunBulletSpawner
   PrefabBullet: {fileID: 7743676561388759529, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
-  _pelletCount: 5
-  _coneHalfAngle: 20
+  _pelletCount: 10
+  _coneHalfAngle: 30
 --- !u!1 &7084624345425927314
 GameObject:
   m_ObjectHideFlags: 0

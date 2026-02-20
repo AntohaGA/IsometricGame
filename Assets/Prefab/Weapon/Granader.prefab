@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8866873551633565031}
   - component: {fileID: 1811121775649058669}
   - component: {fileID: 1117644596865473037}
+  - component: {fileID: 3927348607126510113}
   m_Layer: 0
   m_Name: Granader
   m_TagString: Untagged
@@ -138,8 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granader
   BulletSpawnerSpot: {fileID: 2394056983311092372}
-  spawner: {fileID: 1117644596865473037}
-  bulletData: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
+  BulletSpawner: {fileID: 1117644596865473037}
+  WeaponStats: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
+  _handler: {fileID: 3927348607126510113}
 --- !u!114 &1117644596865473037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +155,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleBulletSpawner
   PrefabBullet: {fileID: 3262486703261772038, guid: f59f7b49d12e3ab45be8d2e70841edcb, type: 3}
+--- !u!114 &3927348607126510113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200337624215283597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2b855a80f7b2c43a8a90a87d2cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeExplosionHandler
+  explosionPrefab: {fileID: 5033180708955247871, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
+  explosionRadius: 2
+  explosionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

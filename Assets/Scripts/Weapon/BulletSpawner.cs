@@ -1,50 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class BulletSpawner : MonoBehaviour
 {
-    private const int PoolCapacity = 10;
-    private const int PoolMaxSize = 50;
-
-    protected PoolBullets PoolBullets;
+    private const int PoolCapacity = 20;
+    private const int PoolMaxSize = 100;
 
     [SerializeField] protected Bullet PrefabBullet;
 
+    private PoolBullets _poolBullets;
+
     protected virtual void Awake()
     {
-        if (PoolBullets == null)
-        {
-            PoolBullets = gameObject.AddComponent<PoolBullets>();
-            PoolBullets.Init(PoolCapacity, PoolMaxSize, PrefabBullet);
-        }
+        _poolBullets ??= gameObject.AddComponent<PoolBullets>();
+        _poolBullets.Init(PoolCapacity, PoolMaxSize, PrefabBullet);
     }
 
-    public virtual void Shoot(Transform from, WeaponStats bulletData)
+    public virtual void Reset() => _poolBullets?.ClearPool();
+    public void OnBulletDestroyed(Bullet bullet) => ReturnBullet(bullet);
+
+    public virtual void SpawnBullet(WeaponStats weaponStats, Transform spotSpawn)
     {
-        Bullet bullet = GetBullet(bulletData, from);
+        Bullet bullet = _poolBullets.GetInstance();
+        bullet.Init(weaponStats, spotSpawn);
+        bullet.Destroyed += OnBulletDestroyed;
     }
 
     public virtual void ReturnBullet(Bullet bullet)
     {
         bullet.Destroyed -= OnBulletDestroyed;
-        PoolBullets.ReturnInstance(bullet);
-    }
-
-    public virtual void Reset()
-    {
-        PoolBullets.ClearPool();
-    }
-
-    public void OnBulletDestroyed(Bullet bullet)
-    {
-        ReturnBullet(bullet);
-    }
-
-    private Bullet GetBullet(WeaponStats bulletData, Transform spot)
-    {
-        Bullet bullet = PoolBullets.GetInstance();
-        bullet.Init(bulletData.finalLifeTime, bulletData.finalSpeed, bulletData.finalDamage, spot);
-        bullet.Destroyed += OnBulletDestroyed;
-
-        return bullet;
+        _poolBullets.ReturnInstance(bullet);
     }
 }

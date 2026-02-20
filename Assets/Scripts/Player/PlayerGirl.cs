@@ -46,7 +46,7 @@ public class PlayerGirl : MonoBehaviour, IDamagable
 
         if (_playerInput.IsFirstWeaponShoot)
         {
-            _weaponCollector.ShootCurrentWeapon();
+            _weaponCollector.ShootCurrentWeapon(_playerInput.IsMoving);
         }
 
         if (_playerInput.IsFirstWeapon)

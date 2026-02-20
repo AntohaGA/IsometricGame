@@ -5,42 +5,33 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-    private const float RotatorBulletZ = -90f;
+    private const float RotatorBulletZ = 0;
     private Rigidbody2D _rigidbody2D;
-    private float _damage;
-    private float _lifeTime;
-    private float _speed;
+    private float _damageMultiplier = 1;
+    private float _lifeTimeMultiplier = 1;
+    private float _speedMultiplier = 1;
 
     public event Action<Bullet> Destroyed;
 
-    public float Damage => _damage;
+    public float Damage;
 
-    private void Awake()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+    protected virtual void OnDestroyed() => Destroyed?.Invoke(this);
+    private void Awake() => _rigidbody2D = GetComponent<Rigidbody2D>();
 
-    public virtual void Init(float lifeTime, float speed, float damage, Transform spot)
+    public virtual void Init(WeaponStats weaponStats, Transform initSpot)
     {
-        _lifeTime = lifeTime;
-        _speed = speed;
-        _damage = damage;
-        transform.SetPositionAndRotation(spot.position, spot.rotation * Quaternion.Euler(0, 0, RotatorBulletZ));
+        Damage = _damageMultiplier * weaponStats.Damage;
+        transform.position = initSpot.position;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, initSpot.right) * Quaternion.Euler(0, 0, RotatorBulletZ);
         CancelInvoke();
-        Invoke(nameof(Destroy), _lifeTime);
-        _rigidbody2D.linearVelocity = spot.right * _speed;
+        Invoke(nameof(Destroy), _lifeTimeMultiplier * weaponStats.LifeTime);
+        _rigidbody2D.linearVelocity = initSpot.right * _speedMultiplier * weaponStats.Speed;
     }
 
-    private void Destroy()
+    protected virtual void Destroy()
     {
-        Destroyed?.Invoke(this);
-        gameObject.SetActive(false);
-    }
-
-    private void Despawn()
-    {
-        CancelInvoke(); // защита от повторного вызова
-        Destroyed?.Invoke(this);
+        CancelInvoke();
+        OnDestroyed();
         gameObject.SetActive(false);
     }
 }

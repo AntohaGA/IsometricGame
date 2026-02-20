@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24290102797395f49913e21e0bd811e1, type: 3}
   m_Name: ShotgunStats
   m_EditorClassIdentifier: Assembly-CSharp::BulletData
-  baseLifeTime: 0.2
-  baseSpeed: 16
-  baseDamage: 10
-  finalLifeTime: 0.2
-  finalSpeed: 16
-  finalDamage: 10
+  LifeTime: 0.5
+  Speed: 15
+  Damage: 10

@@ -79,8 +79,8 @@ public class WeaponCollector : MonoBehaviour
         }
     }
 
-    public void ShootCurrentWeapon()
+    public void ShootCurrentWeapon(bool isMoving)
     {
-        _currentWeapon.Shoot();
+        _currentWeapon.Shoot(isMoving);
     }
 }

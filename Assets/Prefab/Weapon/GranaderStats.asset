@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24290102797395f49913e21e0bd811e1, type: 3}
   m_Name: GranaderStats
   m_EditorClassIdentifier: Assembly-CSharp::BulletData
-  baseLifeTime: 2
-  baseSpeed: 3
-  baseDamage: 200
-  finalLifeTime: 2
-  finalSpeed: 3
-  finalDamage: 200
+  LifeTime: 0.8
+  Speed: 7
+  Damage: 100

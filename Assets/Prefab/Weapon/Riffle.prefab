@@ -138,11 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SniperRiffle
   BulletSpawnerSpot: {fileID: 901361398097737229}
-  spawner: {fileID: 5490702732023650137}
-  bulletData: {fileID: 11400000, guid: 6808873af4386b246a3cd8e8bfa3585c, type: 2}
-  _bulletLifeTime: 1
-  _bulletSpeed: 20
-  _bulletDamage: 100
+  BulletSpawner: {fileID: 5490702732023650137}
+  WeaponStats: {fileID: 11400000, guid: 6808873af4386b246a3cd8e8bfa3585c, type: 2}
 --- !u!114 &5490702732023650137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96acbf58411549343a919e29a86af2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleBulletSpawner
-  _speed: 10
-  _damage: 100
-  _lifeTime: 3
   PrefabBullet: {fileID: 7743676561388759529, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}

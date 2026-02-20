@@ -1,5 +1,3 @@
-using UnityEngine;
-
-public class SingleBulletSpawner : BulletSpawner, IShootHandler
+public class SingleBulletSpawner : BulletSpawner
 {
 }
