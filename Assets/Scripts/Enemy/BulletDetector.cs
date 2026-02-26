@@ -19,8 +19,12 @@ public class BulletDetector : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Bullet bullet))
         {
-            TakeDamage(bullet.Damage);
-            DestroyBullet(bullet);
+            TakeDamage(bullet.GetDamage());  // Урон с ослаблением
+            bullet.OnHitEnemy();             // Пуля прошла сквозь
+                                             // НЕ уничтожаем пулю здесь!
+
+         //   TakeDamage(bullet.Damage);
+         //   DestroyBullet(bullet);
         }
     }
 
@@ -41,7 +45,7 @@ public class BulletDetector : MonoBehaviour
 
     private void DestroyBullet(Bullet bullet)
     {
-        Destroy(bullet.gameObject);
+        bullet.Destroy();
     }
 
     public void Die()

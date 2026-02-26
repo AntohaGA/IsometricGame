@@ -33,8 +33,6 @@ public class WeaponCollector : MonoBehaviour
                 weapon.gameObject.SetActive(false);
         }
 
-        Debug.Log(_weapons[0]);
-
         EquipWeapon(_weapons[0]);
     }
 
@@ -75,7 +73,6 @@ public class WeaponCollector : MonoBehaviour
         if (_currentWeapon != newWeapon)
         {
             EquipWeapon(newWeapon);
-            Debug.Log($"Switched to weapon {index + 1}");
         }
     }
 

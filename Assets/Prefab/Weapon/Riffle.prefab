@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96acbf58411549343a919e29a86af2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleBulletSpawner
-  PrefabBullet: {fileID: 7743676561388759529, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
+  PrefabBullet: {fileID: -5039173397268683281, guid: bbf3e949f2fe93b429f17a08304b8813, type: 3}

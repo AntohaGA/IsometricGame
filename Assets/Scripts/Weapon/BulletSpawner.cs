@@ -18,10 +18,10 @@ public abstract class BulletSpawner : MonoBehaviour
     public virtual void Reset() => _poolBullets?.ClearPool();
     public void OnBulletDestroyed(Bullet bullet) => ReturnBullet(bullet);
 
-    public virtual void SpawnBullet(WeaponStats weaponStats, Transform spotSpawn)
+    public virtual void SpawnBullet(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection, bool isMove)
     {
         Bullet bullet = _poolBullets.GetInstance();
-        bullet.Init(weaponStats, spotSpawn);
+        bullet.Init(weaponStats, spawnPosition, shootDirection, isMove);
         bullet.Destroyed += OnBulletDestroyed;
     }
 

@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 5780506016250916224}
   - component: {fileID: 9047182208386960128}
   - component: {fileID: 1204707835512087346}
-  - component: {fileID: 9060508820897564531}
+  - component: {fileID: 6728311231426103654}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113cb0954e5b8ab41a2552376975c00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRotator
---- !u!114 &9060508820897564531
+--- !u!114 &6728311231426103654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,8 +343,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9127517849912267122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c04b7007a1a71ae4498cd93325435afb, type: 3}
+  m_Script: {fileID: 11500000, guid: af2b8f41f189a474c865746dc880f812, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SimpleAccuracy
-  _standingSpread: 0
-  _movingSpread: 10
+  m_EditorClassIdentifier: Assembly-CSharp::Painter
+  _linePrefab: {fileID: 7748587356157916337, guid: 579bb377e0f69564e8620d0e76f7d4a1, type: 3}
+  _barrierLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _minDistance: 0.1

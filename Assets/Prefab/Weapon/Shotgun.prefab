@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f455e463bbbab144a1ca54608a179f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunBulletSpawner
-  PrefabBullet: {fileID: 7743676561388759529, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
-  _pelletCount: 10
+  PrefabBullet: {fileID: -9121415209243443649, guid: c89ae32c1bf218e4f8f8ff030bf00f7f, type: 3}
+  _pelletCount: 5
   _coneHalfAngle: 30
 --- !u!1 &7084624345425927314
 GameObject:

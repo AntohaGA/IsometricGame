@@ -6,11 +6,6 @@ public class PlayerToucher : MonoBehaviour
 
     private float damageTimer = 0f;
 
-    private void Awake()
-    {
-        
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player")) 

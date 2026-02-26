@@ -16,9 +16,9 @@ public abstract class Weapon : MonoBehaviour
         GunSprite = GetComponent<SpriteRenderer>();
     }
 
-    public virtual void Shoot(bool isMoving)
+    public virtual void Shoot(bool isMove)
     {
-        BulletSpawner.SpawnBullet(WeaponStats, BulletSpawnerSpot);
+        BulletSpawner.SpawnBullet(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right, isMove);
         OnShoot?.Invoke();  // Анимация, звук
     }
 }
