@@ -1,7 +1,7 @@
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Painter : MonoBehaviour
 {
@@ -17,32 +17,28 @@ public class Painter : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-            StartDrawing();
-
-        if (Input.GetMouseButton(1))
-            Draw();
-
-        if (Input.GetMouseButtonUp(1)) 
-            StopDrawing();
+        if (Input.GetMouseButtonDown(1)) StartDrawing();
+        if (Input.GetMouseButton(1)) Draw();
+        if (Input.GetMouseButtonUp(1)) StopDrawing();
     }
 
     void StartDrawing()
     {
         _currentLine = Instantiate(_linePrefab, transform);
-        _currentLine.gameObject.layer = _barrierLayer;
+        _currentLine.gameObject.layer = Mathf.RoundToInt(_barrierLayer); // вњ… РџСЂР°РІРёР»СЊРЅС‹Р№ СЃР»РѕР№
         _points.Clear();
     }
 
     void Draw()
     {
-        Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition); // вњ… Vector3
+        mousePos.z = 0;
 
-        if (_points.Count == 0 || Vector2.Distance(_points.Last(), mousePos) > _minDistance)
+        if (_points.Count == 0 || Vector3.Distance(_points.Last(), mousePos) > _minDistance)
         {
             _points.Add(mousePos);
             _currentLine.positionCount = _points.Count;
-            _currentLine.SetPositions(_points.ToArray());
+            _currentLine.SetPositions(_points.ToArray()); // вњ… Р Р°Р±РѕС‚Р°РµС‚ СЃ Vector3
         }
     }
 
@@ -50,27 +46,41 @@ public class Painter : MonoBehaviour
     {
         if (_points.Count > 1)
         {
-            AddNavMeshObstacle(_currentLine);
+            CreateBarrierLine(); // вњ… РќРѕРІР°СЏ С„СѓРЅРєС†РёСЏ
         }
-        else
+        else if (_currentLine != null)
         {
             Destroy(_currentLine.gameObject);
         }
         _currentLine = null;
+        _points.Clear();
     }
 
-    void AddNavMeshObstacle(LineRenderer line)
+    void CreateBarrierLine()
     {
-        // Только физический барьер, без NavMesh
-        BoxCollider2D collider = line.gameObject.AddComponent<BoxCollider2D>();
-        collider.isTrigger = false; // Твердый барьер
+        // вњ… РЎРѕР·РґР°РµРј РѕС‚РґРµР»СЊРЅС‹Р№ РѕР±СЉРµРєС‚ РґР»СЏ Р±Р°СЂСЊРµСЂР°
+        GameObject barrier = new GameObject("BarrierLine");
+        barrier.layer = Mathf.RoundToInt(_barrierLayer);
 
-        // Увеличиваем для покрытия всей линии
-        collider.size = Vector2.one * 0.3f;
+        // 1. РљРѕРїРёСЂСѓРµРј LineRenderer РґР»СЏ РІРёР·СѓР°Р»Р°
+        LineRenderer visualLine = barrier.AddComponent<LineRenderer>();
+        visualLine.material = _currentLine.material;
+        visualLine.startWidth = _currentLine.startWidth;
+        visualLine.endWidth = _currentLine.endWidth;
+        visualLine.positionCount = _points.Count;
+        visualLine.SetPositions(_points.ToArray());
 
-        // Враги будут физически сталкиваться
-        Rigidbody2D rb = line.gameObject.AddComponent<Rigidbody2D>();
-        rb.isKinematic = true; // Статический
+        // 2. вњ… EdgeCollider2D РґР»СЏ С‚РѕС‡РЅРѕР№ Р»РёРЅРёРё!
+        EdgeCollider2D edgeCollider = barrier.AddComponent<EdgeCollider2D>();
+        edgeCollider.isTrigger = false;
+        edgeCollider.points = Array.ConvertAll(_points.ToArray(), p => (Vector2)p);
+
+        // 3. Rigidbody2D СЃС‚Р°С‚РёС‡РµСЃРєРёР№
+      /*  Rigidbody2D rb = barrier.AddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
+        rb.simulated = false;*/
+
+        // 4. РЈРЅРёС‡С‚РѕР¶Р°РµРј РІСЂРµРјРµРЅРЅСѓСЋ Р»РёРЅРёСЋ
+      //  Destroy(_currentLine.gameObject);
     }
 }

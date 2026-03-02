@@ -5,7 +5,7 @@ public class Grenade : Bullet
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private float _explosionRadius = 2f;
 
-    private int _damage = 100;
+    [SerializeField] private int _damage = 100;
 
     private void Start()
     {

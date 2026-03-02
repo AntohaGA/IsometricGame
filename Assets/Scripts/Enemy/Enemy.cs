@@ -13,15 +13,17 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     public event Action OnKilled;
     public event Action<Enemy> Killed;
 
-    private void OnEnable()
+    private void Awake()
     {
         BulletDetector = GetComponent<BulletDetector>();
         ZombieAnimator = GetComponent<ZombieAnimator>();
         ZombieMover = GetComponent<ZombieMover>();
+    }
 
+    private void OnEnable()
+    {
         BulletDetector.enabled = true;
         ZombieMover.enabled = true;
-
         BulletDetector.OnBulletDamage += TakeDamage;
         BulletDetector.OnBulletDamage += ZombieAnimator.Hit;
         OnKilled += ZombieAnimator.Die;
@@ -30,11 +32,11 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 
     private void OnDisable()
     {
+        BulletDetector.enabled = false;
+        ZombieMover.enabled = false;
         BulletDetector.OnBulletDamage -= TakeDamage;
         BulletDetector.OnBulletDamage -= ZombieAnimator.Hit;
         OnKilled -= ZombieAnimator.Die;
-        BulletDetector.enabled = false;
-        ZombieMover.enabled = false;
     }
 
     public void Init(Vector2 spawnspot)
