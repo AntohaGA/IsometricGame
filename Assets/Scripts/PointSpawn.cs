@@ -4,12 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PointSpawn : MonoBehaviour
 {
-    [SerializeField] private Transform _point;
-    [SerializeField] private Enemy _enemy;
     [SerializeField] private int _count;
     [SerializeField] private float _delay;
+    [SerializeField] private EnemySpawner _enemySpawner;
 
-    private Vector3 _position;
     private CapsuleCollider2D _capsuleCollider2D;
     private bool isSpawned = false;
     private Coroutine _coroutine;
@@ -18,7 +16,6 @@ public class PointSpawn : MonoBehaviour
     {
         _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         _capsuleCollider2D.isTrigger = true;
-        _position = _point.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,8 +34,7 @@ public class PointSpawn : MonoBehaviour
 
         while (currentSpawn > 0)
         {
-            Instantiate(_enemy, _position, Quaternion.identity);
-            Debug.Log("Spawn enemy - " + currentSpawn);
+            _enemySpawner.SpawnEnemy(transform.position);
             currentSpawn--;
 
             yield return delay;

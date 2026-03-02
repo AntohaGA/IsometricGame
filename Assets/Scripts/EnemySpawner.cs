@@ -1,32 +1,30 @@
-using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private const int PoolCapacity = 20;
+    private const int PoolMaxSize = 100;
+
     [SerializeField] private Enemy _enemy;
-    [SerializeField] private float _spawnDelay = 3;
-    [SerializeField] private float _spawnOffset = 3;
 
-    private Transform _transform;
+    private PoolEnemies _pool;
 
-    private void Start()
+    private void Awake()
     {
-        _transform = transform;
-        StartCoroutine(SpawnEnemyCoroutine(_spawnDelay));
+        _pool ??= gameObject.AddComponent<PoolEnemies>();
+        _pool.Init(PoolCapacity, PoolMaxSize, _enemy);
     }
 
-    private IEnumerator SpawnEnemyCoroutine(float time)
+    public void SpawnEnemy(Vector3 spawnPosition)
     {
-        WaitForSeconds delay = new WaitForSeconds(time);
+        Enemy enemy = _pool.GetInstance();
+        enemy.Killed += DestroyEnemy;
+        enemy.Init(spawnPosition);
+    }
 
-        while (enabled)
-        {
-            float x = Random.Range(_transform.position.x - _spawnOffset, _transform.position.x + _spawnOffset);
-            float y = Random.Range(_transform.position.y - _spawnOffset, _transform.position.y + _spawnOffset);
-            Vector3 randomCoordinate = new Vector3(x, y, gameObject.transform.position.z);
-            Instantiate(_enemy, randomCoordinate, Quaternion.identity);
-
-            yield return delay;
-        }
+    private void DestroyEnemy(Enemy enemy)
+    {
+        enemy.Killed -= DestroyEnemy;
+        _pool.ReturnInstance(enemy);
     }
 }

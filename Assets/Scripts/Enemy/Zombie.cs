@@ -4,7 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieMover))]
 [RequireComponent(typeof(ZombieAnimator))]
 [RequireComponent(typeof(FlipperAgent))]
-public class Zombie : MonoBehaviour
+[RequireComponent(typeof(BulletDetector))]
+public class Zombie : Enemy
 {
 
 }

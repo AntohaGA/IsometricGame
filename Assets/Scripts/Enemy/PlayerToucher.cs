@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class PlayerToucher : MonoBehaviour
 {
-    [SerializeField] private float _damage;
+    [SerializeField] private int _damage;
 
     private float damageTimer = 0f;
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
+            Hit(other);
+    }
+
+    private void Hit(Collider2D other)
+    {
+        damageTimer += Time.deltaTime;
+
+        if (damageTimer >= 0.1f)
         {
-            damageTimer += Time.deltaTime;
+            other.gameObject.GetComponent<PlayerGirl>().TakeDamage(_damage);
 
-            if (damageTimer >= 0.1f) 
-            {
-                other.gameObject.GetComponent<PlayerGirl>().TakeDamage(_damage);
-
-                damageTimer = 0f;
-            }
+            damageTimer = 0f;
         }
     }
 

@@ -16,3 +16,6 @@ MonoBehaviour:
   Speed: 1
   Damage: 1
   CountPenetration: 5
+  DamageMultiplier: 1
+  MaxPenetrations: 5
+  DamageFalloff: 1

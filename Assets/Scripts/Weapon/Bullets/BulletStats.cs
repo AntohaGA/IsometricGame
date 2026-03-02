@@ -5,7 +5,7 @@ public class BulletStats : ScriptableObject
 {
     public float LifeTime;
     public float Speed;
-    public float Damage;
+    public int Damage;
     public int CountPenetration;
 
     public float DamageMultiplier = 1f;

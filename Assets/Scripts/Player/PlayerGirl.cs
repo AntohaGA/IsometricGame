@@ -12,7 +12,7 @@ public class PlayerGirl : MonoBehaviour, IDamagable
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private float _speed;
-    [SerializeField] private float _health;
+    [SerializeField] private int _health;
 
     private PlayerAnimator _animator;
     private Rigidbody2D _rigidbody2D;
@@ -63,7 +63,7 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         _health -= damage;
         _healthSlider.value = _health;

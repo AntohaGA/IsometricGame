@@ -1,62 +1,35 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class BulletDetector : MonoBehaviour
 {
-    [SerializeField] private ZombieAnimator _zombieAnimator;
-    [SerializeField] private ZombieMover _enemyMover;
-    [SerializeField] private float _hp = 100f;
+    public event Action<int> OnBulletDamage;
 
     private CapsuleCollider2D _capsuleCollider;
 
-    private void Start()
+    private void Awake()
     {
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
+    }
+
+    private void OnEnable()
+    {
+        _capsuleCollider.enabled = enabled;
+    }
+
+    private void OnDisable()
+    {
+        _capsuleCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Bullet bullet))
         {
-            TakeDamage(bullet.GetDamage());  // Урон с ослаблением
-            bullet.OnHitEnemy();             // Пуля прошла сквозь
-                                             // НЕ уничтожаем пулю здесь!
-
-         //   TakeDamage(bullet.Damage);
-         //   DestroyBullet(bullet);
+            Debug.Log("OnTriggerEnter2D " + bullet);
+            bullet.OnHitEnemy();
+            OnBulletDamage?.Invoke(bullet.Damage);
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _zombieAnimator.Hit();
-        _hp -= damage;
-
-        if (_hp <= 0)
-        {
-            _enemyMover.Stop();
-            _enemyMover.enabled = false;
-            _capsuleCollider.enabled = false;
-            _zombieAnimator.Die();
-            Die();
-        }
-    }
-
-    private void DestroyBullet(Bullet bullet)
-    {
-        bullet.Destroy();
-    }
-
-    public void Die()
-    {
-        StartCoroutine(Dissapear());
-    }
-
-    private IEnumerator Dissapear()
-    {
-        yield return new WaitForSeconds(3);
-
-        Destroy(_enemyMover.gameObject);
     }
 }

@@ -1,11 +1,74 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamagable
+public abstract class Enemy : MonoBehaviour, IDamagable
 {
-    [SerializeField] private BulletDetector _bulletDetector;
+    protected BulletDetector BulletDetector;
+    protected ZombieAnimator ZombieAnimator;
+    protected ZombieMover ZombieMover;
+    protected int StartHealth = 200;
+    protected int Health;
 
-    public void TakeDamage(float damage)
+    public event Action OnKilled;
+    public event Action<Enemy> Killed;
+
+    private void OnEnable()
     {
-        _bulletDetector.TakeDamage(damage);
+        BulletDetector = GetComponent<BulletDetector>();
+        ZombieAnimator = GetComponent<ZombieAnimator>();
+        ZombieMover = GetComponent<ZombieMover>();
+
+        BulletDetector.enabled = true;
+        ZombieMover.enabled = true;
+
+        BulletDetector.OnBulletDamage += TakeDamage;
+        BulletDetector.OnBulletDamage += ZombieAnimator.Hit;
+        OnKilled += ZombieAnimator.Die;
+        Health = StartHealth;
+    }
+
+    private void OnDisable()
+    {
+        BulletDetector.OnBulletDamage -= TakeDamage;
+        BulletDetector.OnBulletDamage -= ZombieAnimator.Hit;
+        OnKilled -= ZombieAnimator.Die;
+        BulletDetector.enabled = false;
+        ZombieMover.enabled = false;
+    }
+
+    public void Init(Vector2 spawnspot)
+    {
+        transform.position = spawnspot;
+        transform.rotation = Quaternion.identity;
+        Health = StartHealth;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+
+        if (Health <= 0)
+        {
+            StartCoroutine(DeathSequence());
+        }
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        OnKilled?.Invoke();
+        BulletDetector.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        ZombieMover.enabled = false;
+
+        yield return new WaitForSeconds(2);
+
+        Killed?.Invoke(this);
+    }
+
+    public virtual void Kill()
+    {
+        StopAllCoroutines();
+        Killed?.Invoke(this);
     }
 }

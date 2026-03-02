@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class DamageZone : MonoBehaviour
 {
-    [SerializeField] private float _damage;
+    [SerializeField] private int _damage;
     [SerializeField] private float _delay;
 
     private Coroutine _makeDamage;

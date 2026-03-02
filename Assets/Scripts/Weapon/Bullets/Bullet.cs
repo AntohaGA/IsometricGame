@@ -10,11 +10,11 @@ public class Bullet : MonoBehaviour
     private BulletStats Final;
     private Rigidbody2D _rigidbody2D;
 
-    public float Damage => Final.Damage;
-
     private int _currentPenetrations = 0;
+    public int Damage => Final.Damage;
 
-    public event Action<Bullet> EndOfLifetime;
+    private Coroutine _lifeTimerCoroutine; // Поле для хранения!
+
     public event Action<Bullet> Destroyed;
 
     private void Awake()
@@ -26,17 +26,15 @@ public class Bullet : MonoBehaviour
     public virtual void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection, bool isMove)
     {
         Final.Damage = weaponStats.Damage * Stats.Damage;
+        _currentPenetrations = 0;
         transform.position = spawnPosition;
-        float maxDeviationAngle = isMove ? weaponStats.MoveAccuracy : weaponStats.StopAccuracy;
-        float deviationAngle = UnityEngine.Random.Range(-maxDeviationAngle, maxDeviationAngle) * Mathf.Deg2Rad;
-        Vector2 finalDirection = Quaternion.Euler(0, 0, deviationAngle) * shootDirection.normalized;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, finalDirection);
-
+        Vector2 finalDirection = GetDirection(weaponStats, shootDirection, isMove);
         _rigidbody2D.linearVelocity = finalDirection.normalized * weaponStats.Speed;
 
-        _currentPenetrations = 0; // Сброс счетчика
+        if (_lifeTimerCoroutine != null)
+            StopCoroutine(_lifeTimerCoroutine);
 
-        StartCoroutine(LifeTimer(weaponStats.LifeTime));
+        _lifeTimerCoroutine = StartCoroutine(LifeTimer(weaponStats.LifeTime));
     }
 
     public float GetDamage() => Damage * Mathf.Pow(Stats.DamageFalloff, _currentPenetrations);
@@ -44,13 +42,13 @@ public class Bullet : MonoBehaviour
     public void OnHitEnemy()
     {
         _currentPenetrations++;
+
         if (_currentPenetrations >= Stats.MaxPenetrations)
-            Destroy(); // Уничтожить после N врагов
+            Destroy();
     }
 
     public virtual void Destroy()
     {
-        EndOfLifetime?.Invoke(this);
         Destroyed?.Invoke(this);
     }
 
@@ -58,6 +56,17 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        _lifeTimerCoroutine = null;
         Destroy();
+    }
+
+    private Vector2 GetDirection(WeaponStats weaponStats, Vector2 shootDirection, bool isMove)
+    {
+        float maxDeviationAngle = isMove ? weaponStats.MoveAccuracy : weaponStats.StopAccuracy;
+        float deviationAngle = UnityEngine.Random.Range(-maxDeviationAngle, maxDeviationAngle) * Mathf.Deg2Rad;
+        Vector2 finalDirection = Quaternion.Euler(0, 0, deviationAngle) * shootDirection.normalized;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, finalDirection);
+
+        return finalDirection;
     }
 }
