@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Painter : MonoBehaviour
 {
@@ -15,21 +17,21 @@ public class Painter : MonoBehaviour
 
     void Start() => _cam = Camera.main;
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(1)) StartDrawing();
         if (Input.GetMouseButton(1)) Draw();
         if (Input.GetMouseButtonUp(1)) StopDrawing();
     }
 
-    void StartDrawing()
+    private void StartDrawing()
     {
         _currentLine = Instantiate(_linePrefab, transform);
         _currentLine.gameObject.layer = Mathf.RoundToInt(_barrierLayer); // ✅ Правильный слой
         _points.Clear();
     }
 
-    void Draw()
+    private void Draw()
     {
         Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition); // ✅ Vector3
         mousePos.z = 0;
@@ -42,11 +44,11 @@ public class Painter : MonoBehaviour
         }
     }
 
-    void StopDrawing()
+    private void StopDrawing()
     {
         if (_points.Count > 1)
         {
-            CreateBarrierLine(); // ✅ Новая функция
+            CreateCarveBarrier(); // ✅ Новая функция
         }
         else if (_currentLine != null)
         {
@@ -56,31 +58,28 @@ public class Painter : MonoBehaviour
         _points.Clear();
     }
 
-    void CreateBarrierLine()
+    private void CreateCarveBarrier()
     {
-        // ✅ Создаем отдельный объект для барьера
-        GameObject barrier = new GameObject("BarrierLine");
-        barrier.layer = Mathf.RoundToInt(_barrierLayer);
+        // 1. ВИЗУАЛ (одна линия)
+        GameObject visualBarrier = new GameObject("VisualBarrier");
+        LineRenderer line = visualBarrier.AddComponent<LineRenderer>();
+        line.material = _currentLine.material;
+        line.startWidth = 0.2f;
+        line.SetPositions(_points.ToArray());
 
-        // 1. Копируем LineRenderer для визуала
-        LineRenderer visualLine = barrier.AddComponent<LineRenderer>();
-        visualLine.material = _currentLine.material;
-        visualLine.startWidth = _currentLine.startWidth;
-        visualLine.endWidth = _currentLine.endWidth;
-        visualLine.positionCount = _points.Count;
-        visualLine.SetPositions(_points.ToArray());
+        EdgeCollider2D edge = visualBarrier.AddComponent<EdgeCollider2D>();
+        edge.points = Array.ConvertAll(_points.ToArray(), p => (Vector2)p);
 
-        // 2. ✅ EdgeCollider2D для точной линии!
-        EdgeCollider2D edgeCollider = barrier.AddComponent<EdgeCollider2D>();
-        edgeCollider.isTrigger = false;
-        edgeCollider.points = Array.ConvertAll(_points.ToArray(), p => (Vector2)p);
+        // 2. NavMesh препятствия (много маленьких)
+        for (int i = 0; i < _points.Count; i += 2) // Каждый 2-й точка = оптимизация
+        {
+            GameObject obstacleGO = new GameObject("NavObstacle");
+            obstacleGO.transform.position = _points[i];
 
-        // 3. Rigidbody2D статический
-      /*  Rigidbody2D rb = barrier.AddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Static;
-        rb.simulated = false;*/
-
-        // 4. Уничтожаем временную линию
-      //  Destroy(_currentLine.gameObject);
+            NavMeshObstacle obstacle = obstacleGO.AddComponent<NavMeshObstacle>();
+            obstacle.carving = true;
+            obstacle.carveOnlyStationary = false;
+            obstacle.size = new Vector3(0.2f, 0.2f, 0.2f);
+        }
     }
 }

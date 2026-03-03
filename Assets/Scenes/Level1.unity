@@ -17161,7 +17161,7 @@ Transform:
   m_GameObject: {fileID: 977075729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.90173, y: -22.22138, z: 0}
+  m_LocalPosition: {x: 19.69, y: -13.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91430,6 +91430,14 @@ PrefabInstance:
       propertyPath: _enemySpawner
       value: 
       objectReference: {fileID: 977075730}
+    - target: {fileID: 7423630386282126694, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: m_Size.y
+      value: 0.089776635
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423630386282126694, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
+      propertyPath: m_Center.z
+      value: -0.00000047683716
+      objectReference: {fileID: 0}
     - target: {fileID: 8197982268542944731, guid: 3c96f13950624234ba5f6a5f9004accb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.55
