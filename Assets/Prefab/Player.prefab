@@ -351,3 +351,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   _minDistance: 0.1
+  _brickMaterial: {fileID: 2100000, guid: b5d6535820143134badf363121bd6d8a, type: 2}
