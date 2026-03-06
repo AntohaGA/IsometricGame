@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
-public class PlayerGirl : MonoBehaviour, IDamagable
+public class PlayerGirl : MonoBehaviour, IDamagable, IHittable
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private float _speed;
@@ -61,16 +61,30 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         {
             _weaponCollector.SwitchToWeapon(2);
         }
+        if (_playerInput.IsFourthWeapon)
+        {
+            _weaponCollector.SwitchToWeapon(3);
+        }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(Bullet bullet)
     {
-        _health -= damage;
+        _health -= bullet.Damage;
         _healthSlider.value = _health;
 
         if (_health <= 0)
         {
             Deceased?.Invoke(this);
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnHit()
+    {
+        throw new NotImplementedException();
     }
 }

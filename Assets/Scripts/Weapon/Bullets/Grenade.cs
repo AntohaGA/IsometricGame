@@ -2,40 +2,18 @@
 
 public class Grenade : Bullet
 {
-    [SerializeField] private GameObject _explosionPrefab;
-    [SerializeField] private float _explosionRadius = 2f;
-
-    [SerializeField] private int _damage = 100;
+    [SerializeField] private ExplosionEffect _explosionEffect;
+    private float _explosionRadius = 2f;
 
     private void Start()
     {
-        Destroyed += CreateExplosion;
-    }
-     
-    public override void Destroy()
-    {
-        CreateExplosion(this);
-        base.Destroy();
+        Destroyed += OnGrenadeDestroyed;
     }
 
-    private void CreateExplosion(Bullet bullet)
+    private void OnGrenadeDestroyed(Bullet bullet)
     {
-        bullet.Destroyed -= CreateExplosion;
-
-        if (_explosionPrefab != null)
-        {
-            GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(explosion, 1f);
-        }
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _explosionRadius);
-
-        foreach (Collider2D hit in colliders)
-        {
-            if (hit.TryGetComponent<IDamagable>(out var damagable))
-            {
-                damagable.TakeDamage(_damage);
-            }
-        }
+        bullet.Destroyed -= OnGrenadeDestroyed;
+        _explosionEffect.Explode(transform.position, _explosionRadius, Damage, this);
+        Destroy();
     }
 }

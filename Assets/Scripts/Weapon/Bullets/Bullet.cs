@@ -7,17 +7,23 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] protected BulletStats Stats;
+
     private BulletStats Final;
-    private Rigidbody2D _rigidbody2D;
+    private Coroutine _lifeTimerCoroutine; 
 
     private int _currentPenetrations = 0;
-    public int Damage => Final.Damage;
 
-    private Coroutine _lifeTimerCoroutine; // Поле для хранения!
+    protected Rigidbody2D _rigidbody2D;
 
     public event Action<Bullet> Destroyed;
 
-    private void Awake()
+    public int Damage
+    {
+        get => Final.Damage;
+        protected set => Final.Damage = value;
+    }
+
+    protected virtual void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         Final = ScriptableObject.CreateInstance<BulletStats>();
@@ -37,10 +43,10 @@ public class Bullet : MonoBehaviour
         _lifeTimerCoroutine = StartCoroutine(LifeTimer(weaponStats.LifeTime));
     }
 
-    public float GetDamage() => Damage * Mathf.Pow(Stats.DamageFalloff, _currentPenetrations);
-
     public void OnHitEnemy()
     {
+        Debug.Log("OnHitEnemy");
+
         _currentPenetrations++;
 
         if (_currentPenetrations >= Stats.MaxPenetrations)

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IDamageDealer
 {
     [SerializeField] public Transform BulletSpawnerSpot;
     [SerializeField] protected BulletSpawner BulletSpawner;

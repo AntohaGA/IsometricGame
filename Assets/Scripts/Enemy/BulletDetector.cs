@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class BulletDetector : MonoBehaviour
 {
-    public event Action<int> OnBulletDamage;
+    public event Action<Bullet> OnBulletDetect;
 
     private CapsuleCollider2D _capsuleCollider;
 
@@ -15,7 +15,7 @@ public class BulletDetector : MonoBehaviour
 
     private void OnEnable()
     {
-        _capsuleCollider.enabled = enabled;
+        _capsuleCollider.enabled = true;
     }
 
     private void OnDisable()
@@ -27,9 +27,7 @@ public class BulletDetector : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Bullet bullet))
         {
-            Debug.Log("OnTriggerEnter2D " + bullet);
-            bullet.OnHitEnemy();
-            OnBulletDamage?.Invoke(bullet.Damage);
+            OnBulletDetect?.Invoke(bullet);
         }
     }
 }

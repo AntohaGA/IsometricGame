@@ -31,4 +31,5 @@ public class InputReader : MonoBehaviour
     public bool IsFirstWeapon => Input.GetKeyDown(KeyCode.Alpha1);
     public bool IsSecondWeapon => Input.GetKeyDown(KeyCode.Alpha2);
     public bool IsThirdWeapon => Input.GetKeyDown(KeyCode.Alpha3);
+    public bool IsFourthWeapon => Input.GetKeyDown(KeyCode.Alpha4);
 }

@@ -5,9 +5,11 @@ using UnityEngine;
 public class WeaponCollector : MonoBehaviour
 {
     [SerializeField] Transform _firstWeaponSpot;
-    [SerializeField] private Rifle _riflePrefab;
+    [SerializeField] private Weapon _riflePrefab;
     [SerializeField] private Weapon _shotgunPrefab;
     [SerializeField] private Weapon _granaderPrefab;
+    [SerializeField] private Weapon _mineLauncherPrefab;
+
 
     private GunRotator _gunRotator;
     private Weapon[] _weapons;
@@ -24,7 +26,8 @@ public class WeaponCollector : MonoBehaviour
         {
             _riflePrefab != null ? Instantiate(_riflePrefab, _firstWeaponSpot.transform) : null,
             _shotgunPrefab != null ? Instantiate(_shotgunPrefab, _firstWeaponSpot.transform) : null,
-            _granaderPrefab != null ? Instantiate(_granaderPrefab, _firstWeaponSpot.transform) : null
+            _granaderPrefab != null ? Instantiate(_granaderPrefab, _firstWeaponSpot.transform) : null,
+            _mineLauncherPrefab !=null ? Instantiate(_mineLauncherPrefab, _firstWeaponSpot.transform) :null,
         };
 
         foreach (Weapon weapon in _weapons)

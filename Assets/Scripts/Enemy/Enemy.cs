@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IDamagable
+public abstract class Enemy : MonoBehaviour, IDamagable, IDamageDealer, IHittable
 {
     protected BulletDetector BulletDetector;
     protected ZombieAnimator ZombieAnimator;
@@ -24,8 +24,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     {
         BulletDetector.enabled = true;
         ZombieMover.enabled = true;
-        BulletDetector.OnBulletDamage += TakeDamage;
-        BulletDetector.OnBulletDamage += ZombieAnimator.Hit;
+        BulletDetector.OnBulletDetect += TakeDamageFromBullet;
+        BulletDetector.OnBulletDetect += ZombieAnimator.Hit;
         OnKilled += ZombieAnimator.Die;
         Health = StartHealth;
     }
@@ -34,8 +34,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     {
         BulletDetector.enabled = false;
         ZombieMover.enabled = false;
-        BulletDetector.OnBulletDamage -= TakeDamage;
-        BulletDetector.OnBulletDamage -= ZombieAnimator.Hit;
+        BulletDetector.OnBulletDetect -= TakeDamageFromBullet;
+        BulletDetector.OnBulletDetect -= ZombieAnimator.Hit;
         OnKilled -= ZombieAnimator.Die;
     }
 
@@ -56,6 +56,12 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         }
     }
 
+    public void TakeDamageFromBullet(Bullet bullet)
+    {
+        bullet.OnHitEnemy();
+        TakeDamage(bullet.Damage);
+    }
+
     private IEnumerator DeathSequence()
     {
         OnKilled?.Invoke();
@@ -72,5 +78,10 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     {
         StopAllCoroutines();
         Killed?.Invoke(this);
+    }
+
+    public void OnHit()
+    {
+        throw new NotImplementedException();
     }
 }

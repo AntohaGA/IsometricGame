@@ -147,7 +147,7 @@ public class Painter : MonoBehaviour
         for (int i = startIndex; i < endIndex; i++)
             lineLength += Vector3.Distance(_points[i], _points[i + 1]);
 
-        obstacle.size = new Vector3(lineLength * 0.8f, 0.4f, 0.5f); // Длина x Ширина x Глубина
+        obstacle.size = new Vector3(lineLength * 0.8f, 0.01f, 0.5f); // Длина x Ширина x Глубина
 
         Rigidbody2D rb = obstacleGO.AddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
