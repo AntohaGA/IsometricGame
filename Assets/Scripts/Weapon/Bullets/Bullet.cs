@@ -1,96 +1,50 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] protected BulletMultiplier Stats;
+    [SerializeField] private BulletStats Stats;
 
-    private int _damage;
-    private int _speed;
-    private int _lifeTime;
-    private int _penetration;
-    private int _currentPenetrations = 0;
-    private Vector2 _linearVelocity;
-
-    protected Coroutine _lifeTimerCoroutine;
-    protected Rigidbody2D _rigidbody2D;
+    private BulletConfig _config;
+    private BulletMovement _movement;
+    private Lifetime _lifetime;
+    private BulletDamage _damageSystem;
 
     public event Action<Bullet> Destroyed;
+    public int Damage => _config?.damage ?? 0;
 
-    public void InvokeDestroyed() => Destroyed?.Invoke(this);
-
-    public int Damage
-    {
-        get => _damage;
-    }
+    public void DestroyBullet() => OnDestroyBullet();
 
     protected virtual void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    public void InitStats(WeaponStats weaponStats)
-    {
-        _currentPenetrations = 0;
-        _damage = Stats.DamageMultiplier * weaponStats.Damage;
-        _speed = Stats.SpeedMultiplier * weaponStats.Speed;
-        _lifeTime = Stats.LifeTimeMultiplier * weaponStats.LifeTime;
-        _penetration = Stats.PenetrationMultiplier * weaponStats.Penetration;
+        _movement = new BulletMovement(GetComponent<Rigidbody2D>());
+        _damageSystem = new BulletDamage(this);
     }
 
     public virtual void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
     {
-        InitStats(weaponStats);
+        _config = new BulletConfig(Stats, weaponStats);
+        _damageSystem.Initialize(_config.penetration);
         transform.position = spawnPosition;
-        _linearVelocity = GetDirection(shootDirection);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
+        _movement.Move(shootDirection, _config.speed);
+        _lifetime = new Lifetime(this, OnDestroyBullet);
+        _lifetime.Start(_config.lifeTime);
     }
 
-    public virtual void Go()
-    {
-        _rigidbody2D.linearVelocity = _linearVelocity.normalized * _speed;
-
-        if (_lifeTimerCoroutine != null)
-            StopCoroutine(_lifeTimerCoroutine);
-
-        _lifeTimerCoroutine = StartCoroutine(LifeTimer());
-    }
-
-    protected virtual void Destroy()
+    protected virtual void OnDestroyBullet()
     {
         Destroyed?.Invoke(this);
     }
 
-    protected virtual IEnumerator LifeTimer()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        yield return new WaitForSeconds(_lifeTime);
-
-        _lifeTimerCoroutine = null;
-        Destroy();
-    }
-
-    protected void GiveDamage(IDamagable damagable)
-    {
-        DecPenetration();
-        damagable.TakeDamage(Damage);
-    }
-
-    private Vector2 GetDirection(Vector2 shootDirection)
-    {
-        Vector2 finalDirection = Quaternion.Euler(0, 0, 0) * shootDirection.normalized;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, finalDirection);
-
-        return finalDirection;
-    }
-
-    private void DecPenetration()
-    {
-        Debug.Log("DecPenetration");
-        _currentPenetrations++;
-
-        if (_currentPenetrations >= _penetration)
-            Destroy();
+        if (other.TryGetComponent<IDamagable>(out var damagable))
+        {
+            Debug.Log(damagable);
+            _damageSystem.GiveDamage(damagable);
+        }
     }
 }

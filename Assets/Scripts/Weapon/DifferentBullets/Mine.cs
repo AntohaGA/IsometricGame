@@ -21,7 +21,7 @@ public class Mine : Bullet
     {
         _detectionCollider.enabled = false;
         transform.position = spawnPosition;
-        _rigidbody2D.bodyType = RigidbodyType2D.Static;
+       // _rigidbody2D.bodyType = RigidbodyType2D.Static;
         _isActive = false;
 
         StartCoroutine(ActivationSequence());

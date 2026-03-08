@@ -43,7 +43,7 @@ public class ZombieMover : MonoBehaviour
 
     private IEnumerator UpdatePath()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.2f);
+        WaitForSeconds delay = new WaitForSeconds(0.3f);
 
         while (enabled)
         {

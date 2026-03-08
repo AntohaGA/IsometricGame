@@ -297,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 0}
   _speed: 8
-  _health: 100
+  _health: 1000
 --- !u!114 &5780506016250916224
 MonoBehaviour:
   m_ObjectHideFlags: 0

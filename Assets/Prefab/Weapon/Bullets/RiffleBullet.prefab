@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9102513361987210573, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3872191350577547601, guid: 773fe8c815131724cb78cb64f5e04ffe, type: 3}
       propertyPath: m_Size.x
       value: 0.32
@@ -106,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84365d2af91234c9b2d05efbc77459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RifleBullet
-  Stats: {fileID: 11400000, guid: f3a9d2881d83d3246b10a9e0302dec5e, type: 2}
+  Stats: {fileID: 11400000, guid: 691ae09c351c9464f8ad63cf72b8f7e9, type: 2}

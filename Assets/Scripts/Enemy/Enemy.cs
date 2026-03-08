@@ -10,7 +10,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     protected int Health;
     protected int Damage;
 
-    public event Action OnKilled;
     public event Action<Enemy> Killed;
 
     private void Awake()
@@ -22,19 +21,15 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     private void OnEnable()
     {
         ZombieMover.enabled = true;
-     //   DamageDetector.OnDamageDetect += TakeDamage;
-     //   DamageDetector.OnDamageDetect += ZombieAnimator.Hit;
-        OnKilled += ZombieAnimator.Die;
+        GetComponent<Collider2D>().enabled = true;
+        Killed += ZombieAnimator.Die;
         Health = StartHealth;
     }
 
     private void OnDisable()
     {
-     //   DamageDetector.enabled = false;
         ZombieMover.enabled = false;
-      //  DamageDetector.OnDamageDetect -= TakeDamage;
-      //  DamageDetector.OnDamageDetect -= ZombieAnimator.Hit;
-        OnKilled -= ZombieAnimator.Die;
+        Killed -= ZombieAnimator.Die;
     }
 
     public void Init(Vector2 spawnspot)
@@ -47,6 +42,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     public void TakeDamage(int damage)
     {
         Health -= damage;
+        ZombieAnimator.Hit();
 
         if (Health <= 0)
         {
@@ -56,8 +52,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 
     private IEnumerator DeathSequence()
     {
-        OnKilled?.Invoke();
-     //   DamageDetector.enabled = false;
         GetComponent<Collider2D>().enabled = false;
         ZombieMover.enabled = false;
 

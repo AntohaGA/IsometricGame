@@ -20,12 +20,12 @@ public class ZombieAnimator : MonoBehaviour
         _animator.SetBool("isRun", false);
     }
 
-    public void Hit(int damage)
+    public void Hit()
     {
         _animator.SetTrigger("isHit");
     }
 
-    public void Die()
+    public void Die(Enemy enemy)
     {
         _animator.SetBool("isDead", true);
     }
