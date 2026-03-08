@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5973e83865a985449b21eb567c33ec54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunBullet
-  Stats: {fileID: 11400000, guid: b0d0ec4acebbb254e99f49ec9a33ff0d, type: 2}
+  Stats: {fileID: 11400000, guid: 5a21e0ba428c71242876644ce97514ff, type: 2}

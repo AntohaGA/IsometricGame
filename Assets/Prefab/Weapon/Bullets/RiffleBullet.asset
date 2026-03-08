@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c224720e186c8343aed39971a7db657, type: 3}
-  m_Name: MineStats
-  m_EditorClassIdentifier: Assembly-CSharp::BulletStats
-  LifeTime: 0
-  Speed: 0
-  Damage: 200
-  CountPenetration: 0
+  m_Script: {fileID: 11500000, guid: dc64d57491e4e804bbc6874437896ba3, type: 3}
+  m_Name: RiffleBullet
+  m_EditorClassIdentifier: Assembly-CSharp::BulletMultiplier
   DamageMultiplier: 1
-  MaxPenetrations: 1
-  DamageFalloff: 1
+  LifeTimeMultiplier: 1
+  SpeedMultiplier: 1
+  CountPenetration: 1
+  MaxPenetration: 1

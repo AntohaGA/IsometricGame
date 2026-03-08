@@ -20,7 +20,7 @@ public class ZombieAnimator : MonoBehaviour
         _animator.SetBool("isRun", false);
     }
 
-    public void Hit(Bullet bullet)
+    public void Hit(int damage)
     {
         _animator.SetTrigger("isHit");
     }

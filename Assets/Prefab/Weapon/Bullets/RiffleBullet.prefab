@@ -106,4 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84365d2af91234c9b2d05efbc77459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RifleBullet
-  Stats: {fileID: 11400000, guid: 7a158acf6a9ed0d4c95246c603db746e, type: 2}
+  Stats: {fileID: 11400000, guid: f3a9d2881d83d3246b10a9e0302dec5e, type: 2}

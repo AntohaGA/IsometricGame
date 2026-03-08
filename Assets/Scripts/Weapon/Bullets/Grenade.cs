@@ -1,19 +1,43 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Grenade : Bullet
 {
-    [SerializeField] private ExplosionEffect _explosionEffect;
-    private float _explosionRadius = 2f;
+    [SerializeField] private GameObject _explosion;
+    [SerializeField] private float explosionRadius = 2.5f;
 
-    private void Start()
+    private IEnumerator ExplodeLifetime()
     {
-        Destroyed += OnGrenadeDestroyed;
+        Explode();
+
+        yield return new WaitForSeconds(1);  
+        
+        InvokeDestroyed();
     }
 
-    private void OnGrenadeDestroyed(Bullet bullet)
+    private void Explode()
     {
-        bullet.Destroyed -= OnGrenadeDestroyed;
-        _explosionEffect.Explode(transform.position, _explosionRadius, Damage, this);
-        Destroy();
+        DamageEnemiesInRadius(transform.position);
+
+        if (_explosion != null)
+            Instantiate(_explosion, transform.position, Quaternion.identity);
+    }
+
+    private void DamageEnemiesInRadius(Vector3 center)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(center, explosionRadius);
+
+        foreach (Collider2D hit in colliders)
+        {
+            if (hit.TryGetComponent<IDamagable>(out var damagable))
+            {
+                damagable.TakeDamage(Damage);
+            }
+        }
+    }
+
+    protected override void Destroy()
+    {            
+        StartCoroutine(ExplodeLifetime());
     }
 }

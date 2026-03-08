@@ -3,9 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponStats", menuName = "Weapon/Weapon Data")]
 public class WeaponStats : ScriptableObject
 {
-    public float LifeTime;
-    public float Speed;
+    public int LifeTime;
+    public int Speed;
     public int Damage;
-    public float MoveAccuracy;
-    public float StopAccuracy;
+    public int Penetration;
+    public int MoveAccuracy;
+    public int StopAccuracy;
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour, IDamageDealer
+public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] public Transform BulletSpawnerSpot;
     [SerializeField] protected BulletSpawner BulletSpawner;
@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour, IDamageDealer
 
     public virtual void Shoot(bool isMove)
     {
-        BulletSpawner.SpawnBullet(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right, isMove);
+        BulletSpawner.SpawnBullet(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
         OnShoot?.Invoke();  // Анимация, звук
     }
 }

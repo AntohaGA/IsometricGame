@@ -6,9 +6,8 @@ public class Mine : Bullet
 {
     [Header("Mine Settings")]
     [SerializeField] private float _activationDelay = 2f;
-    [SerializeField] private ExplosionEffect _explosionEffect;
+    [SerializeField] private GameObject _explosion;
 
-    private float _explosionRadius = 2f;
     private bool _isActive;
     private CircleCollider2D _detectionCollider;
 
@@ -18,10 +17,9 @@ public class Mine : Bullet
         _detectionCollider = GetComponent<CircleCollider2D>();
     }
 
-    public override void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection, bool isMove)
+    public override void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
     {
         _detectionCollider.enabled = false;
-        Damage = weaponStats.Damage;
         transform.position = spawnPosition;
         _rigidbody2D.bodyType = RigidbodyType2D.Static;
         _isActive = false;
@@ -35,15 +33,5 @@ public class Mine : Bullet
 
         _isActive = true;
         _detectionCollider.enabled = true;
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!_isActive) return;
-
-        if (collision.TryGetComponent<IDamagable>(out var component))
-        {
-            _explosionEffect.Explode(transform.position, _explosionRadius, Damage, this);
-        }
     }
 }

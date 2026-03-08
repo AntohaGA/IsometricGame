@@ -32,8 +32,7 @@ Transform:
   m_LocalPosition: {x: 11.12, y: -8.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2297039169956511493}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5873909859994993338
@@ -134,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303b8bb332b78354e8f9116b071154b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mine
-  Stats: {fileID: 11400000, guid: 032e9e4be9334a24d9d85a641c702539, type: 2}
+  Stats: {fileID: 11400000, guid: 6554933052523a141a9d53156e99abbe, type: 2}
   _activationDelay: 2
-  _explosionEffect: {fileID: 826859273418965638}
+  _explosion: {fileID: 5033180708955247871, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
 --- !u!58 &8272210486352342763
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,80 +172,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.8
---- !u!1001 &3748598847133378686
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 9138667166663493505}
-    m_Modifications:
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741662392726675836, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_Name
-      value: ExplosionEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741662392726675836, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
---- !u!114 &826859273418965638 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4574578509094251256, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-  m_PrefabInstance: {fileID: 3748598847133378686}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd60095f5cb46aa4a8cb5b280d8a2ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExplosionEffect
---- !u!4 &2297039169956511493 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3162945574982424443, guid: 07abb8e57d97f924fadcc7e59a7db1f7, type: 3}
-  m_PrefabInstance: {fileID: 3748598847133378686}
-  m_PrefabAsset: {fileID: 0}

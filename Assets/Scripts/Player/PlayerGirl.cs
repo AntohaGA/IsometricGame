@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
-public class PlayerGirl : MonoBehaviour, IDamagable, IHittable
+public class PlayerGirl : MonoBehaviour, IDamagable
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private float _speed;
@@ -67,24 +67,14 @@ public class PlayerGirl : MonoBehaviour, IDamagable, IHittable
         }
     }
 
-    public void TakeDamage(Bullet bullet)
+    public void TakeDamage(int damage)
     {
-        _health -= bullet.Damage;
+        _health -= damage;
         _healthSlider.value = _health;
 
         if (_health <= 0)
         {
             Deceased?.Invoke(this);
         }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnHit()
-    {
-        throw new NotImplementedException();
     }
 }
