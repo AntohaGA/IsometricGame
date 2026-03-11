@@ -10,7 +10,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     protected int Health;
     protected int Damage;
 
-    public event Action<Enemy> Killed;
+    private event Action OnKilled;
+    public event Action<Enemy> Distroyd;
 
     private void Awake()
     {
@@ -22,14 +23,13 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     {
         ZombieMover.enabled = true;
         GetComponent<Collider2D>().enabled = true;
-        Killed += ZombieAnimator.Die;
         Health = StartHealth;
+        OnKilled += ZombieAnimator.Die;
     }
 
     private void OnDisable()
     {
         ZombieMover.enabled = false;
-        Killed -= ZombieAnimator.Die;
     }
 
     public void Init(Vector2 spawnspot)
@@ -46,6 +46,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 
         if (Health <= 0)
         {
+            OnKilled?.Invoke();
             StartCoroutine(DeathSequence());
         }
     }
@@ -57,6 +58,6 @@ public abstract class Enemy : MonoBehaviour, IDamagable
 
         yield return new WaitForSeconds(2);
 
-        Killed?.Invoke(this);
+        Distroyd?.Invoke(this);
     }
 }
