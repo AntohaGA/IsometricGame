@@ -1,155 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.AI.Navigation;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Painter : MonoBehaviour
 {
-    [SerializeField] private LineRenderer _linePrefab;
-    [SerializeField] private LayerMask _barrierLayer;
-    [SerializeField] private float _minDistance = 0.1f;
-    [SerializeField] private Material _brickMaterial; // ✅ Кирпичный материал
+    [SerializeField] private GameObject _wallPrefab;
+    [SerializeField] private Grid _grid;
+    [SerializeField] private float _cellSize = 1f;
 
-    private LineRenderer _currentLine;
-    private List<Vector3> _points = new();
     private Camera _cam;
+    private bool _isDrawing = false;
+    private HashSet<Vector3Int> _placedCells = new();
 
-    void Start() => _cam = Camera.main;
-
-    private void Update()
+    void Start()
     {
-        if (Input.GetMouseButtonDown(1)) StartDrawing();
-        if (Input.GetMouseButton(1)) Draw();
-        if (Input.GetMouseButtonUp(1)) StopDrawing();
+        _cam = Camera.main;
+        if (_grid == null) _grid = FindAnyObjectByType<Grid>();
     }
 
-    private void StartDrawing()
+    void Update()
     {
-        _currentLine = Instantiate(_linePrefab, transform);
-        _currentLine.gameObject.layer = Mathf.RoundToInt(_barrierLayer);
-
-        // ✅ Кирпичная текстура!
-        _currentLine.material = _brickMaterial;
-        _currentLine.startWidth = 0.4f;  // ✅ Толще для стен!
-        _currentLine.endWidth = 0.4f;
-
-        _points.Clear();
+        if (Input.GetMouseButtonDown(1)) _isDrawing = true;
+        if (Input.GetMouseButton(1)) DrawDirectly();
+        if (Input.GetMouseButtonUp(1)) _isDrawing = false;
     }
 
-    private void Draw()
+    private void DrawDirectly()
     {
-        Vector3 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition); // ✅ Vector3
-        mousePos.z = 0;
+        if (!_isDrawing || _wallPrefab == null)
+            return;
 
-        if (_points.Count == 0 || Vector3.Distance(_points.Last(), mousePos) > _minDistance)
+        Vector3Int currentCell = GetGridCell(Input.mousePosition);
+
+        if (!_placedCells.Contains(currentCell))
         {
-            _points.Add(mousePos);
-            _currentLine.positionCount = _points.Count;
-            _currentLine.SetPositions(_points.ToArray()); // ✅ Работает с Vector3
+            PlaceWall(currentCell);
+            _placedCells.Add(currentCell);
         }
     }
 
-    private void StopDrawing()
+    private void PlaceWall(Vector3Int cell)
     {
-        if (_points.Count > 1)
-        {
-            CreateCarveBarrier(); // ✅ Новая функция
-        }
-        else if (_currentLine != null)
-        {
-            Destroy(_currentLine.gameObject);
-        }
-        _currentLine = null;
-        _points.Clear();
+        Vector3 cellCenter = _grid.CellToWorld(cell) + new Vector3(_cellSize * 0.5f, _cellSize * 0.5f, 0);
+        cellCenter.z = 0f;
+        GameObject wall = Instantiate(_wallPrefab, cellCenter, Quaternion.identity);
+        SpriteRenderer spriteRenderer = wall.GetComponent<SpriteRenderer>();
     }
 
-    private void CreateCarveBarrier()
+    private Vector3Int GetGridCell(Vector3 screenPos)
     {
-        // 1. ВИЗУАЛ (одна линия)
-        GameObject visualBarrier = new GameObject("VisualBarrier");
-        visualBarrier.layer = Mathf.RoundToInt(_barrierLayer);
+        Vector3 worldPos = _cam.ScreenToWorldPoint(screenPos);
+        worldPos.z = 0f;
 
-        LineRenderer line = visualBarrier.AddComponent<LineRenderer>();
-        line.material = _currentLine.material;
-        line.startWidth = 0.2f;
-        line.SetPositions(_points.ToArray());
-
-        EdgeCollider2D edge = visualBarrier.AddComponent<EdgeCollider2D>();
-        edge.points = Array.ConvertAll(_points.ToArray(), p => (Vector2)p);
-
-        // 2. ДЛИННЫЕ NavMeshObstacle (ТОЛЬКО 3-5 штук!)
-        CreateLongObstacles();
-
-    }
-
-    private void CreateLongObstacles()
-    {
-        const float MAX_SEGMENT_LENGTH = 2.0f; // ✅ Максимум 2 юнита на сегмент
-        const int MAX_OBSTACLES = 5; // ✅ Максимум 5 препятствий
-
-        int obstaclesCreated = 0;
-
-        for (int i = 0; i < _points.Count - 1 && obstaclesCreated < MAX_OBSTACLES;)
-        {
-            Vector3 startPoint = _points[i];
-            int endIndex = i + 1;
-
-            // ✅ Собираем длинный сегмент (до 2 юнитов)
-            float totalLength = 0;
-            while (endIndex < _points.Count && totalLength < MAX_SEGMENT_LENGTH)
-            {
-                totalLength += Vector3.Distance(_points[endIndex - 1], _points[endIndex]);
-                endIndex++;
-            }
-
-            // Создаем ДЛИННОЕ препятствие
-            CreateLongObstacle(i, endIndex - 1);
-            obstaclesCreated++;
-            i = endIndex - 1; // Пропускаем обработанные точки
-        }
-    }
-
-    private void CreateLongObstacle(int startIndex, int endIndex)
-    {
-        // 1. Центр и направление линии
-        Vector3 center = Vector3.zero;
-        Vector3 direction = Vector3.zero;
-
-        for (int i = startIndex; i <= endIndex; i++)
-            center += _points[i];
-        center /= (endIndex - startIndex + 1);
-
-        if (endIndex > startIndex)
-            direction = (_points[endIndex] - _points[startIndex]).normalized;
-
-        // 2. Создаем объект
-        GameObject obstacleGO = new GameObject("LongObstacle");
-        obstacleGO.transform.position = center;
-
-        // 3. ✅ ПОВОРАЧИВАЕМ по направлению линии!
-        if (direction != Vector3.zero)
-        {
-            // Вычисляем угол линии
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            obstacleGO.transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
-
-        // 4. NavMeshObstacle
-        NavMeshObstacle obstacle = obstacleGO.AddComponent<NavMeshObstacle>();
-        obstacle.carving = true;
-        obstacle.carveOnlyStationary = false;
-        obstacle.shape = NavMeshObstacleShape.Box;
-
-        // 5. ✅ ДЛИННАЯ коробка ПО ВСЕЙ ЛИНИИ
-        float lineLength = 0;
-        for (int i = startIndex; i < endIndex; i++)
-            lineLength += Vector3.Distance(_points[i], _points[i + 1]);
-
-        obstacle.size = new Vector3(lineLength * 0.8f, 0.01f, 0.5f); // Длина x Ширина x Глубина
-
-        Rigidbody2D rb = obstacleGO.AddComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Static;
+        return _grid.WorldToCell(worldPos);
     }
 }

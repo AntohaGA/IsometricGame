@@ -7,8 +7,6 @@ public class GrenadeExplosion
     private readonly float _explosionRadius = 2;
     private bool _hasExploded = false;
 
-
-
     public GrenadeExplosion(Bullet grenade, GameObject explosionPrefab, float explosionRadius)
     {
         _grenade = grenade;

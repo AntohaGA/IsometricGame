@@ -26,11 +26,11 @@ public class Bullet : MonoBehaviour
     public virtual void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
     {
         _config = new BulletConfig(Stats, weaponStats);
+        _lifetime = new Lifetime(this, OnDestroyBullet);
         _damageSystem.Initialize(_config.penetration);
         transform.position = spawnPosition;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
         _movement.Move(shootDirection, _config.speed);
-        _lifetime = new Lifetime(this, OnDestroyBullet);
         _lifetime.Start(_config.lifeTime);
     }
 

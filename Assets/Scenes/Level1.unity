@@ -16547,6 +16547,18 @@ PrefabInstance:
       propertyPath: _healthSlider
       value: 
       objectReference: {fileID: 420232246}
+    - target: {fileID: 6728311231426103654, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _grid
+      value: 
+      objectReference: {fileID: 302893548}
+    - target: {fileID: 6728311231426103654, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _wallPrefab
+      value: 
+      objectReference: {fileID: 1445833481922733853, guid: 3273bb11d36925344acbac3ffd9edd59, type: 3}
+    - target: {fileID: 6728311231426103654, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _linePreview
+      value: 
+      objectReference: {fileID: 7748587356157916337, guid: 579bb377e0f69564e8620d0e76f7d4a1, type: 3}
     - target: {fileID: 9127517849912267122, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_Name
       value: Player
@@ -26343,63 +26355,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1754933194
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.508166
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -15.508734
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247868, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033180708955247871, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
-      propertyPath: m_Name
-      value: Explosion_2_Bomb_Red
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 152689d6752175f4fa353ae19681fb33, type: 3}
 --- !u!1 &1955399418
 GameObject:
   m_ObjectHideFlags: 0
@@ -91648,4 +91603,3 @@ SceneRoots:
   - {fileID: 3425140269071138841}
   - {fileID: 977075731}
   - {fileID: 916380612}
-  - {fileID: 1754933194}

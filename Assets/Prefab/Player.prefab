@@ -347,9 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2b8f41f189a474c865746dc880f812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Painter
-  _linePrefab: {fileID: 7748587356157916337, guid: 579bb377e0f69564e8620d0e76f7d4a1, type: 3}
+  _wallPrefab: {fileID: 1445833481922733853, guid: 3273bb11d36925344acbac3ffd9edd59, type: 3}
   _barrierLayer:
     serializedVersion: 2
     m_Bits: 0
-  _minDistance: 0.1
-  _brickMaterial: {fileID: 2100000, guid: b5d6535820143134badf363121bd6d8a, type: 2}
+  _grid: {fileID: 0}
+  _cellSize: 1
