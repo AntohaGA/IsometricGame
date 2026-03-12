@@ -8,11 +8,5 @@ public class LevelCreator : MonoBehaviour
     private void Start()
     {
         _playerGirl = FindFirstObjectByType<PlayerGirl>();
-        _playerGirl.Deceased += KillPlayer;
-    }
-
-    private void KillPlayer(PlayerGirl playerGirl)
-    {
-        SceneManager.LoadScene("Level1");
     }
 }

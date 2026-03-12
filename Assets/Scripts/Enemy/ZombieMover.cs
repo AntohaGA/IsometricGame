@@ -18,14 +18,6 @@ public class ZombieMover : MonoBehaviour
         _agent.enabled = false;
     }
 
-    private void OnDisable()
-    {
-        if (_targetPlayer != null)
-        {
-            _targetPlayer.Deceased -= OnPlayerDied;
-        }
-    }
-
     public void Stop()
     {
         _agent.enabled = false;
@@ -37,7 +29,6 @@ public class ZombieMover : MonoBehaviour
         _targetPlayer = playerMover;
         _agent.enabled = true;
         _zombieAnimator.Run();
-        _targetPlayer.Deceased += OnPlayerDied;
         StartCoroutine(UpdatePath());
     }
 
@@ -53,12 +44,5 @@ public class ZombieMover : MonoBehaviour
         }
 
         Stop();
-    }
-
-    private void OnPlayerDied(PlayerGirl player)
-    {
-        Stop();
-        _targetPlayer.Deceased -= OnPlayerDied;
-        _targetPlayer  = null;
     }
 }

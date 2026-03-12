@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,20 +7,18 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
-public class PlayerGirl : MonoBehaviour, IDamagable
+[RequireComponent(typeof(Health))]
+public class PlayerGirl : MonoBehaviour
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private float _speed;
-    [SerializeField] private int _health;
 
+    private Health _health;
     private PlayerAnimator _animator;
     private Rigidbody2D _rigidbody2D;
     private WeaponCollector _weaponCollector;
     private InputReader _playerInput;
-
-    public event Action<PlayerGirl> Deceased;
-    public event Action OnHit;
-    public event Action OnDead;
+    private PlayerKiller _playerKiller;
 
     private void Awake()
     {
@@ -29,7 +26,20 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         _animator = GetComponent<PlayerAnimator>();
         _weaponCollector = GetComponent<WeaponCollector>();
         _playerInput = GetComponent<InputReader>();
-        _healthSlider.value = _health;
+        _health = GetComponent<Health>();
+        _playerKiller = GetComponent<PlayerKiller>();
+    }
+
+    private void OnEnable()
+    {
+        _health.OnDead += _playerKiller.Die;
+        _health.OnHealthChanged += ChangeSliderHealth;
+    }
+
+    private void OnDisable()
+    {
+        _health.OnDead -= _playerKiller.Die;
+        _health.OnHealthChanged -= ChangeSliderHealth;
     }
 
     private void Update()
@@ -69,14 +79,8 @@ public class PlayerGirl : MonoBehaviour, IDamagable
         }
     }
 
-    public void TakeDamage(int damage)
+    private void ChangeSliderHealth(int change)
     {
-        _health -= damage;
-        _healthSlider.value = _health;
-
-        if (_health <= 0)
-        {
-            Deceased?.Invoke(this);
-        }
+        _healthSlider.value -= change;
     }
 }

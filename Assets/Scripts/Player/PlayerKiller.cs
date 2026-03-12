@@ -2,17 +2,8 @@ using UnityEngine;
 
 public class PlayerKiller : MonoBehaviour
 {
-    private PlayerGirl _playerGirl;
-
-    private void Start()
+    public void Die()
     {
-        _playerGirl = GetComponent<PlayerGirl>();
-        _playerGirl.Deceased += Die;
-    }
-
-    public void Die(PlayerGirl playerGirl)
-    {
-        _playerGirl.Deceased -= Die;
-        Destroy(playerGirl.gameObject);
+        Destroy(gameObject);
     }
 }
