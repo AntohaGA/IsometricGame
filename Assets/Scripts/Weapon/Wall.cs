@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,9 @@ public class Wall : MonoBehaviour, IDamagable
     [SerializeField] private int _maxHealth = 500;
 
     private int _health;
+
+    public event Action OnHit;
+    public event Action OnDead;
 
     private void Awake()
     {

@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class GrenadeExplosion: Bullet
+public class GrenadeExplosion: MonoBehaviour
 {
-    private readonly Bullet _explosionPrefab;
+    [SerializeField] private  GameObject _explosionPrefab;
+    [SerializeField] private int _damage = 500;
     private readonly float _explosionRadius = 2;
 
-    public void Explode()
+    private void OnEnable()
     {
-        DealAreaDamage();
         SpawnExplosionEffect();
+        DealAreaDamage();
     }
 
     private void DealAreaDamage()
@@ -19,8 +20,8 @@ public class GrenadeExplosion: Bullet
         {
             if (hit.TryGetComponent<IDamagable>(out var damagable))
             {
-                damagable.TakeDamage(Damage);
-                Debug.Log(Damage + " - grenade Damage");
+                damagable.TakeDamage(_damage);
+                Debug.Log(_damage + " - grenade Damage");
             }
         }
     }

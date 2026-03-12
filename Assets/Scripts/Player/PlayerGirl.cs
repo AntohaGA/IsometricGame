@@ -20,6 +20,8 @@ public class PlayerGirl : MonoBehaviour, IDamagable
     private InputReader _playerInput;
 
     public event Action<PlayerGirl> Deceased;
+    public event Action OnHit;
+    public event Action OnDead;
 
     private void Awake()
     {

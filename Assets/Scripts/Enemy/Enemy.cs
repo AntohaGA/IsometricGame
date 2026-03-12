@@ -2,53 +2,49 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IDamagable
+public abstract class Enemy : MonoBehaviour, IDestroyble
 {
+    private Health _health;
+
     protected ZombieAnimator ZombieAnimator;
     protected ZombieMover ZombieMover;
-    protected int StartHealth = 200;
-    protected int Health;
-    protected int Damage;
 
-    private event Action OnKilled;
+    public event Action OnDestroy;
     public event Action<Enemy> Distroyd;
 
     private void Awake()
     {
         ZombieAnimator = GetComponent<ZombieAnimator>();
         ZombieMover = GetComponent<ZombieMover>();
+        _health = GetComponent<Health>();
+        _health.OnDead += HandleDeath;
     }
 
     private void OnEnable()
     {
         ZombieMover.enabled = true;
         GetComponent<Collider2D>().enabled = true;
-        Health = StartHealth;
-        OnKilled += ZombieAnimator.Die;
+        _health.OnHit += ZombieAnimator.Hit;
+        _health.OnDead += ZombieAnimator.Die;
     }
 
     private void OnDisable()
     {
         ZombieMover.enabled = false;
+        _health.OnHit -= ZombieAnimator.Hit;
+        _health.OnDead -= ZombieAnimator.Die;
     }
 
     public void Init(Vector2 spawnspot)
     {
         transform.position = spawnspot;
         transform.rotation = Quaternion.identity;
-        Health = StartHealth;
     }
 
-    public void TakeDamage(int damage)
+    private void HandleDeath()
     {
-        Health -= damage;
-        ZombieAnimator.Hit();
-
-        if (Health <= 0)
-        {
-            OnKilled?.Invoke();
-            StartCoroutine(DeathSequence());
-        }
+        OnDestroy?.Invoke();
+        StartCoroutine(DeathSequence());
     }
 
     private IEnumerator DeathSequence()

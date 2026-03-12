@@ -4,7 +4,5 @@ using UnityEngine;
 [RequireComponent(typeof(SingleBulletSpawner))]
 public class Granader : Weapon
 {
-    [SerializeField] private BulletSpawner _explosionSpawner;
-
 
 }

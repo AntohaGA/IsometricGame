@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 532534628834639273}
   - component: {fileID: 3742811678040508359}
   - component: {fileID: 5100308431069232745}
+  - component: {fileID: 8781276220443148820}
   - component: {fileID: 6541807365121059929}
   - component: {fileID: 3143130291772190047}
   m_Layer: 0
@@ -275,6 +276,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa251baeef834e47b6ef0d31f3c8290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8781276220443148820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440621018151635449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e40ae51bd7d2334092b902c73d9c950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  startHealth: 200
 --- !u!70 &6541807365121059929
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

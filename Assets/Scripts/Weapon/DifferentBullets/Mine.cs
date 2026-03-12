@@ -8,7 +8,7 @@ public class Mine : Bullet
     [SerializeField] private float _activationDelay = 2f;
     [SerializeField] private GameObject _explosion;
 
-    private bool _isActive;
+ //   private bool _isActive;
     private CircleCollider2D _detectionCollider;
 
     protected override void Awake()
@@ -22,7 +22,7 @@ public class Mine : Bullet
         _detectionCollider.enabled = false;
         transform.position = spawnPosition;
        // _rigidbody2D.bodyType = RigidbodyType2D.Static;
-        _isActive = false;
+      //  _isActive = false;
 
         StartCoroutine(ActivationSequence());
     }
@@ -31,7 +31,7 @@ public class Mine : Bullet
     {
         yield return new WaitForSeconds(_activationDelay);
 
-        _isActive = true;
+     //   _isActive = true;
         _detectionCollider.enabled = true;
     }
 }
