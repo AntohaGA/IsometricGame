@@ -2,18 +2,6 @@
 
 public class Grenade : Bullet
 {
-    [SerializeField] private GameObject _explosion;
-    private GrenadeExplosion _explosionSystem;
-    private int _explosionRadius;
+    [SerializeField] private Bullet _explosion;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        _explosionSystem = new GrenadeExplosion(this, _explosion, _explosionRadius);
-    }
-
-    protected override void OnDestroyBullet()
-    {
-        _explosionSystem.Explode();
-    }
 }
