@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerAnimator))]
@@ -7,13 +6,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(PlayerHealth))]
 public class PlayerGirl : MonoBehaviour
 {
-    [SerializeField] private Slider _healthSlider;
     [SerializeField] private float _speed;
 
-    private Health _health;
+    private PlayerHealth _health;
     private PlayerAnimator _animator;
     private Rigidbody2D _rigidbody2D;
     private WeaponCollector _weaponCollector;
@@ -26,20 +24,18 @@ public class PlayerGirl : MonoBehaviour
         _animator = GetComponent<PlayerAnimator>();
         _weaponCollector = GetComponent<WeaponCollector>();
         _playerInput = GetComponent<InputReader>();
-        _health = GetComponent<Health>();
+        _health = GetComponent<PlayerHealth>();
         _playerKiller = GetComponent<PlayerKiller>();
     }
 
     private void OnEnable()
     {
         _health.OnDead += _playerKiller.Die;
-        _health.OnHealthChanged += ChangeSliderHealth;
     }
 
     private void OnDisable()
     {
         _health.OnDead -= _playerKiller.Die;
-        _health.OnHealthChanged -= ChangeSliderHealth;
     }
 
     private void Update()
@@ -77,10 +73,5 @@ public class PlayerGirl : MonoBehaviour
         {
             _weaponCollector.SwitchToWeapon(3);
         }
-    }
-
-    private void ChangeSliderHealth(int change)
-    {
-        _healthSlider.value -= change;
     }
 }

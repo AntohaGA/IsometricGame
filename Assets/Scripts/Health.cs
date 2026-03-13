@@ -3,21 +3,20 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDamagable
 {
-    [SerializeField] private int startHealth = 200;
+    [SerializeField] protected int startHealth = 200;
 
-    private int _currentHealth;
+    protected int _currentHealth;
 
     public event Action OnHit;
     public event Action OnDead;
+    public event Action<int> OnNewHealth;
 
-    public event Action<int> OnHealthChanged;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         _currentHealth = startHealth;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _currentHealth = startHealth;
     }
@@ -25,8 +24,8 @@ public class Health : MonoBehaviour, IDamagable
     public void TakeDamage(int amount)
     {
         OnHit?.Invoke();
-        OnHealthChanged?.Invoke(amount);
         _currentHealth -= amount;
+        OnNewHealth?.Invoke(_currentHealth);
 
         if (_currentHealth <= 0)
         {

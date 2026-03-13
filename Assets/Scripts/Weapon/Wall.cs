@@ -20,9 +20,11 @@ public class Wall : MonoBehaviour, IDamagable
     public void TakeDamage(int damage)
     {
         _health -= damage;
+        OnHit?.Invoke();
 
         if (_health <= 0)
         {
+            OnDead?.Invoke();
             Destroy(gameObject);
         }
     }
