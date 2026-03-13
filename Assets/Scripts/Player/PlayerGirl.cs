@@ -30,12 +30,12 @@ public class PlayerGirl : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.OnDead += _playerKiller.Die;
+        _health.OnDestroy += _playerKiller.Die;
     }
 
     private void OnDisable()
     {
-        _health.OnDead -= _playerKiller.Die;
+        _health.OnDestroy -= _playerKiller.Die;
     }
 
     private void Update()

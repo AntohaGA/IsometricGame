@@ -1,15 +1,16 @@
 using System;
+using System.ComponentModel;
 using UnityEngine;
 
-public class Health : MonoBehaviour, IDamagable
+public class Health : MonoBehaviour, IDamagable, IDestroyble
 {
     [SerializeField] protected int startHealth = 200;
 
-    protected int _currentHealth;
+    [SerializeField, ReadOnly(true)] protected int _currentHealth;
 
     public event Action OnHit;
-    public event Action OnDead;
     public event Action<int> OnNewHealth;
+    public event Action OnDestroy;
 
     protected virtual void Awake()
     {
@@ -29,7 +30,7 @@ public class Health : MonoBehaviour, IDamagable
 
         if (_currentHealth <= 0)
         {
-            OnDead?.Invoke();
+            OnDestroy?.Invoke();
         }
     }
 }

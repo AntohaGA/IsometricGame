@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 9047182208386960128}
   - component: {fileID: 1204707835512087346}
   - component: {fileID: 6728311231426103654}
+  - component: {fileID: 8658908916488697800}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -295,9 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8b9711f9ae2ea4ea7d65f12d7ed96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthSlider: {fileID: 0}
   _speed: 8
-  _health: 1000
 --- !u!114 &5780506016250916224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,8 +347,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Painter
   _wallPrefab: {fileID: 1445833481922733853, guid: 3273bb11d36925344acbac3ffd9edd59, type: 3}
-  _barrierLayer:
-    serializedVersion: 2
-    m_Bits: 0
   _grid: {fileID: 0}
   _cellSize: 1
+--- !u!114 &8658908916488697800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9127517849912267122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569b8f9c3ab2dd44b8957aeba415bf08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  startHealth: 1000
+  _currentHealth: 0
+  _healthSlider: {fileID: 0}

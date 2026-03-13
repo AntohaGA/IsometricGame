@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 8781276220443148820}
   - component: {fileID: 6541807365121059929}
   - component: {fileID: 3143130291772190047}
+  - component: {fileID: 3639703914999106086}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -289,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   startHealth: 200
+  _currentHealth: 124
 --- !u!70 &6541807365121059929
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -302,7 +304,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -324,7 +326,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1, y: 1.1}
   m_Direction: 0
 --- !u!50 &3143130291772190047
 Rigidbody2D:
@@ -353,3 +355,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3639703914999106086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440621018151635449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee29ec3b4a506d498051f52eda0efb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  damagePerSecond: 100
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _collider2D: {fileID: 6541807365121059929}

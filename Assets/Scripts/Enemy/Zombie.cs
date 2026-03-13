@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieAnimator))]
 [RequireComponent(typeof(FlipperAgent))]
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(DamageDealer))]
 public class Zombie : Enemy
 {
 

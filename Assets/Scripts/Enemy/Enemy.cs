@@ -2,37 +2,38 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IDestroyble
+public abstract class Enemy : MonoBehaviour
 {
     private Health _health;
 
     protected ZombieAnimator ZombieAnimator;
     protected ZombieMover ZombieMover;
 
-    public event Action OnDestroy;
-    public event Action<Enemy> Distroyd;
+    public event Action<Enemy> Destroyd;
 
     private void Awake()
     {
         ZombieAnimator = GetComponent<ZombieAnimator>();
         ZombieMover = GetComponent<ZombieMover>();
         _health = GetComponent<Health>();
-        _health.OnDead += HandleDeath;
+        _health.OnDestroy += HandleDeath;
     }
 
     private void OnEnable()
     {
-        ZombieMover.enabled = true;
         GetComponent<Collider2D>().enabled = true;
+        ZombieMover.enabled = true;
+
         _health.OnHit += ZombieAnimator.Hit;
-        _health.OnDead += ZombieAnimator.Die;
+        _health.OnDestroy += ZombieAnimator.Die;
+        _health.OnDestroy += HandleDeath;
     }
 
     private void OnDisable()
     {
-        ZombieMover.enabled = false;
         _health.OnHit -= ZombieAnimator.Hit;
-        _health.OnDead -= ZombieAnimator.Die;
+        _health.OnDestroy -= ZombieAnimator.Die;
+        _health.OnDestroy -= HandleDeath;
     }
 
     public void Init(Vector2 spawnspot)
@@ -43,7 +44,6 @@ public abstract class Enemy : MonoBehaviour, IDestroyble
 
     private void HandleDeath()
     {
-        OnDestroy?.Invoke();
         StartCoroutine(DeathSequence());
     }
 
@@ -54,6 +54,6 @@ public abstract class Enemy : MonoBehaviour, IDestroyble
 
         yield return new WaitForSeconds(2);
 
-        Distroyd?.Invoke(this);
+        Destroyd?.Invoke(this);
     }
 }

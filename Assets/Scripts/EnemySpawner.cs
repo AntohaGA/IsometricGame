@@ -18,13 +18,13 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy(Vector3 spawnPosition)
     {
         Enemy enemy = _pool.GetInstance();
-        enemy.Distroyd += DestroyEnemy;
+        enemy.Destroyd += DestroyEnemy;
         enemy.Init(spawnPosition);
     }
 
     private void DestroyEnemy(Enemy enemy)
     {
-        enemy.Distroyd -= DestroyEnemy;
+        enemy.Destroyd -= DestroyEnemy;
         _pool.ReturnInstance(enemy);
     }
 }
