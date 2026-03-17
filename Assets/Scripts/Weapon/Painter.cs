@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Painter : MonoBehaviour
@@ -9,12 +10,18 @@ public class Painter : MonoBehaviour
 
     private Camera _cam;
     private bool _isDrawing = false;
-    private HashSet<Vector3Int> _placedCells = new();
+
+    // Вместо HashSet используем Dictionary:
+    // Ключ - координата клетки (Vector3Int)
+    // Значение - ссылка на созданный объект стены (GameObject)
+    private Dictionary<Vector3Int, GameObject> _placedWalls = new Dictionary<Vector3Int, GameObject>();
 
     void Start()
     {
         _cam = Camera.main;
-        if (_grid == null) _grid = FindAnyObjectByType<Grid>();
+
+        if (_grid == null)
+            _grid = FindAnyObjectByType<Grid>();
     }
 
     void Update()
@@ -31,10 +38,10 @@ public class Painter : MonoBehaviour
 
         Vector3Int currentCell = GetGridCell(Input.mousePosition);
 
-        if (!_placedCells.Contains(currentCell))
+        // Проверяем: если в словаре нет ключа с такой координатой, значит место свободно.
+        if (!_placedWalls.ContainsKey(currentCell))
         {
             PlaceWall(currentCell);
-            _placedCells.Add(currentCell);
         }
     }
 
@@ -42,8 +49,39 @@ public class Painter : MonoBehaviour
     {
         Vector3 cellCenter = _grid.CellToWorld(cell) + new Vector3(_cellSize * 0.5f, _cellSize * 0.5f, 0);
         cellCenter.z = 0f;
+
+        // Создаем стену
         GameObject wall = Instantiate(_wallPrefab, cellCenter, Quaternion.identity);
-        SpriteRenderer spriteRenderer = wall.GetComponent<SpriteRenderer>();
+
+        // Добавляем в словарь: Координата -> Объект
+        _placedWalls.Add(cell, wall);
+
+        // --- НОВАЯ ЛОГИКА ---
+        // Находим компонент Wall на созданном объекте и подписываемся на его событие OnDestroyed.
+        Wall wallComponent = wall.GetComponent<Wall>();
+        if (wallComponent != null)
+        {
+            wallComponent.DestroyThis += HandleWallDestroyed;
+        }
+    }
+
+    // --- НОВЫЙ МЕТОД ---
+    // Этот метод будет вызван, когда любая стена отправит сигнал о своем уничтожении.
+    private void HandleWallDestroyed(Wall destroyedWall)
+    {
+        // Ищем координату по объекту стены и удаляем её из словаря.
+        foreach (var pair in _placedWalls)
+        {
+            if (pair.Value == destroyedWall.gameObject)
+            {
+                // Удаляем запись из словаря, чтобы место стало доступным для рисования.
+                _placedWalls.Remove(pair.Key);
+
+                // Отписываемся от события, чтобы избежать утечек памяти.
+                destroyedWall.DestroyThis -= HandleWallDestroyed;
+                break;
+            }
+        }
     }
 
     private Vector3Int GetGridCell(Vector3 screenPos)

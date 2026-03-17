@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour, IDestroyble
+public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletStats Stats;
 
@@ -12,10 +12,11 @@ public class Bullet : MonoBehaviour, IDestroyble
     private Lifetime _lifetime;
     private BulletDamage _damageSystem;
 
-    public event Action<Bullet> Destroyed;
     public event Action OnDestroy;
 
     public int Damage => _config?.damage ?? 0;
+
+    public event Action<Bullet> Destroyed;
 
     public void DestroyBullet() => OnDestroyBullet();
 
@@ -38,15 +39,20 @@ public class Bullet : MonoBehaviour, IDestroyble
 
     protected virtual void OnDestroyBullet()
     {
+        Debug.Log("OnDestroyBullet");
         OnDestroy?.Invoke();
         Destroyed?.Invoke(this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        DealDamage(other);
+    }
+
+    protected virtual void DealDamage(Collider2D other)
+    {
         if (other.TryGetComponent<IDamagable>(out var damagable))
         {
-            Debug.Log(damagable);
             _damageSystem.GiveDamage(damagable);
         }
     }

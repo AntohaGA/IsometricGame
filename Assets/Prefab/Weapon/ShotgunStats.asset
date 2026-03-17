@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunStats
   m_EditorClassIdentifier: Assembly-CSharp::BulletData
   LifeTime: 1
-  Speed: 15
+  Speed: 5
   Damage: 17
   Penetration: 2
   MoveAccuracy: 100

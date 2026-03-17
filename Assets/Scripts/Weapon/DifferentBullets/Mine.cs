@@ -2,13 +2,12 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class Mine : Bullet
+public class Mine : Bullet, ISpawnsOnDestraction
 {
     [Header("Mine Settings")]
-    [SerializeField] private float _activationDelay = 2f;
+    [SerializeField] private float _activationDelay;
     [SerializeField] private GameObject _explosion;
 
- //   private bool _isActive;
     private CircleCollider2D _detectionCollider;
 
     protected override void Awake()
@@ -17,13 +16,21 @@ public class Mine : Bullet
         _detectionCollider = GetComponent<CircleCollider2D>();
     }
 
+    private void OnEnable()
+    {
+        OnDestroy += SpawnNextObject;
+    }
+
+    private void OnDisable()
+    {
+        OnDestroy -= SpawnNextObject;
+    }
+
     public override void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
     {
-        _detectionCollider.enabled = false;
-        transform.position = spawnPosition;
-       // _rigidbody2D.bodyType = RigidbodyType2D.Static;
-      //  _isActive = false;
+        base.Init(weaponStats, spawnPosition, shootDirection);
 
+        _detectionCollider.enabled = false;
         StartCoroutine(ActivationSequence());
     }
 
@@ -31,7 +38,16 @@ public class Mine : Bullet
     {
         yield return new WaitForSeconds(_activationDelay);
 
-     //   _isActive = true;
         _detectionCollider.enabled = true;
+    }
+
+    public void SpawnNextObject()
+    {
+        Instantiate(_explosion, transform.position, Quaternion.identity);
+    }
+
+    protected override void DealDamage(Collider2D other)
+    {
+        DestroyBullet();
     }
 }

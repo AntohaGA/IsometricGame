@@ -16563,6 +16563,14 @@ PrefabInstance:
       propertyPath: _linePreview
       value: 
       objectReference: {fileID: 7748587356157916337, guid: 579bb377e0f69564e8620d0e76f7d4a1, type: 3}
+    - target: {fileID: 8658908916488697800, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: startHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658908916488697800, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _healthSlider
+      value: 
+      objectReference: {fileID: 420232246}
     - target: {fileID: 9127517849912267122, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_Name
       value: Player

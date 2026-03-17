@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
-    [SerializeField] ZombieMover _enemyMover;
+    [SerializeField] private ZombieMover _enemyMover;
+    [SerializeField] private LayerMask _targetLayerMask;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerGirl playerMover))
+        Debug.Log("OnTriggerStay2D");
+
+        if (IsInTargetLayer(collision.gameObject))
         {
-            _enemyMover.GoToPlayer(playerMover);
+            _enemyMover.GoToPlayer(collision.transform);
         }
+    }
+
+    private bool IsInTargetLayer(GameObject obj)
+    {
+        return (_targetLayerMask.value & (1 << obj.layer)) > 0;
     }
 }

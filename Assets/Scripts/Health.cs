@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using UnityEngine;
 
-public class Health : MonoBehaviour, IDamagable, IDestroyble
+public class Health : MonoBehaviour, IDamagable
 {
     [SerializeField] protected int startHealth = 200;
 
@@ -10,7 +10,7 @@ public class Health : MonoBehaviour, IDamagable, IDestroyble
 
     public event Action OnHit;
     public event Action<int> OnNewHealth;
-    public event Action OnDestroy;
+    public event Action Destroyd;
 
     protected virtual void Awake()
     {
@@ -30,7 +30,7 @@ public class Health : MonoBehaviour, IDamagable, IDestroyble
 
         if (_currentHealth <= 0)
         {
-            OnDestroy?.Invoke();
+            Destroyd?.Invoke();
         }
     }
 }

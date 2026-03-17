@@ -11,7 +11,7 @@ public class Wall : MonoBehaviour, IDamagable
     private int _health;
 
     public event Action OnHit;
-    public event Action OnDead;
+    public event Action<Wall> DestroyThis;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class Wall : MonoBehaviour, IDamagable
 
         if (_health <= 0)
         {
-            OnDead?.Invoke();
+            DestroyThis?.Invoke(this);
             Destroy(gameObject);
         }
     }

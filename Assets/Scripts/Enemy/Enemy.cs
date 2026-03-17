@@ -16,7 +16,7 @@ public abstract class Enemy : MonoBehaviour
         ZombieAnimator = GetComponent<ZombieAnimator>();
         ZombieMover = GetComponent<ZombieMover>();
         _health = GetComponent<Health>();
-        _health.OnDestroy += HandleDeath;
+        _health.Destroyd += HandleDeath;
     }
 
     private void OnEnable()
@@ -25,15 +25,15 @@ public abstract class Enemy : MonoBehaviour
         ZombieMover.enabled = true;
 
         _health.OnHit += ZombieAnimator.Hit;
-        _health.OnDestroy += ZombieAnimator.Die;
-        _health.OnDestroy += HandleDeath;
+        _health.Destroyd += ZombieAnimator.Die;
+        _health.Destroyd += HandleDeath;
     }
 
     private void OnDisable()
     {
         _health.OnHit -= ZombieAnimator.Hit;
-        _health.OnDestroy -= ZombieAnimator.Die;
-        _health.OnDestroy -= HandleDeath;
+        _health.Destroyd -= ZombieAnimator.Die;
+        _health.Destroyd -= HandleDeath;
     }
 
     public void Init(Vector2 spawnspot)

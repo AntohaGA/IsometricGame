@@ -1,43 +1,64 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class DamageDealer : MonoBehaviour
 {
-    [SerializeField] private float damagePerSecond = 100f; // Урон, наносимый каждую секунду контакта
-    [SerializeField] private LayerMask playerLayer; // Маска слоя игрока
-    [SerializeField] private Collider2D _collider2D;
+    [Header("Настройки урона")]
+    [SerializeField] private float _damagePerHit = 10f;
+    [SerializeField] private float _damageInterval = 0.5f;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    [Header("Настройки зоны")]
+    [SerializeField] private float _damageRadius = 0.5f; // Радиус зоны урона
+    [SerializeField] private LayerMask _targetLayerMask; // Маска слоя для поиска (например, PlayerHitbox)
+
+    private readonly WaitForSeconds _damageDelay = new WaitForSeconds(0.5f);
+
+    private void OnEnable()
     {
-        // Проверяем попадание коллайдера игрока
-        if ((playerLayer.value & (1 << other.gameObject.layer)) != 0 && other.TryGetComponent<PlayerGirl>(out var player))
-        {
-            StartCoroutine(DamageOverTime(other));
-        }
+        StartCoroutine(CheckForTargets());
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnDisable()
     {
         StopAllCoroutines();
     }
 
-    private IEnumerator DamageOverTime(Collider2D target)
+    private IEnumerator CheckForTargets()
     {
         while (true)
         {
-            // Наносим урон каждые полсекунды
-            yield return new WaitForSeconds(0.5f); // задержка перед нанесением следующего удара
+            // 1. Ищем все коллайдеры в радиусе по маске слоев
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _damageRadius, _targetLayerMask);
 
-            // Проверяем доступность целевого объекта
-            if (!target || !target.TryGetComponent<PlayerGirl>(out var player))
-                break;
-
-            // Получаем здоровье игрока
-            if (player.GetComponent<Health>() is { } health)
+            foreach (var hitCollider in hitColliders)
             {
-                health.TakeDamage((int)(damagePerSecond * Time.deltaTime)); // Уроном наносятся постепенно, пропорционально времени столкновения
+                // 2. Получаем Transform родителя найденного коллайдера
+                // Проверяем, есть ли у коллайдера родитель, чтобы избежать ошибки NullReferenceException
+                if (hitCollider.transform.parent == null)
+                {
+                    continue; // Пропускаем объект, если у него нет родителя
+                }
+
+                // 3. Ищем компонент Health на объекте родителя
+                Health health = hitCollider.transform.parent.GetComponent<Health>();
+
+                // 4. Если компонент найден, наносим урон
+                if (health != null)
+                {
+                    health.TakeDamage((int)_damagePerHit);
+                    Debug.Log($"Нанесено {_damagePerHit} урона!");
+                    // Если Health найден на родителе, нет смысла искать дальше по иерархии вверх
+                    continue;
+                }
             }
+
+            yield return _damageDelay;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _damageRadius);
     }
 }

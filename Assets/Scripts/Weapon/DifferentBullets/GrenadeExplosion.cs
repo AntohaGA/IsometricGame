@@ -1,15 +1,30 @@
+using System.Collections;
 using UnityEngine;
 
 public class GrenadeExplosion: MonoBehaviour
 {
     [SerializeField] private  GameObject _explosionPrefab;
     [SerializeField] private int _damage = 500;
+    [SerializeField] private float _destroyDelay = 2f;
+
     private readonly float _explosionRadius = 2;
+
+    private GameObject _explosion;
 
     private void OnEnable()
     {
-        SpawnExplosionEffect();
+        StartCoroutine(ExplodeAndDestroy());
+    }
+
+    private IEnumerator ExplodeAndDestroy()
+    {
         DealAreaDamage();
+        SpawnExplosionEffect();
+
+        yield return new WaitForSeconds(_destroyDelay);
+
+        Destroy(_explosion);
+        Destroy(gameObject);
     }
 
     private void DealAreaDamage()
@@ -31,7 +46,7 @@ public class GrenadeExplosion: MonoBehaviour
         if (_explosionPrefab != null)
         {
             Vector3 spawnPosition = transform.position;
-            Instantiate(_explosionPrefab, spawnPosition, Quaternion.identity);
+            _explosion = Instantiate(_explosionPrefab, spawnPosition, Quaternion.identity);
         }
     }
 }
