@@ -4,36 +4,25 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    private Health _health;
-
-    protected ZombieAnimator ZombieAnimator;
-    protected ZombieMover ZombieMover;
+    [SerializeField] protected Health Health;
+    [SerializeField] protected ZombieAnimator ZombieAnimator;
+    [SerializeField] protected ZombieMover ZombieMover;
 
     public event Action<Enemy> Destroyd;
 
-    private void Awake()
-    {
-        ZombieAnimator = GetComponent<ZombieAnimator>();
-        ZombieMover = GetComponent<ZombieMover>();
-        _health = GetComponent<Health>();
-        _health.Destroyd += HandleDeath;
-    }
-
     private void OnEnable()
     {
-        GetComponent<Collider2D>().enabled = true;
         ZombieMover.enabled = true;
-
-        _health.OnHit += ZombieAnimator.Hit;
-        _health.Destroyd += ZombieAnimator.Die;
-        _health.Destroyd += HandleDeath;
+        Health.OnHit += ZombieAnimator.Hit;
+        Health.Destroyd += ZombieAnimator.Die;
+        Health.Destroyd += HandleDeath;
     }
 
     private void OnDisable()
     {
-        _health.OnHit -= ZombieAnimator.Hit;
-        _health.Destroyd -= ZombieAnimator.Die;
-        _health.Destroyd -= HandleDeath;
+        Health.OnHit -= ZombieAnimator.Hit;
+        Health.Destroyd -= ZombieAnimator.Die;
+        Health.Destroyd -= HandleDeath;
     }
 
     public void Init(Vector2 spawnspot)
@@ -49,7 +38,6 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator DeathSequence()
     {
-        GetComponent<Collider2D>().enabled = false;
         ZombieMover.enabled = false;
 
         yield return new WaitForSeconds(2);

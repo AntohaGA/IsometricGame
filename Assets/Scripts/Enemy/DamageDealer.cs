@@ -5,7 +5,6 @@ public class DamageDealer : MonoBehaviour
 {
     [Header("Настройки урона")]
     [SerializeField] private float _damagePerHit = 10f;
-    [SerializeField] private float _damageInterval = 0.5f;
 
     [Header("Настройки зоны")]
     [SerializeField] private float _damageRadius = 0.5f; // Радиус зоны урона
@@ -27,7 +26,6 @@ public class DamageDealer : MonoBehaviour
     {
         while (true)
         {
-            // 1. Ищем все коллайдеры в радиусе по маске слоев
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _damageRadius, _targetLayerMask);
 
             foreach (var hitCollider in hitColliders)
@@ -58,7 +56,7 @@ public class DamageDealer : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _damageRadius);
     }
 }

@@ -6,12 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(PlayerHealth))]
 public class PlayerGirl : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private PlayerHealth _health;
 
-    private PlayerHealth _health;
     private PlayerAnimator _animator;
     private Rigidbody2D _rigidbody2D;
     private WeaponCollector _weaponCollector;
@@ -24,7 +23,6 @@ public class PlayerGirl : MonoBehaviour
         _animator = GetComponent<PlayerAnimator>();
         _weaponCollector = GetComponent<WeaponCollector>();
         _playerInput = GetComponent<InputReader>();
-        _health = GetComponent<PlayerHealth>();
         _playerKiller = GetComponent<PlayerKiller>();
     }
 

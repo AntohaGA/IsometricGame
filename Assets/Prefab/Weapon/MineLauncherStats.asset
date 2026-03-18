@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24290102797395f49913e21e0bd811e1, type: 3}
   m_Name: MineLauncherStats
   m_EditorClassIdentifier: Assembly-CSharp::WeaponStats
-  LifeTime: 1
-  Speed: 8
+  LifeTime: 100
+  Speed: 0
   Damage: 200
-  Penetration: 100
+  Penetration: 1
   MoveAccuracy: 1
   StopAccuracy: 1

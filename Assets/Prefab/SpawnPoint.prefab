@@ -176,10 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b344f7684fe47104d9eebf558ed4700b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _point: {fileID: 7023877572622585437}
-  _enemy: {fileID: 8158115149922959846, guid: 75804ba2b097e904b9834faa000d2de5, type: 3}
   _count: 10
   _delay: 2
+  _enemySpawner: {fileID: 0}
+  _targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!61 &-7403400383565589858
 BoxCollider2D:
   m_ObjectHideFlags: 0
