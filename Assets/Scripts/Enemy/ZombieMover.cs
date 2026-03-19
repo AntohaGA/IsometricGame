@@ -18,6 +18,20 @@ public class ZombieMover : MonoBehaviour
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _agent.enabled = false;
+    }    
+
+    public void GoToPlayer(Transform player)
+    {
+        _targetPlayer = player;
+        _agent.enabled = true;
+        _zombieAnimator.Run();
+
+        if (_pathUpdateCoroutine != null)
+        {
+            StopCoroutine(_pathUpdateCoroutine);
+        }
+
+        _pathUpdateCoroutine = StartCoroutine(UpdatePath());
     }
 
     public void Stop()
@@ -29,45 +43,6 @@ public class ZombieMover : MonoBehaviour
         {
             StopCoroutine(_pathUpdateCoroutine);
             _pathUpdateCoroutine = null;
-        }
-
-        if (_targetPlayer != null)
-        {
-            Health playerHealth = _targetPlayer.GetComponent<Health>();
-
-            if (playerHealth != null)
-            {
-                playerHealth.Destroyd -= HandlePlayerDeath;
-            }
-        }
-
-        _targetPlayer = null;
-    }
-
-    public void GoToPlayer(Transform player)
-    {
-        if (player == null) return;
-
-        _targetPlayer = player;
-        _agent.enabled = true;
-
-        if (_zombieAnimator != null)
-        {
-            _zombieAnimator.Run();
-        }
-
-        if (_pathUpdateCoroutine != null)
-        {
-            StopCoroutine(_pathUpdateCoroutine);
-        }
-
-        _pathUpdateCoroutine = StartCoroutine(UpdatePath());
-
-        Health playerHealth = _targetPlayer.GetComponent<Health>();
-
-        if (playerHealth != null)
-        {
-            playerHealth.Destroyd += HandlePlayerDeath;
         }
     }
 
@@ -81,11 +56,5 @@ public class ZombieMover : MonoBehaviour
         }
 
         Stop();
-    }
-
-    private void HandlePlayerDeath()
-    {
-        Debug.Log("Игрок умер! Зомби останавливается.");
-        Stop(); // Вызываем метод Stop для полной очистки
     }
 }

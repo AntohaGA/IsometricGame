@@ -12,11 +12,6 @@ public class Health : MonoBehaviour, IDamagable
     public event Action<int> OnNewHealth;
     public event Action Destroyd;
 
-    protected virtual void Awake()
-    {
-        _currentHealth = startHealth;
-    }
-
     protected virtual void OnEnable()
     {
         _currentHealth = startHealth;

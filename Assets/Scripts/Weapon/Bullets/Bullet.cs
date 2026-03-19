@@ -39,7 +39,6 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnDestroyBullet()
     {
-        Debug.Log("OnDestroyBullet");
         OnDestroy?.Invoke();
         Destroyed?.Invoke(this);
     }
@@ -53,6 +52,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.TryGetComponent<IDamagable>(out var damagable))
         {
+            Debug.Log("DealDamage - " + other);
             _damageSystem.GiveDamage(damagable);
         }
     }

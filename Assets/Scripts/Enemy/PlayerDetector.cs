@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
@@ -6,6 +7,18 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] private LayerMask _targetLayerMask;
     [SerializeField] private Collider2D _detectorCollider;
 
+    public event Action<Transform> OnFoundPlayer;
+
+    private void OnEnable()
+    {
+        _detectorCollider.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        _detectorCollider.enabled = false;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!_detectorCollider.enabled)
@@ -13,8 +26,8 @@ public class PlayerDetector : MonoBehaviour
 
         if (IsInTargetLayer(collision.gameObject))
         {
-            _enemyMover.GoToPlayer(collision.transform);
             _detectorCollider.enabled = false;
+            OnFoundPlayer?.Invoke(collision.transform);
         }
     }
 
@@ -22,4 +35,9 @@ public class PlayerDetector : MonoBehaviour
     {
         return (_targetLayerMask.value & (1 << obj.layer)) > 0;
     }
+
+    public void Stop()
+    {
+        _detectorCollider.enabled = false;
+    } 
 }

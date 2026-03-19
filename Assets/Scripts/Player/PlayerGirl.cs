@@ -59,14 +59,17 @@ public class PlayerGirl : MonoBehaviour
         {
             _weaponCollector.SwitchToWeapon(0);
         }
+
         if (_playerInput.IsSecondWeapon)
         {
             _weaponCollector.SwitchToWeapon(1);
         }
+
         if (_playerInput.IsThirdWeapon)
         {
             _weaponCollector.SwitchToWeapon(2);
         }
+
         if (_playerInput.IsFourthWeapon)
         {
             _weaponCollector.SwitchToWeapon(3);

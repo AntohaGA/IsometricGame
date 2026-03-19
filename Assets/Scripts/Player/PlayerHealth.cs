@@ -5,9 +5,8 @@ public class PlayerHealth : Health
 {
     [SerializeField] private Slider _healthSlider;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         _healthSlider.maxValue = startHealth;
         _healthSlider.minValue = 0;
     }
