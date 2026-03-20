@@ -14,7 +14,23 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable() -- Enemy");
+        Subscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    public void Init(Vector2 spawnspot)
+    {
+        transform.position = spawnspot;
+        transform.rotation = Quaternion.identity;
+        ZombieAnimator.Stand();
+    }
+
+    private void Subscribe()
+    {
         Health.OnHit += ZombieAnimator.Hit;
         Health.Destroyd += ZombieAnimator.Die;
         Health.Destroyd += ZombieMover.Stop;
@@ -23,23 +39,7 @@ public abstract class Enemy : MonoBehaviour
         PlayerDetector.OnFoundPlayer += ZombieMover.GoToPlayer;
     }
 
-    private void OnDisable()
-    {
-     /*   Health.OnHit -= ZombieAnimator.Hit;
-        Health.Destroyd -= ZombieAnimator.Die;
-        Health.Destroyd -= HandleDeath;
-        Health.Destroyd -= ZombieMover.Stop;
-        Health.Destroyd -= PlayerDetector.Stop;
-        PlayerDetector.OnFoundPlayer -= ZombieMover.GoToPlayer;*/
-    }
-
-    public void Init(Vector2 spawnspot)
-    {
-        transform.position = spawnspot;
-        transform.rotation = Quaternion.identity;
-    }
-
-    private void HandleDeath()
+    private void Unsubscribe()
     {
         Health.OnHit -= ZombieAnimator.Hit;
         Health.Destroyd -= ZombieAnimator.Die;
@@ -47,7 +47,11 @@ public abstract class Enemy : MonoBehaviour
         Health.Destroyd -= ZombieMover.Stop;
         Health.Destroyd -= PlayerDetector.Stop;
         PlayerDetector.OnFoundPlayer -= ZombieMover.GoToPlayer;
+    }
 
+    private void HandleDeath()
+    {
+        Unsubscribe();
         StartCoroutine(DeathSequence());
     }
 

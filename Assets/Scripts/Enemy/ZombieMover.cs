@@ -37,7 +37,6 @@ public class ZombieMover : MonoBehaviour
     public void Stop()
     {
         _agent.enabled = false;
-        _zombieAnimator.Stand();
 
         if (_pathUpdateCoroutine != null)
         {

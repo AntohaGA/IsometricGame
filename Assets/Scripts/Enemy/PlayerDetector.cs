@@ -1,13 +1,20 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class PlayerDetector : MonoBehaviour
 {
-    [SerializeField] private ZombieMover _enemyMover;
     [SerializeField] private LayerMask _targetLayerMask;
-    [SerializeField] private Collider2D _detectorCollider;
+
+    private Collider2D _detectorCollider;
 
     public event Action<Transform> OnFoundPlayer;
+
+    private void Awake()
+    {
+        _detectorCollider = GetComponent<Collider2D>();
+        _detectorCollider.isTrigger = true;
+    }
 
     private void OnEnable()
     {
@@ -39,5 +46,5 @@ public class PlayerDetector : MonoBehaviour
     public void Stop()
     {
         _detectorCollider.enabled = false;
-    } 
+    }
 }

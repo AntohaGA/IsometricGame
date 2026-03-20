@@ -29,4 +29,10 @@ public class ZombieAnimator : MonoBehaviour
     {
         _animator.SetBool("isDead", true);
     }
+
+    public void ResetState()
+    {
+        _animator.SetBool("isDead", false);
+        _animator.SetBool("isRun", false);
+    }
 }
