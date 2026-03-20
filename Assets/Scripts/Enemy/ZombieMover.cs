@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,12 +6,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class ZombieMover : MonoBehaviour
 {
-    [SerializeField] private ZombieAnimator _zombieAnimator;
-
     private NavMeshAgent _agent;
-    private Transform _targetPlayer;
     private Coroutine _pathUpdateCoroutine;
     private readonly WaitForSeconds _pathUpdateDelay = new WaitForSeconds(0.3f);
+
+    public event Action OnRun;
 
     private void OnEnable()
     {
@@ -20,18 +20,17 @@ public class ZombieMover : MonoBehaviour
         _agent.enabled = false;
     }    
 
-    public void GoToPlayer(Transform player)
+    public void GoTo(Transform target)
     {
-        _targetPlayer = player;
         _agent.enabled = true;
-        _zombieAnimator.Run();
+        OnRun?.Invoke();
 
         if (_pathUpdateCoroutine != null)
         {
             StopCoroutine(_pathUpdateCoroutine);
         }
 
-        _pathUpdateCoroutine = StartCoroutine(UpdatePath());
+        _pathUpdateCoroutine = StartCoroutine(UpdatePath(target));
     }
 
     public void Stop()
@@ -45,11 +44,11 @@ public class ZombieMover : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdatePath()
+    private IEnumerator UpdatePath(Transform target)
     {
-        while (enabled && _targetPlayer != null)
+        while (enabled && target != null)
         {
-            _agent.SetDestination(_targetPlayer.position);
+            _agent.SetDestination(target.position);
 
             yield return _pathUpdateDelay;
         }

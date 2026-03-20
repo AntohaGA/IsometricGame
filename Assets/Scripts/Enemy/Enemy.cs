@@ -36,7 +36,8 @@ public abstract class Enemy : MonoBehaviour
         Health.Destroyd += ZombieMover.Stop;
         Health.Destroyd += PlayerDetector.Stop;
         Health.Destroyd += HandleDeath;
-        PlayerDetector.OnFoundPlayer += ZombieMover.GoToPlayer;
+        ZombieMover.OnRun += ZombieAnimator.Run;
+        PlayerDetector.OnFoundPlayer += ZombieMover.GoTo;
     }
 
     private void Unsubscribe()
@@ -46,7 +47,8 @@ public abstract class Enemy : MonoBehaviour
         Health.Destroyd -= HandleDeath;
         Health.Destroyd -= ZombieMover.Stop;
         Health.Destroyd -= PlayerDetector.Stop;
-        PlayerDetector.OnFoundPlayer -= ZombieMover.GoToPlayer;
+        ZombieMover.OnRun -= ZombieAnimator.Run;
+        PlayerDetector.OnFoundPlayer -= ZombieMover.GoTo;
     }
 
     private void HandleDeath()

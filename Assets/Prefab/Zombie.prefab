@@ -81,11 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab918a9fb60274446870eaf4edd25a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDetector
-  _enemyMover: {fileID: 424453420198200832}
   _targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _detectorCollider: {fileID: 1277278452742784742}
 --- !u!1 &4394146611712837032
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +148,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -329,7 +327,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -397,7 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe58411ee35b75459c4d0dd49a4b7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieMover
-  _zombieAnimator: {fileID: 3037910776442897764}
 --- !u!114 &2377832898056358377
 MonoBehaviour:
   m_ObjectHideFlags: 0

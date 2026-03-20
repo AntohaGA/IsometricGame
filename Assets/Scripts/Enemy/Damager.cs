@@ -8,7 +8,7 @@ public class Damager : MonoBehaviour
 
     private float _lastHitTime;
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (IsInTargetLayer(collision.gameObject))
         {
