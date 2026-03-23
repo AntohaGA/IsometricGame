@@ -45,9 +45,4 @@ public class Mine : Bullet, ISpawnsOnDestraction
     {
         Instantiate(_explosion, transform.position, Quaternion.identity);
     }
-
-    protected override void DealDamage(Collider2D other)
-    {
-        DestroyBullet();
-    }
 }

@@ -14,7 +14,7 @@ public class Lifetime
         _onDestroy = onDestroy;
     }
 
-    public void Start(int lifeTime)
+    public void Start(float lifeTime)
     {
         Stop();
         _coroutine = _mono.StartCoroutine(LifeTimer(lifeTime));
@@ -26,7 +26,7 @@ public class Lifetime
             _mono.StopCoroutine(_coroutine);
     }
 
-    private IEnumerator LifeTimer(int lifeTime)
+    private IEnumerator LifeTimer(float lifeTime)
     {
         yield return new WaitForSeconds(lifeTime);
 

@@ -15,14 +15,11 @@ public class BulletDamage
         _currentPenetrations = 0;
     }
 
-    public void GiveDamage(IDamagable damagable)
+    public bool GiveDamage(IDamagable damagable)
     {
-        _currentPenetrations++;
         damagable.TakeDamage(_bullet.Damage);
+        _currentPenetrations++;
 
-        if (_currentPenetrations >= _maxPenetrations)
-        {
-            _bullet.DestroyBullet();
-        }
+        return _currentPenetrations >= _maxPenetrations;
     }
 }

@@ -1,12 +1,11 @@
 using System;
-using System.ComponentModel;
 using UnityEngine;
 
 public class Health : MonoBehaviour, IDamagable
 {
     [SerializeField] protected int startHealth = 200;
 
-    [SerializeField, ReadOnly(true)] protected int _currentHealth;
+    protected int _currentHealth;
 
     public event Action OnHit;
     public event Action<int> OnNewHealth;

@@ -4,7 +4,7 @@ public class BulletConfig
 {
     public int damage;
     public int speed;
-    public int lifeTime;
+    public float lifeTime;
     public int penetration;
 
     public BulletConfig(BulletStats stats, WeaponStats weaponStats)

@@ -1,9 +1,10 @@
 using System;
+using System.Data;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IAttack
 {
     [SerializeField] private BulletStats Stats;
 
@@ -45,15 +46,19 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DealDamage(other);
+        IDamagable damagable = other.GetComponentInParent<IDamagable>();
+
+        if (damagable != null)
+        {
+            ApplyDamage(damagable);
+        }
     }
 
-    protected virtual void DealDamage(Collider2D other)
+    public void ApplyDamage(IDamagable target)
     {
-        if (other.TryGetComponent<IDamagable>(out var damagable))
+        if (_damageSystem.GiveDamage(target))
         {
-            Debug.Log("DealDamage - " + other);
-            _damageSystem.GiveDamage(damagable);
+            OnDestroyBullet(); 
         }
     }
 }
