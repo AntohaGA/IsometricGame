@@ -42,7 +42,9 @@ GameObject:
   - component: {fileID: 2921408628638785704}
   - component: {fileID: 8866873551633565031}
   - component: {fileID: 1811121775649058669}
-  - component: {fileID: 1117644596865473037}
+  - component: {fileID: 1402953614485187336}
+  - component: {fileID: 1370440557897150143}
+  - component: {fileID: 855289924262388184}
   m_Layer: 0
   m_Name: Granader
   m_TagString: Untagged
@@ -138,9 +140,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granader
   BulletSpawnerSpot: {fileID: 2394056983311092372}
-  BulletSpawner: {fileID: 1117644596865473037}
+  BulletSpawner: {fileID: 855289924262388184}
   WeaponStats: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
---- !u!114 &1117644596865473037
+  _poolGrenades: {fileID: 1402953614485187336}
+  _poolExplosions: {fileID: 1370440557897150143}
+--- !u!114 &1402953614485187336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +153,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 8200337624215283597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96acbf58411549343a919e29a86af2e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 873767511016e6b44920ce227763d237, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SingleBulletSpawner
-  PrefabBullet: {fileID: -4954496387452920354, guid: 537a6c3d544dd3543abc16813f3d21cd, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::PoolGrenades
+--- !u!114 &1370440557897150143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200337624215283597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5597447632e5a514f9cf1287179b43f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolExplosions
+--- !u!114 &855289924262388184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200337624215283597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1086631ca9bdc2f4fb33bf6ff8d4eee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileSpawner
+  PrefabBullet: {fileID: 0}

@@ -1,12 +1,12 @@
 public class BulletDamage
 {
-    private readonly Bullet _bullet;
+    private readonly int _damage;
     private int _currentPenetrations = 0;
     private int _maxPenetrations;
 
-    public BulletDamage(Bullet bullet)
+    public BulletDamage(int damage)
     {
-        _bullet = bullet;
+        _damage = damage;
     }
 
     public void Initialize(int maxPenetrations)
@@ -17,7 +17,7 @@ public class BulletDamage
 
     public bool GiveDamage(IDamagable damagable)
     {
-        damagable.TakeDamage(_bullet.Damage);
+        damagable.TakeDamage(_damage);
         _currentPenetrations++;
 
         return _currentPenetrations >= _maxPenetrations;

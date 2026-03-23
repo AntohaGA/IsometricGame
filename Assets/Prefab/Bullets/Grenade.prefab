@@ -107,5 +107,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b841e9a03b8de1f4b861a92046afcf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grenade
-  Stats: {fileID: 11400000, guid: 76370293873d8c24c9dffe6ab9c442a8, type: 2}
-  _explosion: {fileID: 5262498815784451030, guid: ccc32c040c0322f48b4f20c51bbcdc5b, type: 3}
+  _damage: 500
+  _explosionRadius: 2

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShotgunBulletSpawner : BulletSpawner
+public class ShotgunBulletSpawner : ProjectileSpawner
 {
     [SerializeField] private int _pelletCount;
     [SerializeField] private float _coneHalfAngle;

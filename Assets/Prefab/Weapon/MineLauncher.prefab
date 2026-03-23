@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6116614867936425053}
   - component: {fileID: 7117777604105264856}
   - component: {fileID: 3632311709740683661}
+  - component: {fileID: 3429866656896771453}
   m_Layer: 0
   m_Name: MineLauncher
   m_TagString: Untagged
@@ -140,6 +141,7 @@ MonoBehaviour:
   BulletSpawnerSpot: {fileID: 8066331592392634386}
   BulletSpawner: {fileID: 3632311709740683661}
   WeaponStats: {fileID: 11400000, guid: 729c1fdff5867754ab746d860b95315e, type: 2}
+  _poolMines: {fileID: 0}
 --- !u!114 &3632311709740683661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,4 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a6eedfa67d0394d91208ddaaf2fdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MineBulletSpawner
-  PrefabBullet: {fileID: 7627448796775371927, guid: de165b28ee557f04eb25764e897fefbb, type: 3}
+  PrefabBullet: {fileID: 0}
+--- !u!114 &3429866656896771453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054510906127696395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28c960dc8b517340be5c5611451e7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolProjectile

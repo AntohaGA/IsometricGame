@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] public Transform BulletSpawnerSpot;
-    [SerializeField] protected BulletSpawner BulletSpawner;
+    [SerializeField] protected ProjectileSpawner BulletSpawner;
     [SerializeField] protected WeaponStats WeaponStats;
 
     public SpriteRenderer GunSprite { get; private set; }
@@ -20,5 +20,10 @@ public abstract class Weapon : MonoBehaviour
     {
         BulletSpawner.SpawnBullet(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
         OnShoot?.Invoke();  // Анимация, звук
+    }
+
+    protected void TriggerShootEvent()
+    {
+        OnShoot?.Invoke();
     }
 }
