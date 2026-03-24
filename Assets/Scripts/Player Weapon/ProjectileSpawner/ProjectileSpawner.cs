@@ -17,16 +17,17 @@ public abstract class ProjectileSpawner : MonoBehaviour
 
     public virtual void Reset() => _poolProjectile?.ClearPool();
 
-    public virtual void SpawnBullet(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
+    public virtual void SpawnProjectile(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
     {
         Projectile projectile = _poolProjectile.GetInstance();
         projectile.Init(weaponStats, spawnPosition, shootDirection);
-        projectile.Destroyed += ReturnBullet;
+        projectile.Destroyed += ReturnProjectile;
     }
 
-    public virtual void ReturnBullet(Projectile projectile)
+    public virtual void ReturnProjectile(Projectile projectile)
     {
-        projectile.Destroyed -= ReturnBullet;
+        Debug.Log("ReturnProjectile");
+        projectile.Destroyed -= ReturnProjectile;
         _poolProjectile.ReturnInstance(projectile);
     }
 }

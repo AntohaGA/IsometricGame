@@ -7,10 +7,9 @@ public class Grenade : Projectile
 
     private BulletMovement _movement;
 
-    protected override void Awake()
+    protected  void Awake()
     {
-        base.Awake();
-        _movement = new BulletMovement(_rb);
+        _movement = new BulletMovement(_rigidbody);
     }
 
     public override void Init(WeaponStats stats, Vector3 pos, Vector2 dir)

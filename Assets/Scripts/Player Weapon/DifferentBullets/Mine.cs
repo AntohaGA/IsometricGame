@@ -1,21 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class Mine : Projectile // Наследуем от Projectile ради пулинга и Destroyed события
+public class Mine : Projectile
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _explosionRadius;
 
     private Collider2D _detectionCollider;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         _detectionCollider = GetComponent<Collider2D>();
         _detectionCollider.isTrigger = true; // Это триггер!
-
-        // Мину не нужно двигать, отключаем физику
-        _rb.bodyType = RigidbodyType2D.Static;
+        _rigidbody.bodyType = RigidbodyType2D.Static;
     }
 
     public override void Init(WeaponStats stats, Vector3 pos, Vector2 dir)
@@ -24,7 +21,6 @@ public class Mine : Projectile // Наследуем от Projectile ради п
         _damage = stats.Damage;
         _explosionRadius = stats.Penetration; // Используем Penetration как радиус
 
-        // Активируем коллайдер через секунду (как в твоем коде)
         StartCoroutine(ActivationDelay());
     }
 

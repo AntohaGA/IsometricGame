@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a6eedfa67d0394d91208ddaaf2fdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MineBulletSpawner
-  PrefabBullet: {fileID: 0}
+  PrefabProjectile: {fileID: 7627448796775371927, guid: de165b28ee557f04eb25764e897fefbb, type: 3}
 --- !u!114 &3429866656896771453
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class Bullet : Projectile
 {
     [SerializeField] private BulletStats Stats;
@@ -8,18 +10,20 @@ public class Bullet : Projectile
     private BulletMovement _movement;
     private BulletDamage _damageSystem;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-        _rb = GetComponent<Rigidbody2D>();
-        _movement = new BulletMovement(_rb);
-        _damageSystem = new BulletDamage(_config.damage);
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
+
+        _movement = new BulletMovement(_rigidbody);
+
     }
 
     public override void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)
     {
         base.Init(weaponStats, spawnPosition, shootDirection);
         _config = new BulletConfig(Stats, weaponStats);
+        _damageSystem = new BulletDamage(_config.damage);
         transform.position = spawnPosition;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
         _movement.Move(shootDirection, _config.speed);

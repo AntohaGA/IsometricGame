@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Shoot(bool isMove)
     {
-        BulletSpawner.SpawnBullet(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
+        BulletSpawner.SpawnProjectile(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
         OnShoot?.Invoke();  // Анимация, звук
     }
 
