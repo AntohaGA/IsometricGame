@@ -3,7 +3,7 @@ using UnityEngine;
 public class GunRotator : MonoBehaviour
 {
     private Camera _mainCamera;
-    private Weapon _gun;
+    private Transform _gun;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class GunRotator : MonoBehaviour
         RotateTowardsMouse();
     }
 
-    public void SetGun(Weapon weapon)
+    public void SetGun(Transform weapon)
     {
         _gun = weapon;
     }
@@ -30,14 +30,14 @@ public class GunRotator : MonoBehaviour
 
         if (_gun != null)
         {
-            _gun.transform.localRotation = Quaternion.Euler(0, 0, angle);
+            _gun.localRotation = Quaternion.Euler(0, 0, angle);
 
             bool isFacingRight = angle > -90f && angle < 90f;
-            Vector3 scale = _gun.transform.localScale;
+            Vector3 scale = _gun.localScale;
             float targetScaleY = isFacingRight ? 1f : -1f;
 
             scale.y = targetScaleY;
-            _gun.transform.localScale = scale;
+            _gun.localScale = scale;
         }
         else
         {

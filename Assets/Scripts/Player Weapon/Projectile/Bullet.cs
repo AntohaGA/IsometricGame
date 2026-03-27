@@ -14,9 +14,7 @@ public class Bullet : Projectile
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
-
         _movement = new BulletMovement(_rigidbody);
-
     }
 
     public override void Init(WeaponStats weaponStats, Vector3 spawnPosition, Vector2 shootDirection)

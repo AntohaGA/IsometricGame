@@ -123,7 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   startHealth: 1000
-  _currentHealth: 0
   _healthSlider: {fileID: 0}
 --- !u!1 &9127517849912267122
 GameObject:
@@ -326,11 +325,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d122e3902f83e94fb253c9a65d98e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstWeaponSpot: {fileID: 1205799537828193944}
-  _riflePrefab: {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
-  _shotgunPrefab: {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
+  _weaponParent: {fileID: 1205799537828193944}
+  _weaponPrefabs:
+  - {fileID: 1124186274912175026, guid: 31faf949682f0b445960575bb827c6bc, type: 3}
+  - {fileID: 999565121178706547, guid: 9368b3907c3daaf43957d55728f5fb52, type: 3}
+  - {fileID: 7117777604105264856, guid: 8f73c704b2138b0448c580d4f23e01c6, type: 3}
   _granaderPrefab: {fileID: 1811121775649058669, guid: 26cf4a507eedd654a862cee5fa96cf8a, type: 3}
-  _mineLauncherPrefab: {fileID: 7117777604105264856, guid: 8f73c704b2138b0448c580d4f23e01c6, type: 3}
 --- !u!114 &6608731679995153569
 MonoBehaviour:
   m_ObjectHideFlags: 0

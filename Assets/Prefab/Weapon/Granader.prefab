@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2921408628638785704}
   - component: {fileID: 8866873551633565031}
   - component: {fileID: 1811121775649058669}
+  - component: {fileID: 4103307634673303833}
   - component: {fileID: 1402953614485187336}
   - component: {fileID: 1370440557897150143}
   - component: {fileID: 855289924262388184}
@@ -61,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 8200337624215283597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.700733, y: -20.969326, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -139,9 +140,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc47f31bc14756499ea3a504d587970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granader
+  _poolGrenades: {fileID: 1402953614485187336}
+  _poolExplosions: {fileID: 1370440557897150143}
   BulletSpawnerSpot: {fileID: 2394056983311092372}
-  BulletSpawner: {fileID: 855289924262388184}
   WeaponStats: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
+--- !u!114 &4103307634673303833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200337624215283597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d504421fbd8e85c4e9bfba8a7e8bc1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeSpawner
   _poolGrenades: {fileID: 1402953614485187336}
   _poolExplosions: {fileID: 1370440557897150143}
 --- !u!114 &1402953614485187336
@@ -180,4 +194,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1086631ca9bdc2f4fb33bf6ff8d4eee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileSpawner
-  PrefabProjectile: {fileID: -4954496387452920354, guid: 537a6c3d544dd3543abc16813f3d21cd, type: 3}
+  PrefabProjectile: {fileID: 3857291324228833071, guid: f15fe707b2ef52c4c924727a8c32eace, type: 3}

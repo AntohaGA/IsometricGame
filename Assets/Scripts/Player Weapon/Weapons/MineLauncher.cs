@@ -1,12 +1,8 @@
-using UnityEngine;
-
 public class MineLauncher : Weapon
 {
-    [SerializeField] private PoolObjects<Mine> _poolMines;
-
-    public override void Shoot(bool isMove)
+    public override void Shoot()
     {
-        Mine mine = _poolMines.GetInstance();
+        Mine mine = MineSpawner.GetInstance();
         mine.Init(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
         mine.gameObject.SetActive(true);
 

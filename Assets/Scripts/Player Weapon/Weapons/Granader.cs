@@ -1,21 +1,22 @@
 using UnityEngine;
-
-public class GrenadeLauncher : Weapon
+// Убираем наследование от MonoBehaviour для интерфейса. Просто MonoBehaviour.
+public class Granader : MonoBehaviour
 {
     [SerializeField] private PoolGrenades _poolGrenades;
     [SerializeField] private PoolExplosions _poolExplosions;
+    [SerializeField] private Transform BulletSpawnerSpot;
+    [SerializeField] private WeaponStats WeaponStats;
 
-    // ... другие поля типа BulletSpawnerSpot
+    public event System.Action OnShoot;
 
-    public override void Shoot(bool isMove)
+    // Метод называется так же - Shoot!
+    public void Shoot()
     {
         Grenade grenade = _poolGrenades.GetInstance();
-
         grenade.Destroyed += (proj) => SpawnExplosion(proj.transform.position);
-
         grenade.Init(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
 
-        TriggerShootEvent();
+        OnShoot?.Invoke(); // Анимация, звук
     }
 
     private void SpawnExplosion(Vector3 position)
@@ -23,11 +24,6 @@ public class GrenadeLauncher : Weapon
         GrenadeExplosion explosion = _poolExplosions.GetInstance();
         explosion.transform.position = position;
         explosion.gameObject.SetActive(true);
-
-        // Подписываем взрыв на его собственное уничтожение для возврата в пул
-        explosion.GetComponent<Lifetime>().Start(2f); // Время жизни взрыва из его скрипта или конфига
-
-        // Если в GrenadeExplosion нет Lifetime, можно сделать так:
-        // explosion.StartCoroutine(ReturnExplosion(explosion, 2f));
+        explosion.GetComponent<Lifetime>().Start(2f);
     }
 }

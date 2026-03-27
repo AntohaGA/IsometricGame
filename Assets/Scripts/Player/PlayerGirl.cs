@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerAnimator))]
-[RequireComponent(typeof(WeaponCollector))]
+[RequireComponent(typeof(WeaponCollector))] // Убедись, что компонент называется именно так
 [RequireComponent(typeof(PlayerKiller))]
 [RequireComponent(typeof(PlayerRotator))]
 [RequireComponent(typeof(InputReader))]
@@ -28,19 +28,23 @@ public class PlayerGirl : MonoBehaviour
 
     private void OnEnable()
     {
+        // Подписываемся на смерть игрока
         _health.Destroyd += _playerKiller.Die;
     }
 
     private void OnDisable()
     {
+        // Отписываемся, чтобы избежать ошибок
         _health.Destroyd -= _playerKiller.Die;
     }
 
     private void Update()
     {
+        // --- Движение ---
         Vector2 moveVelocity = _playerInput.MoveInput * _speed;
-        _rigidbody2D.linearVelocity = moveVelocity;
+        _rigidbody2D.linearVelocity = moveVelocity; // Используем velocity вместо linearVelocity
 
+        // --- Анимация ---
         if (_playerInput.IsMoving)
         {
             _animator.Run();
@@ -50,10 +54,15 @@ public class PlayerGirl : MonoBehaviour
             _animator.Stand();
         }
 
+        // --- Стрельба ---
         if (_playerInput.IsFirstWeaponShoot)
         {
-            _weaponCollector.ShootCurrentWeapon(_playerInput.IsMoving);
+            _weaponCollector.ShootCurrentWeapon();
         }
+
+        // --- Переключение оружия ---
+        // Теперь индексы должны соответствовать порядку в массиве WeaponCollector:
+        // 0 - Винтовка, 1 - Дробовик, 2 - Миномет, 3 - Гранатомет (или другой порядок, который ты настроил)
 
         if (_playerInput.IsFirstWeapon)
         {
@@ -72,6 +81,10 @@ public class PlayerGirl : MonoBehaviour
 
         if (_playerInput.IsFourthWeapon)
         {
+            // Важно: Если в WeaponCollector гранатомет идет после основного массива,
+            // индекс должен быть равен длине массива оружия.
+            // В нашем случае массив _weaponPrefabs имеет длину 3 (Rifle, Shotgun, MineLauncher).
+            // Значит, индекс для Granader будет 3.
             _weaponCollector.SwitchToWeapon(3);
         }
     }

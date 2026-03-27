@@ -1,86 +1,62 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(GunRotator))]
 public class WeaponCollector : MonoBehaviour
 {
-    [SerializeField] Transform _firstWeaponSpot;
-    [SerializeField] private Weapon _riflePrefab;
-    [SerializeField] private Weapon _shotgunPrefab;
-    [SerializeField] private Weapon _granaderPrefab;
-    [SerializeField] private Weapon _mineLauncherPrefab;
-
+    [SerializeField] Transform _weaponParent; // Куда крепить оружие
+    [SerializeField] private Weapon[] _weaponPrefabs; // Массив обычного оружия (Rifle, Shotgun, Mine)
+    [SerializeField] private Granader _granaderPrefab; // Гранатомет - отдельно
 
     private GunRotator _gunRotator;
-    private Weapon[] _weapons;
-    private Weapon _currentWeapon;
+    private Weapon _currentWeapon; // Текущее оружие (Rifle/Shotgun/Mine)
+    private Granader _currentGranader; // Текущий гранатомет
 
     private void Awake()
     {
         _gunRotator = GetComponent<GunRotator>();
-    }
-
-    private void Start()
-    {
-        _weapons = new Weapon[]
-        {
-            _riflePrefab != null ? Instantiate(_riflePrefab, _firstWeaponSpot.transform) : null,
-            _shotgunPrefab != null ? Instantiate(_shotgunPrefab, _firstWeaponSpot.transform) : null,
-            _granaderPrefab != null ? Instantiate(_granaderPrefab, _firstWeaponSpot.transform) : null,
-            _mineLauncherPrefab !=null ? Instantiate(_mineLauncherPrefab, _firstWeaponSpot.transform) :null,
-        };
-
-        foreach (Weapon weapon in _weapons)
-        {
-            if (weapon != null)
-                weapon.gameObject.SetActive(false);
-        }
-
-        EquipWeapon(_weapons[0]);
-    }
-
-    private void EquipWeapon(Weapon weapon)
-    {
-        if (weapon == null)
-            return;
-
-        if (_currentWeapon != null)
-        {
-            _currentWeapon.gameObject.SetActive(false);
-        }
-
-        _currentWeapon = weapon;
-        _currentWeapon.gameObject.SetActive(true);
-        _currentWeapon.transform.SetParent(_firstWeaponSpot);
-        _currentWeapon.transform.localPosition = Vector3.zero;
-        _currentWeapon.transform.localRotation = Quaternion.identity;
-        _gunRotator.SetGun(_currentWeapon);
+        SwitchToWeapon(0);
     }
 
     public void SwitchToWeapon(int index)
     {
-        if (index < 0 || index >= _weapons.Length)
+        if (_currentWeapon != null) 
+            _currentWeapon.gameObject.SetActive(false);
+
+        if (_currentGranader != null)
+            _currentGranader.gameObject.SetActive(false);
+
+        if (index < _weaponPrefabs.Length) // Это пушка или мина?
         {
-            Debug.LogWarning($"Invalid weapon index: {index}");
-            return;
+            if (_currentWeapon == null || _currentWeapon.gameObject.scene.name == null)
+            {
+                _currentWeapon = Instantiate(_weaponPrefabs[index], _weaponParent);
+            }
+            _currentWeapon.gameObject.SetActive(true);
+            _gunRotator.SetGun(_currentWeapon.transform);
+            _currentGranader = null; // Сбрасываем гранатомет
         }
-
-        Weapon newWeapon = _weapons[index];
-
-        if (newWeapon == null)
+        else if (index == _weaponPrefabs.Length && _granaderPrefab != null) // Это гранатомет?
         {
-            Debug.Log($"Weapon slot {index} is empty");
-            return;
-        }
-
-        if (_currentWeapon != newWeapon)
-        {
-            EquipWeapon(newWeapon);
+            int granaderIndex = index - _weaponPrefabs.Length; // Если бы массивов было много
+            if (_currentGranader == null || _currentGranader.gameObject.scene.name == null)
+            {
+                _currentGranader = Instantiate(_granaderPrefab, _weaponParent);
+            }
+            _currentGranader.gameObject.SetActive(true);
+            _gunRotator.SetGun(_currentGranader.transform);
+            _currentWeapon = null; // Сбрасываем пушку
         }
     }
 
-    public void ShootCurrentWeapon(bool isMoving)
+    public void ShootCurrentWeapon()
     {
-        _currentWeapon.Shoot(isMoving);
+        if (_currentWeapon != null)
+        {
+            _currentWeapon.Shoot();
+        }
+        else if (_currentGranader != null)
+        {
+            _currentGranader.Shoot();
+        }
     }
 }
