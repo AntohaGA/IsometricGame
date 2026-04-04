@@ -1,15 +1,13 @@
-using System;
 using UnityEngine;
+using System;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] public Transform BulletSpawnerSpot;
-    [SerializeField] protected ProjectileSpawner BulletSpawner; // Для пуль
-    [SerializeField] protected PoolObjects<Mine> MineSpawner;   // Для мин (добавили новое поле)
+    [SerializeField] public Transform BulletSpawnerSpot; // Точка вылета (можно переименовать в просто Spot)
+    [SerializeField] protected ProjectileSpawner ProjectileSpawner; // ЕДИНСТВЕННЫЙ спавнер!
     [SerializeField] protected WeaponStats WeaponStats;
 
     public SpriteRenderer GunSprite { get; private set; }
-
     public event Action OnShoot;
 
     protected virtual void Awake()
@@ -19,7 +17,8 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
-        BulletSpawner.SpawnProjectile(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
+        ProjectileSpawner.Spawn(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
+
         TriggerShootEvent();
     }
 

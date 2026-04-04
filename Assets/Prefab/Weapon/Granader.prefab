@@ -140,9 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc47f31bc14756499ea3a504d587970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granader
-  _poolGrenades: {fileID: 1402953614485187336}
-  _poolExplosions: {fileID: 1370440557897150143}
   BulletSpawnerSpot: {fileID: 2394056983311092372}
+  ProjectileSpawner: {fileID: 855289924262388184}
   WeaponStats: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
 --- !u!114 &4103307634673303833
 MonoBehaviour:
@@ -194,4 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1086631ca9bdc2f4fb33bf6ff8d4eee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileSpawner
-  PrefabProjectile: {fileID: 3857291324228833071, guid: f15fe707b2ef52c4c924727a8c32eace, type: 3}
+  _poolBullets: {fileID: 0}
+  _poolGrenades: {fileID: 1402953614485187336}
+  _poolMines: {fileID: 0}
