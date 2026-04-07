@@ -2,23 +2,21 @@ using UnityEngine;
 
 public class SingleProjectileSpawner : ProjectileSpawner
 {
-    [SerializeField] private PoolObjects<Bullet> _poolBullets; // Только пул для пуль
+    [SerializeField] protected PoolProjectile PoolProjectile;
+    [SerializeField] private Projectile _prefubBullet;
+
+    private void Awake()
+    {
+        PoolProjectile.Init(20, 100, _prefubBullet);
+    }
 
     public override void Spawn(WeaponStats stats, Vector3 position, Vector2 direction)
     {
-        // Проверяем, что тип снаряда соответствует логике спавнера
-        if (stats.ProjectileType != ProjectileType.Bullet)
-        {
-            Debug.LogWarning("SingleProjectileSpawner пытается спавнить не пулю!", this);
-            return;
-        }
-
-        Bullet bullet = _poolBullets.GetInstance();
-        bullet.transform.position = position;
-        bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
-        bullet.gameObject.SetActive(true);
-        bullet.Init(stats, position, direction);
-
-        bullet.Destroyed += (proj) => _poolBullets.ReturnInstance(proj as Bullet);
+        Projectile projectile = PoolProjectile.GetInstance();
+        projectile.transform.position = position;
+        projectile.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        projectile.gameObject.SetActive(true);
+        projectile.Init(stats, position, direction);
+        projectile.Destroyed += (proj) => PoolProjectile.ReturnInstance(proj as Bullet);
     }
 }

@@ -7,12 +7,6 @@ public class GrenadeSpawner : ProjectileSpawner
 
     public override void Spawn(WeaponStats stats, Vector3 position, Vector2 direction)
     {
-        if (stats.ProjectileType != ProjectileType.Grenade)
-        {
-            Debug.LogWarning("GrenadeSpawner пытается спавнить не гранату!", this);
-            return;
-        }
-
         Grenade grenade = _poolGrenades.GetInstance();
         grenade.transform.position = position;
         grenade.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
@@ -33,14 +27,12 @@ public class GrenadeSpawner : ProjectileSpawner
         explosion.transform.position = position;
         explosion.gameObject.SetActive(true);
 
-        // Запускаем время жизни взрыва и возврат в пул
         Lifetime lifetime = explosion.GetComponent<Lifetime>();
+
         if (lifetime != null)
         {
             lifetime.Start(2f);
-            // Подписываемся на самоуничтожение взрыва
-            lifetime.GetComponent<Projectile>().Destroyed +=
-                (proj) => _poolExplosions.ReturnInstance(explosion);
+          //  lifetime.GetComponent<Projectile>().Destroyed +=  (proj) => _poolExplosions.ReturnInstance(explosion);
         }
     }
 }

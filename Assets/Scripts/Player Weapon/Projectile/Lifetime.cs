@@ -6,12 +6,12 @@ public class Lifetime
 {
     private Coroutine _coroutine;
     private MonoBehaviour _mono;
-    private Action _onDestroy;
+    private Action _onDestroyByTime;
 
     public Lifetime(MonoBehaviour mono, Action onDestroy)
     {
         _mono = mono;
-        _onDestroy = onDestroy;
+        _onDestroyByTime = onDestroy;
     }
 
     public void Start(float lifeTime)
@@ -30,6 +30,6 @@ public class Lifetime
     {
         yield return new WaitForSeconds(lifeTime);
 
-        _onDestroy?.Invoke();
+        _onDestroyByTime?.Invoke();
     }
 }

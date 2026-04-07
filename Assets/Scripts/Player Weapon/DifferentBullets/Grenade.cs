@@ -16,15 +16,13 @@ public class Grenade : Projectile
     {
         base.Init(stats, pos, dir);
         _movement.Move(dir, stats.Speed);
-        _damage = stats.Damage; // Берем урон из WeaponStats
-     //   _explosionRadius = stats.LifeTime * 5f;  Пример зависимости радиуса от времени жизни
+        _damage = stats.Damage;
     }
 
     protected override void OnDestroyProjectile()
     {
         base.OnDestroyProjectile();
         DealAreaDamage();
-
         gameObject.SetActive(false);
     }
 

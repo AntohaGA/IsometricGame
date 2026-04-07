@@ -3,8 +3,8 @@ using System;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] public Transform BulletSpawnerSpot; // Точка вылета (можно переименовать в просто Spot)
-    [SerializeField] protected ProjectileSpawner ProjectileSpawner; // ЕДИНСТВЕННЫЙ спавнер!
+    [SerializeField] public Transform BulletSpawnerSpot;
+    [SerializeField] protected ProjectileSpawner ProjectileSpawner;
     [SerializeField] protected WeaponStats WeaponStats;
 
     public SpriteRenderer GunSprite { get; private set; }
