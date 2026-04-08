@@ -10,6 +10,8 @@ public class Bullet : Projectile
     private BulletMovement _movement;
     private BulletDamage _damageSystem;
 
+
+
     protected void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -22,8 +24,6 @@ public class Bullet : Projectile
         base.Init(weaponStats, spawnPosition, shootDirection);
         _config = new BulletConfig(Stats, weaponStats);
         _damageSystem = new BulletDamage(_config.damage);
-        transform.position = spawnPosition;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
         _movement.Move(shootDirection, _config.speed);
         _damageSystem.Initialize(_config.penetration);
     }

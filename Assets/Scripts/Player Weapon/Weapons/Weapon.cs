@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -8,7 +7,6 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected WeaponStats WeaponStats;
 
     public SpriteRenderer GunSprite { get; private set; }
-    public event Action OnShoot;
 
     protected virtual void Awake()
     {
@@ -18,12 +16,5 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Shoot()
     {
         ProjectileSpawner.Spawn(WeaponStats, BulletSpawnerSpot.position, BulletSpawnerSpot.right);
-
-        TriggerShootEvent();
-    }
-
-    protected void TriggerShootEvent()
-    {
-        OnShoot?.Invoke();
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3325991255005214212}
   - component: {fileID: 5310810054637048511}
   - component: {fileID: 7854986476710936736}
-  - component: {fileID: 3087378354233994795}
+  - component: {fileID: 2399838155688675445}
   m_Layer: 6
   m_Name: RifleBullet
   m_TagString: Untagged
@@ -158,7 +158,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.22222222, y: 0.44444445}
   m_Direction: 0
---- !u!114 &3087378354233994795
+--- !u!114 &2399838155688675445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5203345576527418055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee84365d2af91234c9b2d05efbc77459, type: 3}
+  m_Script: {fileID: 11500000, guid: 211ebac84cc79b943b4abc15332f726d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RifleBullet
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
   Stats: {fileID: 11400000, guid: 691ae09c351c9464f8ad63cf72b8f7e9, type: 2}

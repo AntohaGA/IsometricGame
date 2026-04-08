@@ -167,7 +167,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 335492849654016735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5973e83865a985449b21eb567c33ec54, type: 3}
+  m_Script: {fileID: 11500000, guid: 211ebac84cc79b943b4abc15332f726d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunBullet
   Stats: {fileID: 11400000, guid: 5a21e0ba428c71242876644ce97514ff, type: 2}

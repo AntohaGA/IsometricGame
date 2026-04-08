@@ -9,18 +9,17 @@ public abstract class Projectile : MonoBehaviour
 
     public event Action<Projectile> Destroyed;
 
-    public virtual void Init(WeaponStats stats, Vector3 pos, Vector2 dir)
+    public virtual void Init(WeaponStats bulletStats, Vector3 pos, Vector2 dir)
     {
         transform.position = pos;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
         _lifetime = new Lifetime(this, OnDestroyProjectile);
-        _lifetime.Start(stats.LifeTime);
+        _lifetime.Start(bulletStats.LifeTime);
     }
 
     protected virtual void OnDestroyProjectile()
     {
         _rigidbody.linearVelocity = Vector2.zero;
-
-        Debug.Log("OnDestroyProjectile");
         Destroyed?.Invoke(this);
         gameObject.SetActive(false);
     }

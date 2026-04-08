@@ -2,42 +2,39 @@
 
 public class Grenade : Projectile
 {
-    [SerializeField] private int _damage;
-    [SerializeField] private float _explosionRadius;
+    // Ссылка на пул взрывов. Можно сделать через менеджер, но для простоты так.
+    [SerializeField] private PoolObjects<GrenadeExplosion> _poolExplosions;
 
-    private BulletMovement _movement;
-
-    protected  void Awake()
+    protected override void Awake()
     {
-        _movement = new BulletMovement(_rigidbody);
+        // Инициализируем общие компоненты (Rigidbody, Collider)
+        base.Awake();
     }
 
-    public override void Init(WeaponStats stats, Vector3 pos, Vector2 dir)
+    // Метод столкновения. Мы переопределяем логику из базового класса.
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        base.Init(stats, pos, dir);
-        _movement.Move(dir, stats.Speed);
-        _damage = stats.Damage;
+        // Здесь можно добавить проверку слоя, если нужно
+        // Например: if (!IsEnemy(other)) return;
+
+        // Граната не наносит урон через IDamagable.
+        // Она просто взрывается при касании.
+        Explode();
+
+        // Уничтожаем саму гранату-болванку
+        OnDestroyProjectile();
     }
 
-    protected override void OnDestroyProjectile()
+    private void Explode()
     {
-        base.OnDestroyProjectile();
-        DealAreaDamage();
-        gameObject.SetActive(false);
-    }
+        // 1. Получаем взрыв из пула
+        GrenadeExplosion explosion = _poolExplosions.GetInstance();
 
-    private void DealAreaDamage()
-    {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, _explosionRadius);
+        // 2. Устанавливаем позицию взрыва там, где взорвалась граната
+        explosion.transform.position = transform.position;
+        explosion.gameObject.SetActive(true);
 
-        foreach (var hit in colliders)
-        {
-            IDamagable damagable = hit.GetComponentInParent<IDamagable>();
-
-            if (damagable != null)
-            {
-                damagable.TakeDamage(_damage);
-            }
-        }
+        // 3. (Опционально) Инициализируем взрыв, если ему нужны статы оружия
+        // explosion.Init(WeaponStats, transform.position, Vector2.zero);
     }
 }

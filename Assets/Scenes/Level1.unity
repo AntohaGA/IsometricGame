@@ -16547,6 +16547,10 @@ PrefabInstance:
       propertyPath: startHealth
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 1134670277943152197, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
+      propertyPath: _weaponPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3397799652511000744, guid: c7c4d86c9bcdf6a4ea5cc789845e895e, type: 3}
       propertyPath: m_Enabled
       value: 1

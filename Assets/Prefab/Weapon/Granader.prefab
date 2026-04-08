@@ -43,9 +43,8 @@ GameObject:
   - component: {fileID: 8866873551633565031}
   - component: {fileID: 1811121775649058669}
   - component: {fileID: 4103307634673303833}
-  - component: {fileID: 1402953614485187336}
-  - component: {fileID: 1370440557897150143}
-  - component: {fileID: 855289924262388184}
+  - component: {fileID: 666383987228934500}
+  - component: {fileID: 388981051128182041}
   m_Layer: 0
   m_Name: Granader
   m_TagString: Untagged
@@ -141,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granader
   BulletSpawnerSpot: {fileID: 2394056983311092372}
-  ProjectileSpawner: {fileID: 855289924262388184}
+  ProjectileSpawner: {fileID: 4103307634673303833}
   WeaponStats: {fileID: 11400000, guid: 365a9122badb33149a869d8a543d4a88, type: 2}
 --- !u!114 &4103307634673303833
 MonoBehaviour:
@@ -155,9 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d504421fbd8e85c4e9bfba8a7e8bc1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeSpawner
-  _poolGrenades: {fileID: 1402953614485187336}
-  _poolExplosions: {fileID: 1370440557897150143}
---- !u!114 &1402953614485187336
+  _poolGrenades: {fileID: 666383987228934500}
+  _poolExplosions: {fileID: 388981051128182041}
+  _grenadePrefab: {fileID: 3857291324228833071, guid: f15fe707b2ef52c4c924727a8c32eace, type: 3}
+  _explosionPrefab: {fileID: 5262498815784451030, guid: ccc32c040c0322f48b4f20c51bbcdc5b, type: 3}
+--- !u!114 &666383987228934500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,10 +167,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8200337624215283597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873767511016e6b44920ce227763d237, type: 3}
+  m_Script: {fileID: 11500000, guid: d28c960dc8b517340be5c5611451e7a1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PoolGrenades
---- !u!114 &1370440557897150143
+  m_EditorClassIdentifier: Assembly-CSharp::PoolProjectile
+--- !u!114 &388981051128182041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,21 +179,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8200337624215283597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5597447632e5a514f9cf1287179b43f5, type: 3}
+  m_Script: {fileID: 11500000, guid: d28c960dc8b517340be5c5611451e7a1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PoolExplosions
---- !u!114 &855289924262388184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200337624215283597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1086631ca9bdc2f4fb33bf6ff8d4eee5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileSpawner
-  _poolBullets: {fileID: 0}
-  _poolGrenades: {fileID: 1402953614485187336}
-  _poolMines: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PoolProjectile

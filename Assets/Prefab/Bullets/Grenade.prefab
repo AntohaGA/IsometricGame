@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1575466180684899186}
   - component: {fileID: 3857291324228833071}
   - component: {fileID: 4254694378582382366}
+  - component: {fileID: 2145835079414477515}
   m_Layer: 6
   m_Name: Grenade
   m_TagString: Untagged
@@ -45,8 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b841e9a03b8de1f4b861a92046afcf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grenade
-  _damage: 200
-  _explosionRadius: 2
+  Stats: {fileID: 11400000, guid: 76370293873d8c24c9dffe6ab9c442a8, type: 2}
 --- !u!212 &4254694378582382366
 SpriteRenderer:
   serializedVersion: 2
@@ -106,3 +106,30 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!50 &2145835079414477515
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566570628235740647}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
